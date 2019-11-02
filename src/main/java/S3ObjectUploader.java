@@ -1,4 +1,5 @@
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class S3ObjectUploader {
 	private Logger logger = Logger.getLogger(this.getClass().getName());
@@ -23,7 +24,8 @@ public class S3ObjectUploader {
 	void uploadDirectory(LocalFile directory) {
 		walker.walkTreeFromRoot(directory)
 				.filter(LocalFile::isFile)
-				.parallel()
+				.collect(Collectors.toList())
+				.parallelStream()
 				.forEach(localFile -> uploadFileFrom(directory, localFile));
 	}
 }
