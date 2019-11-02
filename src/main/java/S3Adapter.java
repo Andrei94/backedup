@@ -6,8 +6,6 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
 
-import java.io.File;
-
 public class S3Adapter {
 	private final AmazonS3 client = AmazonS3ClientBuilder
 			.standard()
@@ -25,8 +23,8 @@ public class S3Adapter {
 		return false;
 	}
 
-	public String toFileInRemoteFolder(String folderName, File localFile) {
-		return makeS3FolderFromName(folderName) + localFile.getName();
+	public String toFileInRemoteFolder(String folderName, String localFile) {
+		return makeS3FolderFromName(folderName) + localFile;
 	}
 
 	private String makeS3FolderFromName(String folderName) {

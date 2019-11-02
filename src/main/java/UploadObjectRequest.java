@@ -1,12 +1,10 @@
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.StorageClass;
 
-import java.io.File;
-
 class UploadObjectRequest {
 	private String bucket;
-	private String remoteFile;
-	private File localFile;
+	private String remotePath;
+	private LocalFile localPathFile;
 	private String storageClass;
 
 	UploadObjectRequest withBucket(String bucketName) {
@@ -14,13 +12,13 @@ class UploadObjectRequest {
 		return this;
 	}
 
-	UploadObjectRequest withRemoteFile(String remoteFile) {
-		this.remoteFile = remoteFile;
+	UploadObjectRequest withRemoteFile(String remotePath) {
+		this.remotePath = remotePath;
 		return this;
 	}
 
-	UploadObjectRequest withLocalFile(File localFile) {
-		this.localFile = localFile;
+	UploadObjectRequest withLocalFile(LocalFile localPathFile) {
+		this.localPathFile = localPathFile;
 		return this;
 	}
 
@@ -30,6 +28,6 @@ class UploadObjectRequest {
 	}
 
 	PutObjectRequest toS3PutObjectRequest() {
-		return new PutObjectRequest(bucket, remoteFile, localFile).withStorageClass(StorageClass.fromValue(storageClass));
+		return new PutObjectRequest(bucket, remotePath, localPathFile.toFile()).withStorageClass(StorageClass.fromValue(storageClass));
 	}
 }

@@ -6,7 +6,6 @@ import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -14,8 +13,8 @@ class S3AdapterTest {
 	@Test
 	void mappingLocalFileToRemoteFolder() {
 		S3Adapter adapter = mock(S3Adapter.class);
-		when(adapter.toFileInRemoteFolder(any(), any())).thenCallRealMethod();
-		assertEquals("s3Uploader/file", adapter.toFileInRemoteFolder("s3Uploader", new File("path\\to\\file")));
+		when(adapter.toFileInRemoteFolder("s3Uploader", "file")).thenCallRealMethod();
+		assertEquals("s3Uploader/file", adapter.toFileInRemoteFolder("s3Uploader", "file"));
 	}
 
 	@Test
