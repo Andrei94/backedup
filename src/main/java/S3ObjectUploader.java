@@ -15,7 +15,7 @@ public class S3ObjectUploader {
 				.withBucket("backedup-storage")
 				.withRemoteFile(adapter.toFileInRemoteFolder(remoteFolder, localFile.getPath()))
 				.withLocalFile(localFile)
-				.withStorageClass("GLACIER")
+				.withStorageClass("STANDARD")
 				.toS3PutObjectRequest());
 	}
 

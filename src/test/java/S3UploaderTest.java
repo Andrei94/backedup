@@ -33,7 +33,7 @@ class S3UploaderTest {
 			assertEquals("backedup-storage", argument.getBucketName());
 			assertEquals(s3FolderName + "/file", argument.getKey());
 			assertEquals(localFile.toFile(), argument.getFile());
-			assertEquals("GLACIER", argument.getStorageClass());
+			assertEquals("STANDARD", argument.getStorageClass());
 		})));
 	}
 
@@ -51,8 +51,17 @@ class S3UploaderTest {
 					when(f1.getPath()).thenReturn("path/to/directory/file1");
 					when(f1.getName()).thenReturn("file1");
 					when(f1.isFile()).thenReturn(true);
-					LocalFile file1 = LocalFile.fromFile(f1);
-					filesUnderDirectory.add(file1);
+					filesUnderDirectory.add(LocalFile.fromFile(f1));
+					File dir2 = mock(File.class);
+					when(dir2.getPath()).thenReturn("path/to/directory/secondDirectory");
+					when(dir2.getName()).thenReturn("secondDirectory");
+					when(dir2.isFile()).thenReturn(false);
+					filesUnderDirectory.add(LocalFile.fromFile(dir2));
+					File f2 = mock(File.class);
+					when(f2.getPath()).thenReturn("path/to/directory/secondDirectory/file2");
+					when(f2.getName()).thenReturn("file2");
+					when(f2.isFile()).thenReturn(true);
+					filesUnderDirectory.add(LocalFile.fromFile(f2));
 					return filesUnderDirectory.stream();
 				}
 			};
@@ -65,12 +74,24 @@ class S3UploaderTest {
 
 			uploader.uploadDirectory(localFile);
 
-			filesUnderDirectory.forEach(file -> verify(clientMock).putObject(assertArg(argument -> assertAll(() -> {
+			verify(clientMock).putObject(assertArg(argument -> assertAll(() -> {
 				assertEquals("backedup-storage", argument.getBucketName());
-				assertEquals("directory/" + file.getName(), argument.getKey());
-				assertEquals(file.toFile(), argument.getFile());
+				assertEquals("directory/" + filesUnderDirectory.get(0).getName(), argument.getKey());
+				assertEquals(filesUnderDirectory.get(0).toFile(), argument.getFile());
 				assertEquals("STANDARD", argument.getStorageClass());
-			}))));
+			})));
+			verify(clientMock, never()).putObject(new UploadObjectRequest()
+					.withBucket("backedup-storage")
+					.withRemoteFile("directory" + filesUnderDirectory.get(1).getName())
+					.withLocalFile(filesUnderDirectory.get(1))
+					.withStorageClass("STANDARD")
+					.toS3PutObjectRequest());
+			verify(clientMock).putObject(assertArg(argument -> assertAll(() -> {
+				assertEquals("backedup-storage", argument.getBucketName());
+				assertEquals("directory/secondDirectory/" + filesUnderDirectory.get(2).getName(), argument.getKey());
+				assertEquals(filesUnderDirectory.get(2).toFile(), argument.getFile());
+				assertEquals("STANDARD", argument.getStorageClass());
+			})));
 		}
 	}
 }
