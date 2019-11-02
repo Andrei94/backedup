@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 public class S3ObjectUploader {
@@ -18,21 +19,21 @@ public class S3ObjectUploader {
 				.toS3PutObjectRequest());
 	}
 
-	void uploadDirectory(LocalPath root) {
-		walkTreeFromRoot(root)
-				.filter(LocalPath::isFile)
+	void uploadDirectory(LocalFile directory) {
+		walkTreeFromRoot(directory)
+				.filter(LocalFile::isFile)
 				.parallel()
-				.forEach(localPath -> adapter.putObject(new UploadObjectRequest()
+				.forEach(localFile -> adapter.putObject(new UploadObjectRequest()
 						.withBucket("backedup-storage")
-						.withRemoteFile(adapter.toFileInRemoteFolder(root.getFilename(), root.relativize(localPath)))
-						.withLocalFile(localPath.getLocalFile())
+						.withRemoteFile(adapter.toFileInRemoteFolder(directory.getName(), directory.relativize(localFile)))
+						.withLocalFile(localFile)
 						.withStorageClass("STANDARD")
 						.toS3PutObjectRequest()));
 	}
 
-	protected Stream<LocalPath> walkTreeFromRoot(LocalPath root) {
+	protected Stream<LocalFile> walkTreeFromRoot(LocalFile root) {
 		try {
-			return Files.walk(root.toPath()).map(LocalPath::fromPath);
+			return Files.walk(Paths.get(root.getPath())).map(path -> LocalFile.fromFile(path.toFile()));
 		} catch(IOException e) {
 			e.printStackTrace();
 		}

@@ -1,4 +1,6 @@
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class LocalFile {
 	private String name;
@@ -16,6 +18,14 @@ public class LocalFile {
 		return localFile;
 	}
 
+	static LocalFile fromPath(Path path) {
+		LocalFile localFile = new LocalFile();
+		localFile.name = path.getFileName().toString();
+		localFile.path = path.toFile().getPath();
+		localFile.isFile = path.toFile().isFile();
+		return localFile;
+	}
+
 	public File toFile() {
 		return new File(path);
 	}
@@ -30,5 +40,12 @@ public class LocalFile {
 
 	public String getPath() {
 		return path;
+	}
+
+	String relativize(LocalFile other) {
+		return Paths.get(path)
+				.toUri()
+				.relativize(Paths.get(other.path).toUri())
+				.getPath();
 	}
 }
