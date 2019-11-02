@@ -1,5 +1,4 @@
 import com.amazonaws.SdkClientException;
-import com.amazonaws.services.s3.model.PutObjectRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,8 +25,11 @@ class S3AdapterTest {
 
 	@Test
 	void uploadToInnexistentBucket() {
-		PutObjectRequest innexistentBucket = new PutObjectRequest("innexistent_bucket", "123", mock(File.class));
+		UploadObjectRequest innexistentBucket = new UploadObjectRequest()
+				.withBucket("innexistent_bucket")
+				.withRemoteFile("123")
+				.withLocalFile(LocalFile.fromFile(new File("")));
 		when(adapter.putObject(innexistentBucket)).thenThrow(SdkClientException.class);
-		assertThrows(SdkClientException.class, () ->adapter.putObject(innexistentBucket));
+		assertThrows(SdkClientException.class, () -> adapter.putObject(innexistentBucket));
 	}
 }

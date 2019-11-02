@@ -30,4 +30,20 @@ class UploadObjectRequest {
 	PutObjectRequest toS3PutObjectRequest() {
 		return new PutObjectRequest(bucket, remotePath, localPathFile.toFile()).withStorageClass(StorageClass.fromValue(storageClass));
 	}
+
+	public String getBucket() {
+		return bucket;
+	}
+
+	public String getRemotePath() {
+		return remotePath;
+	}
+
+	public LocalFile getLocalPathFile() {
+		return localPathFile;
+	}
+
+	public String getStorageClass() {
+		return storageClass;
+	}
 }

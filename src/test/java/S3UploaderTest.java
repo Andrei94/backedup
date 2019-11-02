@@ -1,97 +1,104 @@
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
 
 import static info.solidsoft.mockito.java8.AssertionMatcher.assertArg;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class S3UploaderTest {
-	private S3Adapter clientMock;
+	private S3Adapter s3Adapter;
 	private S3ObjectUploader uploader;
+	private LocalFileWalkerStub walker;
 
 	@BeforeEach
 	void setUp() {
-		clientMock = mock(S3Adapter.class);
-		uploader = new S3ObjectUploader(clientMock);
+		s3Adapter = mock(S3Adapter.class);
+		walker = new LocalFileWalkerStub();
+		uploader = new S3ObjectUploader(s3Adapter, walker);
+		when(s3Adapter.toFileInRemoteFolder(anyString(), anyString())).thenCallRealMethod();
 	}
 
 	@Test
 	void uploadFileObject() {
-		LocalFile localFile = LocalFile.fromFile(new File("file"));
-		String s3FolderName = "s3FolderName";
-		when(clientMock.toFileInRemoteFolder(s3FolderName, localFile.getPath())).thenCallRealMethod();
+		LocalFile dir = createMockDirectory("directory");
+		LocalFile localFile = createMockFile("directory/file");
+		when(s3Adapter.putObject(any())).thenReturn(true);
 
-		uploader.upload(s3FolderName, localFile);
+		assertTrue(uploader.uploadFileFrom(dir, localFile));
 
-		verify(clientMock).putObject(assertArg(argument -> assertAll(() -> {
-			assertEquals("backedup-storage", argument.getBucketName());
-			assertEquals(s3FolderName + "/file", argument.getKey());
-			assertEquals(localFile.toFile(), argument.getFile());
+		verify(s3Adapter).putObject(assertArg(argument -> assertAll(() -> {
+			assertEquals("backedup-storage", argument.getBucket());
+			assertEquals("directory/file", argument.getRemotePath());
+			assertEquals(localFile, argument.getLocalPathFile());
 			assertEquals("STANDARD", argument.getStorageClass());
 		})));
 	}
 
-	@Nested
-	class DirectoryStructureUpload {
-		private List<LocalFile> filesUnderDirectory;
+	@Test
+	void uploadDirectoryWithOneFile() {
+		LocalFile fileUnderDirectory = createMockFile("path/to/directory/file1");
+		walker.setFile(fileUnderDirectory);
 
-		@BeforeEach
-		void setUp() {
-			filesUnderDirectory = new ArrayList<>();
-			uploader = new S3ObjectUploader(clientMock) {
-				@Override
-				protected Stream<LocalFile> walkTreeFromRoot(LocalFile root) {
-					File f1 = mock(File.class);
-					when(f1.getPath()).thenReturn("path/to/directory/file1");
-					when(f1.getName()).thenReturn("file1");
-					when(f1.isFile()).thenReturn(true);
-					filesUnderDirectory.add(LocalFile.fromFile(f1));
-					File dir2 = mock(File.class);
-					when(dir2.getPath()).thenReturn("path/to/directory/secondDirectory");
-					when(dir2.getName()).thenReturn("secondDirectory");
-					when(dir2.isFile()).thenReturn(false);
-					filesUnderDirectory.add(LocalFile.fromFile(dir2));
-					File f2 = mock(File.class);
-					when(f2.getPath()).thenReturn("path/to/directory/secondDirectory/file2");
-					when(f2.getName()).thenReturn("file2");
-					when(f2.isFile()).thenReturn(true);
-					filesUnderDirectory.add(LocalFile.fromFile(f2));
-					return filesUnderDirectory.stream();
-				}
-			};
-		}
+		uploader.uploadDirectory(createMockDirectory("path/to/directory"));
 
-		@Test
-		void uploadDirectory() {
-			LocalFile localFile = LocalFile.fromFile(new File("path/to/directory"));
-			when(clientMock.toFileInRemoteFolder(anyString(), anyString())).thenCallRealMethod();
+		verify(s3Adapter).putObject(assertArg(argument -> assertAll(() -> {
+			assertEquals("backedup-storage", argument.getBucket());
+			assertEquals("directory/" + fileUnderDirectory.getName(), argument.getRemotePath());
+			assertEquals(fileUnderDirectory, argument.getLocalPathFile());
+			assertEquals("STANDARD", argument.getStorageClass());
+		})));
+	}
 
-			uploader.uploadDirectory(localFile);
+	@Test
+	void uploadDirectoryWithOneFileInSubdirectory() {
+		LocalFile fileUnderSubdirectory = createMockFile("path/to/directory/secondDirectory/file2");
+		walker.setFile(fileUnderSubdirectory);
 
-			verify(clientMock).putObject(assertArg(argument -> assertAll(() -> {
-				assertEquals("backedup-storage", argument.getBucketName());
-				assertEquals("directory/" + filesUnderDirectory.get(0).getName(), argument.getKey());
-				assertEquals(filesUnderDirectory.get(0).toFile(), argument.getFile());
-				assertEquals("STANDARD", argument.getStorageClass());
-			})));
-			verify(clientMock, never()).putObject(new UploadObjectRequest()
-					.withBucket("backedup-storage")
-					.withRemoteFile("directory" + filesUnderDirectory.get(1).getName())
-					.withLocalFile(filesUnderDirectory.get(1))
-					.withStorageClass("STANDARD")
-					.toS3PutObjectRequest());
-			verify(clientMock).putObject(assertArg(argument -> assertAll(() -> {
-				assertEquals("backedup-storage", argument.getBucketName());
-				assertEquals("directory/secondDirectory/" + filesUnderDirectory.get(2).getName(), argument.getKey());
-				assertEquals(filesUnderDirectory.get(2).toFile(), argument.getFile());
-				assertEquals("STANDARD", argument.getStorageClass());
-			})));
-		}
+		uploader.uploadDirectory(createMockDirectory("path/to/directory"));
+
+		verify(s3Adapter).putObject(assertArg(argument -> assertAll(() -> {
+			assertEquals("backedup-storage", argument.getBucket());
+			assertEquals("directory/secondDirectory/" + fileUnderSubdirectory.getName(), argument.getRemotePath());
+			assertEquals(fileUnderSubdirectory, argument.getLocalPathFile());
+			assertEquals("STANDARD", argument.getStorageClass());
+		})));
+	}
+
+	@Test
+	void uploadDirectoryWithAnotherDirectory() {
+		LocalFile subDirectory = createMockDirectory("path/to/directory/secondDirectory");
+		walker.setFile(subDirectory);
+
+		uploader.uploadDirectory(createMockDirectory("path/to/directory"));
+
+		verify(s3Adapter, never()).putObject(createUploadRequest("directory" + subDirectory.getName(), subDirectory));
+	}
+
+	private LocalFile createMockFile(String filePath) {
+		return LocalFile.fromFile(new File(filePath) {
+			@Override
+			public boolean isFile() {
+				return true;
+			}
+		});
+	}
+
+	private LocalFile createMockDirectory(String directoryPath) {
+		return LocalFile.fromFile(new File(directoryPath) {
+			@Override
+			public boolean isFile() {
+				return false;
+			}
+		});
+	}
+
+	private UploadObjectRequest createUploadRequest(String remoteFile, LocalFile localFile) {
+		return new UploadObjectRequest()
+				.withBucket("backedup-storage")
+				.withRemoteFile(remoteFile)
+				.withLocalFile(localFile)
+				.withStorageClass("STANDARD");
 	}
 }
