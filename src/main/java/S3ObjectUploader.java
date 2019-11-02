@@ -1,4 +1,7 @@
+import java.util.logging.Logger;
+
 public class S3ObjectUploader {
+	private Logger logger = Logger.getLogger(this.getClass().getName());
 	private final S3Adapter adapter;
 	private final LocalFileWalker walker;
 
@@ -8,11 +11,13 @@ public class S3ObjectUploader {
 	}
 
 	boolean uploadFileFrom(LocalFile directory, LocalFile localFile) {
-		return adapter.putObject(new UploadObjectRequest()
+		UploadObjectRequest uploadRequest = new UploadObjectRequest()
 				.withBucket("backedup-storage")
 				.withRemoteFile(adapter.toFileInRemoteFolder(directory.getName(), directory.relativize(localFile)))
 				.withLocalFile(localFile)
-				.withStorageClass("STANDARD"));
+				.withStorageClass("STANDARD");
+		logger.info("Uploading " + uploadRequest);
+		return adapter.putObject(uploadRequest);
 	}
 
 	void uploadDirectory(LocalFile directory) {

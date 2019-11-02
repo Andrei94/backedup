@@ -26,7 +26,7 @@ public class LocalFile {
 		return localFile;
 	}
 
-	public File toFile() {
+	File toFile() {
 		return new File(path);
 	}
 
@@ -47,5 +47,10 @@ public class LocalFile {
 				.toUri()
 				.relativize(Paths.get(other.path).toUri())
 				.getPath();
+	}
+
+	@Override
+	public String toString() {
+		return "path='" + path + '\'';
 	}
 }

@@ -46,4 +46,14 @@ class UploadObjectRequest {
 	public String getStorageClass() {
 		return storageClass;
 	}
+
+	@Override
+	public String toString() {
+		return "UploadObjectRequest{" +
+				"bucket='" + bucket + '\'' +
+				", remotePath='" + remotePath + '\'' +
+				", localPathFile=" + localPathFile +
+				", storageClass='" + storageClass + '\'' +
+				'}';
+	}
 }

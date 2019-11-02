@@ -1,0 +1,300 @@
+Nov 02, 2019 3:45:43 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E20.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E20.m4v', storageClass='GLACIER'}
+Nov 02, 2019 3:45:43 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E04.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E04.m4v', storageClass='GLACIER'}
+Nov 02, 2019 3:45:43 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E02.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E02.m4v', storageClass='GLACIER'}
+Nov 02, 2019 3:45:43 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E24.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E24.m4v', storageClass='GLACIER'}
+Nov 02, 2019 3:45:43 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E08.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E08.m4v', storageClass='GLACIER'}
+Nov 02, 2019 3:45:43 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 1/Dr Quinn S01E07.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 1\Dr Quinn S01E07.m4v', storageClass='GLACIER'}
+Nov 02, 2019 3:45:43 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E21.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E21.m4v', storageClass='GLACIER'}
+Nov 02, 2019 3:45:43 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E23.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E23.m4v', storageClass='GLACIER'}
+Nov 02, 2019 3:54:36 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E09.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E09.m4v', storageClass='GLACIER'}
+Nov 02, 2019 3:54:54 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 1/Dr Quinn S01E08.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 1\Dr Quinn S01E08.m4v', storageClass='GLACIER'}
+Nov 02, 2019 3:55:20 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E24.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E24.m4v', storageClass='GLACIER'}
+Nov 02, 2019 3:57:48 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E25.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E25.m4v', storageClass='GLACIER'}
+Nov 02, 2019 3:58:49 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E03.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E03.m4v', storageClass='GLACIER'}
+Nov 02, 2019 3:58:52 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E21.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E21.m4v', storageClass='GLACIER'}
+Nov 02, 2019 3:59:18 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E05.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E05.m4v', storageClass='GLACIER'}
+Nov 02, 2019 3:59:20 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E22.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E22.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:00:26 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E10.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E10.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:01:05 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E25.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E25.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:02:18 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E26.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E26.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:03:10 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 1/Dr Quinn S01E09.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 1\Dr Quinn S01E09.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:06:13 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E23.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E23.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:06:15 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E26.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E26.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:06:47 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E11.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E11.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:08:20 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E04.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E04.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:08:30 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E27.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E27.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:08:30 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E22.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E22.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:09:33 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E06.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E06.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:10:03 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 1/Dr Quinn S01E10.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 1\Dr Quinn S01E10.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:13:42 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E12.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E12.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:16:00 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E24.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E24.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:16:15 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E23.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E23.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:16:38 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E05.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E05.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:18:05 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E07.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E07.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:18:22 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 1/Dr Quinn S01E11.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 1\Dr Quinn S01E11.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:18:32 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E28.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E28.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:21:14 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E04.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E04.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:23:36 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E06.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E06.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:23:45 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E08.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E08.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:23:50 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E25.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E25.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:24:13 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E01.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E01.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:26:10 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 1/Dr Quinn S01E12.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 1\Dr Quinn S01E12.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:26:14 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E20.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E20.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:26:40 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E24.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E24.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:27:03 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E05.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E05.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:29:34 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E07.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E07.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:31:19 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E26.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E26.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:32:37 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 1/Dr Quinn S01E16.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 1\Dr Quinn S01E16.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:33:24 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E19.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E19.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:34:49 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E06.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E06.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:34:56 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E21.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E21.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:36:40 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 1/Dr Quinn S01E13.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 1\Dr Quinn S01E13.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:36:46 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E25.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E25.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:38:00 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E08.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E08.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:41:10 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E01.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E01.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:41:10 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E20.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E20.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:41:33 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E27.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E27.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:42:25 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E07.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E07.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:43:35 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E22.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E22.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:44:42 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E09.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E09.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:45:07 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 1/Dr Quinn S01E14.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 1\Dr Quinn S01E14.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:49:16 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E26.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E26.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:50:42 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E18.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E18.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:51:24 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E21.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E21.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:51:42 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E28.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E28.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:52:40 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 1/Dr Quinn S01E15.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 1\Dr Quinn S01E15.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:53:02 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E23.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E23.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:54:04 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E10.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E10.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:55:02 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E02.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E02.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:58:23 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E19.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E19.m4v', storageClass='GLACIER'}
+Nov 02, 2019 4:59:45 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E22.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E22.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:00:07 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E06.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E06.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:01:11 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E29.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E29.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:01:29 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 1/Dr Quinn S01E02.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 1\Dr Quinn S01E02.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:01:57 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E01.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E01.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:03:20 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E11.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E11.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:03:54 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E03.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E03.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:08:07 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Movies/Dr. Quinn Medicine Woman - The Heart Within.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Movies\Dr. Quinn Medicine Woman - The Heart Within.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:08:08 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E07.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E07.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:09:14 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E20.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E20.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:10:57 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E02.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E02.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:11:11 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E15.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E15.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:11:16 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 1/Dr Quinn S01E03.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 1\Dr Quinn S01E03.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:11:27 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E14.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E14.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:13:24 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E01.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E01.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:16:14 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E21.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E21.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:17:08 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E08.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E08.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:18:02 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E16.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E16.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:18:27 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E03.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E03.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:18:50 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E15.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E15.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:19:31 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 1/Dr Quinn S01E04.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 1\Dr Quinn S01E04.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:21:12 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Movies/Dr. Quinn Medicine Woman - The Movie.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Movies\Dr. Quinn Medicine Woman - The Movie.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:22:12 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E16.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E16.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:23:02 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E17.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E17.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:23:37 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E09.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E09.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:24:28 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E22.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E22.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:25:00 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E16.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E16.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:25:42 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E13.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E13.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:27:10 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 1/Dr Quinn S01E05.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 1\Dr Quinn S01E05.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:29:41 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E17.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E17.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:30:18 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E18.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E18.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:30:57 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E17.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E17.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:32:22 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E11.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E11.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:32:37 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E10.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E10.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:35:09 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E14.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E14.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:35:11 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 1/Dr Quinn S01E06.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 1\Dr Quinn S01E06.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:36:00 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 1/Dr Quinn S01E00.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 1\Dr Quinn S01E00.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:36:05 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E18.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E18.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:36:48 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E19.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E19.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:37:33 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E18.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E18.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:37:36 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E12.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E12.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:38:17 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E01.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E01.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:42:30 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E09.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E09.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:44:46 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E11.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E11.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:46:14 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E13.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E13.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:46:15 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E12.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E12.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:47:06 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E19.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E19.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:47:18 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E02.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E02.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:47:30 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E15.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E15.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:50:05 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E10.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E10.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:52:05 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E14.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E14.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:52:47 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 1/Dr Quinn S01E01.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 1\Dr Quinn S01E01.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:53:21 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E12.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E12.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:55:18 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E03.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E03.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:55:22 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E20.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E20.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:55:52 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E16.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E16.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:56:15 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E13.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E13.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:56:21 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E11.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E11.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:58:42 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E06.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E06.m4v', storageClass='GLACIER'}
+Nov 02, 2019 5:59:57 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E15.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E15.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:00:27 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E13.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E13.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:01:14 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E12.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E12.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:01:59 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E04.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E04.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:04:13 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E14.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E14.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:04:40 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E02.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E02.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:06:11 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 6/Dr Quinn S06E17.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 6\Dr Quinn S06E17.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:06:22 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E07.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E07.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:07:01 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E14.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E14.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:07:35 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E16.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E16.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:09:20 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 2/Dr Quinn S02E13.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 2\Dr Quinn S02E13.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:10:53 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 5/Dr Quinn S05E05.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 5\Dr Quinn S05E05.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:12:53 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 3/Dr Quinn S03E15.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 3\Dr Quinn S03E15.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:13:19 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E08.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E08.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:14:17 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E17.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E17.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:15:09 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E03.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E03.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:17:20 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E09.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E09.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:19:34 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E04.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E04.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:20:52 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E18.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E18.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:20:56 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E10.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E10.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:23:08 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E05.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E05.m4v', storageClass='GLACIER'}
+Nov 02, 2019 6:25:58 PM S3ObjectUploader uploadFileFrom
+INFO: Uploading UploadObjectRequest{bucket='backedup-storage', remotePath='Dr Quinn Medicine Woman The Complete Collection DVDRip/Season 4/Dr Quinn S04E19.m4v', localPathFile=path='E:\Virtual Machines\Shared\Torrents\Dr Quinn Medicine Woman The Complete Collection DVDRip\Season 4\Dr Quinn S04E19.m4v', storageClass='GLACIER'}
