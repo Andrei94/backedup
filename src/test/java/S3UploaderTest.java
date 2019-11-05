@@ -28,12 +28,12 @@ class S3UploaderTest {
 
 		assertTrue(uploader.uploadFileFrom(dir, localFile));
 
-		verify(s3Adapter).putObject(assertArg(argument -> assertAll(() -> {
-			assertEquals("backedup-storage", argument.getBucket());
-			assertEquals("directory/file", argument.getRemotePath());
-			assertEquals(localFile, argument.getLocalPathFile());
-			assertEquals("STANDARD", argument.getStorageClass());
-		})));
+		verify(s3Adapter).putObject(assertArg(argument -> assertAll(
+				() -> assertEquals("backedup-storage", argument.getBucket()),
+				() -> assertEquals("directory/file", argument.getRemotePath()),
+				() -> assertEquals(localFile, argument.getLocalPathFile()),
+				() -> assertEquals("STANDARD", argument.getStorageClass())
+		)));
 	}
 
 	@Test
@@ -43,12 +43,12 @@ class S3UploaderTest {
 
 		uploader.uploadDirectory(createMockDirectory("path/to/directory"));
 
-		verify(s3Adapter).putObject(assertArg(argument -> assertAll(() -> {
-			assertEquals("backedup-storage", argument.getBucket());
-			assertEquals("directory/" + fileUnderDirectory.getName(), argument.getRemotePath());
-			assertEquals(fileUnderDirectory, argument.getLocalPathFile());
-			assertEquals("STANDARD", argument.getStorageClass());
-		})));
+		verify(s3Adapter).putObject(assertArg(argument -> assertAll(
+				() -> assertEquals("backedup-storage", argument.getBucket()),
+				() -> assertEquals("directory/" + fileUnderDirectory.getName(), argument.getRemotePath()),
+				() -> assertEquals(fileUnderDirectory, argument.getLocalPathFile()),
+				() -> assertEquals("STANDARD", argument.getStorageClass())
+		)));
 	}
 
 	@Test
@@ -58,12 +58,12 @@ class S3UploaderTest {
 
 		uploader.uploadDirectory(createMockDirectory("path/to/directory"));
 
-		verify(s3Adapter).putObject(assertArg(argument -> assertAll(() -> {
-			assertEquals("backedup-storage", argument.getBucket());
-			assertEquals("directory/secondDirectory/" + fileUnderSubdirectory.getName(), argument.getRemotePath());
-			assertEquals(fileUnderSubdirectory, argument.getLocalPathFile());
-			assertEquals("STANDARD", argument.getStorageClass());
-		})));
+		verify(s3Adapter).putObject(assertArg(argument -> assertAll(
+				() -> assertEquals("backedup-storage", argument.getBucket()),
+				() -> assertEquals("directory/secondDirectory/" + fileUnderSubdirectory.getName(), argument.getRemotePath()),
+				() -> assertEquals(fileUnderSubdirectory, argument.getLocalPathFile()),
+				() -> assertEquals("STANDARD", argument.getStorageClass())
+		)));
 	}
 
 	@Test

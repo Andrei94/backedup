@@ -19,11 +19,7 @@ public class LocalFile {
 	}
 
 	static LocalFile fromPath(Path path) {
-		LocalFile localFile = new LocalFile();
-		localFile.name = path.getFileName().toString();
-		localFile.path = path.toFile().getPath();
-		localFile.isFile = path.toFile().isFile();
-		return localFile;
+		return LocalFile.fromFile(path.toFile());
 	}
 
 	File toFile() {

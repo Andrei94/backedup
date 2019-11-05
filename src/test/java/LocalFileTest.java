@@ -2,9 +2,9 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.nio.file.Path;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -27,5 +27,12 @@ class LocalFileTest {
 		when(f.getName()).thenReturn("file2");
 		when(f.isFile()).thenReturn(true);
 		assertTrue(LocalFile.fromFile(f).isFile());
+	}
+
+	@Test
+	void localFileFromPath() {
+		Path p = mock(Path.class);
+		when(p.toFile()).thenReturn(new File("path/to/file2"));
+		assertNotNull(LocalFile.fromPath(p));
 	}
 }
