@@ -12,14 +12,14 @@ class LocalFileWalkerTest {
 	@Test
 	void walkTreeFromRoot() {
 		assertEquals(Arrays.asList("Cities.Skylines.Demo", "file1", "file2"),
-				localFileWalker.walkTreeFromRoot(LocalFile.fromPath(Paths.get("D:\\Programming\\Intellij\\backedup\\src\\test\\resources\\Cities.Skylines.Demo")))
+				localFileWalker.walkTreeFromRoot(LocalFile.fromPath(Paths.get("D:\\Programming\\Intellij\\backedup\\backedup-s3\\src\\test\\resources\\Cities.Skylines.Demo")))
 				.map(LocalFile::getName)
 				.collect(Collectors.toList()));
 	}
 	@Test
 	void walkTreeFromRootWhenRootIsAFile() {
 		assertEquals(Collections.singletonList("file1"),
-				localFileWalker.walkTreeFromRoot(LocalFile.fromPath(Paths.get("D:\\Programming\\Intellij\\backedup\\src\\test\\resources\\Cities.Skylines.Demo\\file1")))
+				localFileWalker.walkTreeFromRoot(LocalFile.fromPath(Paths.get("D:\\Programming\\Intellij\\backedup\\backedup-s3\\src\\test\\resources\\Cities.Skylines.Demo\\file1")))
 						.map(LocalFile::getName)
 						.collect(Collectors.toList()));
 	}

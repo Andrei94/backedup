@@ -20,7 +20,7 @@ class UploadObjectRequestTest {
 		PutObjectRequest request = new UploadObjectRequest()
 				.withBucket("bucket")
 				.withRemoteFile("123")
-				.withLocalFile(LocalFile.fromFile(new File("D:\\Programming\\Intellij\\backedup\\src\\main\\resources\\Cities.Skylines.Demo\\file1")))
+				.withLocalFile(LocalFile.fromFile(new File("D:\\Programming\\Intellij\\backedup\\backedup-s3\\src\\main\\resources\\Cities.Skylines.Demo\\file1")))
 				.withStorageClass("GLACIER")
 				.toS3PutObjectRequest();
 		assertAll(

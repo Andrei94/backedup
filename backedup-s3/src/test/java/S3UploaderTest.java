@@ -5,6 +5,8 @@ import java.io.File;
 
 import static info.solidsoft.mockito.java8.AssertionMatcher.assertArg;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 class S3UploaderTest {

@@ -1,26 +1,25 @@
-plugins {
-    id 'java'
-}
+allprojects {
+    apply plugin: 'java'
 
-group 'de.andrei94'
-version '1.0-SNAPSHOT'
+    group 'de.andrei94'
+    version '1.0-SNAPSHOT'
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
+    repositories {
+        mavenCentral()
+    }
 
-repositories {
-    mavenCentral()
-}
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 
-dependencies {
-    implementation 'com.amazonaws:aws-java-sdk-s3:1.11.632'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
-    testImplementation 'info.solidsoft.mockito:mockito-java8:2.5.0'
-}
+    dependencies {
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
+        testImplementation 'info.solidsoft.mockito:mockito-java8:2.5.0'
+    }
 
-test {
-    useJUnitPlatform()
+    test {
+        useJUnitPlatform()
+    }
 }
