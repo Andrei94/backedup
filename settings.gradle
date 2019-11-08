@@ -1,2 +1,3 @@
 rootProject.name = 'backedup'
 include 'backedup-s3'
+include 'backedup-ui'

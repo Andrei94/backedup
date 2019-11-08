@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="Controller"
+      prefHeight="400.0"
+      prefWidth="600.0"
+      spacing="10">
+    <HBox spacing="10">
+        <padding>
+            <Insets>
+                <top>10</top>
+                <bottom>10</bottom>
+                <left>10</left>
+                <right>10</right>
+            </Insets>
+        </padding>
+        <Button text="+" onMouseClicked="#openFileBrowser"/>
+        <Button text="-" onMouseClicked="#deleteTreeItemWithConfirmation"/>
+    </HBox>
+    <TreeView fx:id="treeView" VBox.vgrow="ALWAYS"/>
+</VBox>
