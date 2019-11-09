@@ -1,0 +1,43 @@
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.DirectoryChooser;
+
+import java.io.File;
+import java.util.concurrent.atomic.AtomicReference;
+
+public class MainWindow {
+	public ListView<Folder> foldersToSync;
+	private MainWindowController controller = new MainWindowController();
+
+	public void openFileBrowser(MouseEvent mouseEvent) {
+		File file = new DirectoryChooser().showDialog(foldersToSync.getScene().getWindow());
+		controller.addToSyncList(file).ifPresent(folder -> foldersToSync.getItems().add(folder));
+	}
+
+	public void deleteTreeItemWithConfirmation(MouseEvent mouseEvent) {
+		Folder selectedItem = foldersToSync.getSelectionModel().getSelectedItem();
+		if(getSelectedButtonFromAlert() == ButtonBar.ButtonData.OK_DONE && controller.removeFromSyncList(selectedItem)) {
+			foldersToSync.getItems().remove(selectedItem);
+		}
+	}
+
+	private ButtonBar.ButtonData getSelectedButtonFromAlert() {
+		Alert alert = new Alert(Alert.AlertType.WARNING);
+		alert.setTitle(controller.getWarningTitle());
+		alert.setContentText(controller.getWarningText());
+		alert.getButtonTypes().setAll(
+				new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE),
+				new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE)
+		);
+		AtomicReference<ButtonBar.ButtonData> buttonData = new AtomicReference<>();
+		alert.showAndWait().ifPresent(buttonType -> buttonData.set(buttonType.getButtonData()));
+		return buttonData.get();
+	}
+
+	public void syncFolders(MouseEvent mouseEvent) {
+		controller.sync();
+	}
+}

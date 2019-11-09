@@ -2,16 +2,16 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="Controller"
+      fx:controller="MainWindow"
       prefHeight="400.0"
       prefWidth="600.0"
       spacing="10">
-    <HBox spacing="10">
+    <HBox spacing="10" alignment="CENTER">
         <padding>
             <Insets>
                 <top>10</top>
@@ -22,6 +22,7 @@
         </padding>
         <Button text="+" onMouseClicked="#openFileBrowser"/>
         <Button text="-" onMouseClicked="#deleteTreeItemWithConfirmation"/>
+        <Button text="↑↓" onMouseClicked="#syncFolders"/>
     </HBox>
-    <TreeView fx:id="treeView" VBox.vgrow="ALWAYS"/>
+    <ListView fx:id="foldersToSync" VBox.vgrow="ALWAYS"/>
 </VBox>

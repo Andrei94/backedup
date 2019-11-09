@@ -1,0 +1,3 @@
+/home/precupa/IdeaProjects/backedup-ui/src
+/home/precupa/IdeaProjects/backedup-ui/out
+/home/precupa/IdeaProjects/backedup-ui/gradle
