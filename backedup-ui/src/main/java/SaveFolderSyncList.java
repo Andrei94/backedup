@@ -12,7 +12,7 @@ class SaveFolderSyncList {
 		try(BufferedWriter writer = Files.newBufferedWriter(path)) {
 			folders.forEach(s -> {
 				try {
-					writer.write(s);
+					writer.write(s.replace("\\", "/"));
 					writer.newLine();
 				} catch(IOException e) {
 					e.printStackTrace();

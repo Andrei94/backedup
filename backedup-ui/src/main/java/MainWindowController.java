@@ -1,13 +1,13 @@
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 class MainWindowController {
-	private List<Folder> folders = new ArrayList<>();
+	private LoadFolderSyncList loader = new LoadFolderSyncList();
+	private List<Folder> folders = loader.load();
 	private SaveFolderSyncList saver = new SaveFolderSyncList();
 
 	Optional<Folder> addToSyncList(File folder) {
@@ -22,8 +22,8 @@ class MainWindowController {
 		if (folders.isEmpty())
 			return false;
 		for (Folder value : folders) {
-			Path subpath = value.path.relativize(folder.toPath());
-			if (!hasToGoBackInPath(subpath))
+			Optional<Path> subpath = value.relativize(folder);
+			if (subpath.isPresent() && !hasToGoBackInPath(subpath.get()))
 				return true;
 		}
 		return false;
@@ -49,6 +49,10 @@ class MainWindowController {
 
 	String getWarningText() {
 		return "Are you sure you want to remove the folder from the sync?";
+	}
+
+	List<Folder> getSyncList() {
+		return folders;
 	}
 }
 

@@ -1,11 +1,21 @@
+import java.io.File;
 import java.nio.file.Path;
 import java.util.Objects;
+import java.util.Optional;
 
 class Folder {
 	Path path;
 
 	Folder(Path path) {
 		this.path = path;
+	}
+
+	Optional<Path> relativize(File other) {
+		try {
+			return Optional.of(path.relativize(other.toPath()));
+		} catch(IllegalArgumentException ex) {
+			return Optional.empty();
+		}
 	}
 
 	@Override

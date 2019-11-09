@@ -1,3 +1,4 @@
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
@@ -6,11 +7,18 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 
 import java.io.File;
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class MainWindow {
+public class MainWindow implements Initializable {
 	public ListView<Folder> foldersToSync;
 	private MainWindowController controller = new MainWindowController();
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		foldersToSync.getItems().setAll(controller.getSyncList());
+	}
 
 	public void openFileBrowser(MouseEvent mouseEvent) {
 		File file = new DirectoryChooser().showDialog(foldersToSync.getScene().getWindow());
