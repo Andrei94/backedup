@@ -9,6 +9,7 @@ class MainWindowController {
 	private LoadFolderSyncList loader = new LoadFolderSyncList();
 	private List<Folder> folders = loader.load();
 	private SaveFolderSyncList saver = new SaveFolderSyncList();
+	private S3ObjectUploader uploader = new S3ObjectUploader(new S3Adapter(), new LocalFileWalker());
 
 	Optional<Folder> addToSyncList(File folder) {
 		if (folder == null || isSubfolder(folder))
@@ -41,6 +42,7 @@ class MainWindowController {
 
 	void sync() {
 		saver.save(folders.stream().map(folder -> folder.path.toString()).collect(Collectors.toList()));
+		folders.forEach(folder -> uploader.uploadDirectory(LocalFile.fromPath(folder.path)));
 	}
 
 	String getWarningTitle() {
