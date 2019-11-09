@@ -1,27 +1,5 @@
 .button{
-    -fx-background-color: #003cff;
-    -fx-font-family:"Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 2em; /* 12 */
-    -fx-text-fill: #ffffff;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 2em;
     -fx-min-width: 40px;
-    -fx-min-height: 40px;
-    -fx-pref-width: 40px;
-    -fx-pref-height: 40px;
-}
-
-.button:focused {
-    -fx-border-color: transparent, black;
-    -fx-border-width: 1, 1;
-    -fx-border-style: solid;
-    -fx-border-radius: 0, 0;
-    -fx-border-insets: 5 5 5 5, 0;
-    -fx-min-width: 50px;
-    -fx-min-height: 50px;
-    -fx-pref-width: 50px;
-    -fx-pref-height: 50px;
-}
-
-.button:pressed {
-    -fx-background-color: #00acff;
-    -fx-text-fill: white;
 }
