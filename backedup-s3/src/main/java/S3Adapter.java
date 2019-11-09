@@ -6,11 +6,19 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.PutObjectResult;
 
 public class S3Adapter {
-	private final AmazonS3 client = AmazonS3ClientBuilder
-			.standard()
-			.withCredentials(new ProfileCredentialsProvider("backedup-storage"))
-			.withRegion(Regions.US_EAST_1)
-			.build();
+	private final AmazonS3 client;
+
+	public S3Adapter() {
+		this(AmazonS3ClientBuilder
+				.standard()
+				.withCredentials(new ProfileCredentialsProvider("backedup-storage"))
+				.withRegion(Regions.US_EAST_1)
+				.build());
+	}
+
+	public S3Adapter(AmazonS3 client) {
+		this.client = client;
+	}
 
 	public boolean putObject(UploadObjectRequest request) {
 		try {
