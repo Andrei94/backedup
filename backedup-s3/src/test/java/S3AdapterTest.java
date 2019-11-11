@@ -19,7 +19,7 @@ class S3AdapterTest {
 		UploadObjectRequest req = new UploadObjectRequest()
 				.withBucket("innexistent_bucket")
 				.withRemoteFile("123")
-				.withLocalFile(LocalFile.fromFile(new File("D:\\Programming\\Intellij\\backedup\\backedup-s3\\src\\main\\resources\\Cities.Skylines.Demo\\file1")))
+				.withLocalFile(LocalFile.fromFile(new File("file1")))
 				.withStorageClass("STANDARD");
 		adapter = new S3Adapter(new ClientWithPutRequestThrowingException());
 		assertFalse(adapter.putObject(req));

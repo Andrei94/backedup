@@ -2,16 +2,11 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.StorageClass;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.logging.Logger;
-
 class UploadObjectRequest {
 	private String bucket;
 	private String remotePath;
 	private LocalFile localPathFile;
 	private String storageClass;
-	private Logger logger = Logger.getLogger(this.getClass().getName());
 
 	UploadObjectRequest withBucket(String bucketName) {
 		this.bucket = bucketName;
@@ -34,13 +29,9 @@ class UploadObjectRequest {
 	}
 
 	PutObjectRequest toS3PutObjectRequest() {
-		try {
-			return new PutObjectRequest(bucket, remotePath, new FileInputStream(localPathFile.toFile()), objectMetadata())
-					.withStorageClass(StorageClass.fromValue(storageClass));
-		} catch(FileNotFoundException e) {
-			logger.warning(e.getMessage());
-			throw new IllegalArgumentException(e.getMessage());
-		}
+		return new PutObjectRequest(bucket, remotePath, localPathFile.toFile())
+				.withMetadata(objectMetadata())
+				.withStorageClass(StorageClass.fromValue(storageClass));
 	}
 
 	private ObjectMetadata objectMetadata() {
