@@ -1,5 +1,6 @@
 import java.io.File;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -34,5 +35,9 @@ class Folder {
 	@Override
 	public int hashCode() {
 		return Objects.hash(path);
+	}
+
+	static Folder createFolder(String path) {
+		return new Folder(Paths.get(path));
 	}
 }

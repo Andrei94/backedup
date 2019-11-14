@@ -6,10 +6,19 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 class MainWindowController {
-	private LoadFolderSyncList loader = new LoadFolderSyncList();
-	private List<Folder> folders = loader.load();
-	private SaveFolderSyncList saver = new SaveFolderSyncList();
-	private S3ObjectUploader uploader = new S3ObjectUploader(new S3Adapter(), new LocalFileWalker());
+	private List<Folder> folders;
+	private SyncFolderSaver saver;
+	private S3ObjectUploader uploader;
+
+	MainWindowController() {
+		this(new S3ObjectUploader(new S3Adapter(), new LocalFileWalker()), new SyncFolderLoader(), new SyncFolderSaver());
+	}
+
+	MainWindowController(S3ObjectUploader uploader, SyncFolderLoader loader, SyncFolderSaver saver) {
+		this.uploader = uploader;
+		this.saver = saver;
+		folders = loader.load();
+	}
 
 	Optional<Folder> addToSyncList(File folder) {
 		if (folder == null || isSubfolder(folder))
