@@ -47,6 +47,7 @@ class CognitoLearningTest {
 	}
 
 	@Test
+	@Disabled
 	void userHasAccessToHisFolder() {
 		String username = "username";
 		if(authenticate(username, "Password123!")) {
