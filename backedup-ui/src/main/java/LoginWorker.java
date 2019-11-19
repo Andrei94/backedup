@@ -3,7 +3,7 @@ import javafx.beans.property.StringProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 
-class LoginWorker extends Service<Boolean> {
+class LoginWorker extends Service<LoginFeedback> {
 	private final LoginController controller;
 	private final SimpleStringProperty username;
 	private final SimpleStringProperty password;
@@ -15,10 +15,10 @@ class LoginWorker extends Service<Boolean> {
 	}
 
 	@Override
-	protected Task<Boolean> createTask() {
-		return new Task<Boolean>() {
+	protected Task<LoginFeedback> createTask() {
+		return new Task<LoginFeedback>() {
 			@Override
-			protected Boolean call() {
+			protected LoginFeedback call() {
 				return controller.authenticate(username.getValue(), password.getValue());
 			}
 		};

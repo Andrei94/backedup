@@ -23,11 +23,12 @@ public class LoginDialog {
 	}
 
 	private void showLoginCallFeedback() {
-		if(loginWorker.getValue())
+		LoginFeedback l = loginWorker.getValue();
+		if(l.isSuccessfulLogin())
 			close(null);
 		else {
-			loginResult.setText(controller.getIncorrectCredentialsMessage());
-			loginResult.setFill(controller.getIncorrectCredentialsColor());
+			loginResult.setText(l.getText());
+			loginResult.setFill(l.getColor());
 		}
 	}
 

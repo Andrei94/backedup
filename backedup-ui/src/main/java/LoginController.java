@@ -1,17 +1,17 @@
-import javafx.scene.paint.Color;
-
 class LoginController {
-	private Authenticator authenticator = new Authenticator();
+	private Authenticator authenticator;
 
-	boolean authenticate(String username, String password) {
-		return authenticator.authenticate(username, password);
+	LoginController() {
+		this(new Authenticator());
 	}
 
-	String getIncorrectCredentialsMessage() {
-		return "Incorrect credentials";
+	LoginController(Authenticator authenticator) {
+		this.authenticator = authenticator;
 	}
 
-	Color getIncorrectCredentialsColor() {
-		return Color.RED;
+	LoginFeedback authenticate(String username, String password) {
+		return authenticator.authenticate(username, password) ?
+				LoginFeedback.createSuccessfulLoginFeedback() :
+				LoginFeedback.createIncorrectCredentialsFeedback();
 	}
 }
