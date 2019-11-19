@@ -25,7 +25,7 @@ public class LoginDialog {
 	private void showLoginCallFeedback() {
 		LoginFeedback l = loginWorker.getValue();
 		if(l.isSuccessfulLogin())
-			close(null);
+			close(new ActionEvent());
 		else {
 			loginResult.setText(l.getText());
 			loginResult.setFill(l.getColor());
