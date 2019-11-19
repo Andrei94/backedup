@@ -3,12 +3,12 @@ import javafx.beans.property.StringProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 
-class LoginService extends Service<Boolean> {
+class LoginWorker extends Service<Boolean> {
 	private final LoginController controller;
 	private final SimpleStringProperty username;
 	private final SimpleStringProperty password;
 
-	LoginService(LoginController controller) {
+	LoginWorker(LoginController controller) {
 		this.controller = controller;
 		this.username = new SimpleStringProperty();
 		this.password = new SimpleStringProperty();
@@ -24,12 +24,12 @@ class LoginService extends Service<Boolean> {
 		};
 	}
 
-	LoginService bindUsername(StringProperty username) {
+	LoginWorker bindUsername(StringProperty username) {
 		this.username.bind(username);
 		return this;
 	}
 
-	LoginService bindPassword(StringProperty password) {
+	LoginWorker bindPassword(StringProperty password) {
 		this.password.bind(password);
 		return this;
 	}

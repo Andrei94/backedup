@@ -12,18 +12,18 @@ public class LoginDialog {
 	public Text loginResult;
 
 	private LoginController controller = new LoginController();
-	private LoginService loginService = new LoginService(controller);
+	private LoginWorker loginWorker = new LoginWorker(controller);
 
 	public void login(ActionEvent actionEvent) {
-		loginService = loginService.bindUsername(username.textProperty())
+		loginWorker = loginWorker.bindUsername(username.textProperty())
 				.bindPassword(password.textProperty());
-		loginIndicator.visibleProperty().bind(loginService.runningProperty());
-		loginService.setOnSucceeded(event -> showLoginCallFeedback());
-		loginService.restart();
+		loginIndicator.visibleProperty().bind(loginWorker.runningProperty());
+		loginWorker.setOnSucceeded(event -> showLoginCallFeedback());
+		loginWorker.restart();
 	}
 
 	private void showLoginCallFeedback() {
-		if(loginService.getValue())
+		if(loginWorker.getValue())
 			close(null);
 		else {
 			loginResult.setText(controller.getIncorrectCredentialsMessage());
