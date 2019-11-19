@@ -1,17 +1,17 @@
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LoginControllerTest {
-
 	@Test
 	void authenticateWithIncorrectCredentials() {
 		LoginController controller = new LoginController(new IncorrectCredentialsAuthenticator());
 		LoginFeedback feedback = controller.authenticate("username", "password");
-		assertEquals("Incorrect credentials", feedback.getText());
-		assertEquals(Color.RED, feedback.getColor());
+		assertAll(
+				() -> assertEquals("Incorrect credentials", feedback.getText()),
+				() -> assertEquals(Color.RED, feedback.getColor())
+		);
 	}
 
 	@Test

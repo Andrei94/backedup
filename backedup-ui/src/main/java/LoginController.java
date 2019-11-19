@@ -2,7 +2,7 @@ class LoginController {
 	private Authenticator authenticator;
 
 	LoginController() {
-		this(new Authenticator());
+		this(new CognitoAuthenticator());
 	}
 
 	LoginController(Authenticator authenticator) {

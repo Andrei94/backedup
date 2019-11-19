@@ -1,9 +1,9 @@
-class CorrectCredentialsAuthenticator extends Authenticator {
+class CorrectCredentialsAuthenticator implements Authenticator {
 	CorrectCredentialsAuthenticator() {
 	}
 
 	@Override
-	boolean authenticate(String username, String password) {
+	public boolean authenticate(String username, String password) {
 		return true;
 	}
 }

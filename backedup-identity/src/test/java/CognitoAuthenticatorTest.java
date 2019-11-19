@@ -3,8 +3,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class AuthenticatorTest {
-	private Authenticator authe = new Authenticator(new IdentityProviderWithAuthParametersChecker());
+class CognitoAuthenticatorTest {
+	private CognitoAuthenticator authe = new CognitoAuthenticator(new IdentityProviderWithAuthParametersChecker());
 
 	@Test
 	void authenticationSuccess() {
