@@ -1,12 +1,17 @@
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
@@ -47,5 +52,12 @@ public class MainWindow implements Initializable {
 
 	public void syncFolders(MouseEvent mouseEvent) {
 		controller.sync();
+	}
+
+	public void login(MouseEvent mouseEvent) throws IOException {
+		Stage stage = new Stage();
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("loginDialog.fxml")), 400, 300));
+		stage.showAndWait();
 	}
 }

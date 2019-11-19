@@ -23,6 +23,7 @@
         <Button text="+" onMouseClicked="#openFileBrowser"/>
         <Button text="-" onMouseClicked="#deleteTreeItemWithConfirmation"/>
         <Button text="↑↓" onMouseClicked="#syncFolders"/>
+        <Button text="authenticate" onMouseClicked="#login"/>
     </HBox>
     <ListView fx:id="foldersToSync" VBox.vgrow="ALWAYS"/>
 </VBox>
