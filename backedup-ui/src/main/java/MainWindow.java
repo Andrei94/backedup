@@ -1,10 +1,7 @@
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
@@ -18,6 +15,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class MainWindow implements Initializable {
 	public ListView<Folder> foldersToSync;
+	public Label loggedInUsername;
 	private MainWindowController controller = new MainWindowController();
 
 	@Override
@@ -54,10 +52,14 @@ public class MainWindow implements Initializable {
 		controller.sync();
 	}
 
-	public void login(MouseEvent mouseEvent) throws IOException {
+	public void openLoginWindow(MouseEvent mouseEvent) throws IOException {
 		Stage stage = new Stage();
 		stage.initModality(Modality.APPLICATION_MODAL);
-		stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("loginDialog.fxml")), 400, 300));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("loginDialog.fxml"));
+		stage.setScene(new Scene(fxmlLoader.load(), 400, 300));
 		stage.showAndWait();
+		LoginDialog loginDialog = fxmlLoader.getController();
+		if(!loginDialog.loggedInUsername.isEmpty())
+			loggedInUsername.setText(controller.getLoggedInText(loginDialog.loggedInUsername));
 	}
 }

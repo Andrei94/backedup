@@ -10,6 +10,7 @@ public class LoginDialog {
 	public PasswordField password;
 	public ProgressIndicator loginIndicator;
 	public Text loginResult;
+	String loggedInUsername;
 
 	private LoginController controller = new LoginController();
 	private LoginWorker loginWorker = new LoginWorker(controller);
@@ -24,8 +25,10 @@ public class LoginDialog {
 
 	private void showLoginCallFeedback() {
 		LoginFeedback l = loginWorker.getValue();
-		if(l.isSuccessfulLogin())
+		if(l.isSuccessfulLogin()) {
+			loggedInUsername = username.getText();
 			close(new ActionEvent());
+		}
 		else {
 			loginResult.setText(l.getText());
 			loginResult.setFill(l.getColor());

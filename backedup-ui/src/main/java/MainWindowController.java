@@ -21,7 +21,7 @@ class MainWindowController {
 	}
 
 	Optional<Folder> addToSyncList(File folder) {
-		if (folder == null || isSubfolder(folder))
+		if(folder == null || isSubfolder(folder))
 			return Optional.empty();
 		Folder f = new Folder(Paths.get(folder.getPath()));
 		folders.add(f);
@@ -29,11 +29,11 @@ class MainWindowController {
 	}
 
 	private boolean isSubfolder(File folder) {
-		if (folders.isEmpty())
+		if(folders.isEmpty())
 			return false;
-		for (Folder value : folders) {
+		for(Folder value : folders) {
 			Optional<Path> subpath = value.relativize(folder);
-			if (subpath.isPresent() && !hasToGoBackInPath(subpath.get()))
+			if(subpath.isPresent() && !hasToGoBackInPath(subpath.get()))
 				return true;
 		}
 		return false;
@@ -44,7 +44,7 @@ class MainWindowController {
 	}
 
 	boolean removeFromSyncList(Folder folder) {
-		if (folder == null)
+		if(folder == null)
 			return false;
 		return folders.remove(folder);
 	}
@@ -64,6 +64,12 @@ class MainWindowController {
 
 	List<Folder> getSyncList() {
 		return folders;
+	}
+
+	public String getLoggedInText(String username) {
+		if(username == null || username.isEmpty())
+			return "";
+		return "Welcome " + username;
 	}
 }
 

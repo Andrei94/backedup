@@ -28,6 +28,21 @@ class MainWindowControllerTest {
 		void warningTitleForDeletionConfirmationPopup() {
 			assertEquals("Remove folder from Sync", controller.getWarningTitle());
 		}
+
+		@Test
+		void loggedInUsername() {
+			assertEquals("Welcome user", controller.getLoggedInText("user"));
+		}
+
+		@Test
+		void loggedInUsernameNull() {
+			assertEquals("", controller.getLoggedInText(null));
+		}
+
+		@Test
+		void loggedInUsernameEmpty() {
+			assertEquals("", controller.getLoggedInText(""));
+		}
 	}
 
 	@Test
