@@ -5,13 +5,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class LoginDialog {
+public class LoginDialog implements Dialog<String> {
 	public TextField username;
 	public PasswordField password;
 	public ProgressIndicator loginIndicator;
 	public Text loginResult;
-	String loggedInUsername;
 
+	private String loggedInUsername;
 	private LoginController controller = new LoginController();
 	private LoginWorker loginWorker = new LoginWorker(controller);
 
@@ -37,5 +37,10 @@ public class LoginDialog {
 
 	public void close(ActionEvent actionEvent) {
 		((Stage) username.getScene().getWindow()).close();
+	}
+
+	@Override
+	public String getResult() {
+		return loggedInUsername;
 	}
 }

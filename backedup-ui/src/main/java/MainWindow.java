@@ -1,14 +1,9 @@
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
@@ -52,14 +47,8 @@ public class MainWindow implements Initializable {
 		controller.sync();
 	}
 
-	public void openLoginWindow(MouseEvent mouseEvent) throws IOException {
-		Stage stage = new Stage();
-		stage.initModality(Modality.APPLICATION_MODAL);
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("loginDialog.fxml"));
-		stage.setScene(new Scene(fxmlLoader.load(), 400, 300));
-		stage.showAndWait();
-		LoginDialog loginDialog = fxmlLoader.getController();
-		if(!loginDialog.loggedInUsername.isEmpty())
-			loggedInUsername.setText(controller.getLoggedInText(loginDialog.loggedInUsername));
+	public void openLoginWindow(MouseEvent mouseEvent) {
+		String username = DialogOpener.openDialog("loginDialog.fxml", 400, 300);
+		loggedInUsername.setText(controller.getLoggedInText(username));
 	}
 }
