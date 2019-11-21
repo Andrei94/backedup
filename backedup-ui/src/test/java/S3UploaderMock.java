@@ -1,16 +1,10 @@
-class S3UploaderMock extends S3ObjectUploader {
+import java.nio.file.Path;
+
+class S3UploaderMock implements ObjectUploader {
 	private int timesUploadDirectoryCalled = 0;
 
-	S3UploaderMock() {
-		this(null, null);
-	}
-
-	private S3UploaderMock(S3Adapter adapter, LocalFileWalker walker) {
-		super(adapter, walker);
-	}
-
 	@Override
-	void uploadDirectory(LocalFile directory) {
+	public void uploadDirectory(Path directory) {
 		timesUploadDirectoryCalled++;
 	}
 

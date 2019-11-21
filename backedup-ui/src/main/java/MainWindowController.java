@@ -8,13 +8,13 @@ import java.util.stream.Collectors;
 class MainWindowController {
 	private List<Folder> folders;
 	private SyncFolderSaver saver;
-	private S3ObjectUploader uploader;
+	private ObjectUploader uploader;
 
 	MainWindowController() {
-		this(new S3ObjectUploader(new S3Adapter(), new LocalFileWalker()), new SyncFolderLoader(), new SyncFolderSaver());
+		this(ObjectUploaderFactory.createS3ObjectUploader(), new SyncFolderLoader(), new SyncFolderSaver());
 	}
 
-	MainWindowController(S3ObjectUploader uploader, SyncFolderLoader loader, SyncFolderSaver saver) {
+	MainWindowController(ObjectUploader uploader, SyncFolderLoader loader, SyncFolderSaver saver) {
 		this.uploader = uploader;
 		this.saver = saver;
 		folders = loader.load();
@@ -51,7 +51,7 @@ class MainWindowController {
 
 	void sync() {
 		saver.save(folders.stream().map(folder -> folder.path.toString()).collect(Collectors.toList()));
-		folders.forEach(folder -> uploader.uploadDirectory(LocalFile.fromPath(folder.path)));
+		folders.forEach(folder -> uploader.uploadDirectory(folder.path));
 	}
 
 	String getWarningTitle() {
@@ -72,4 +72,3 @@ class MainWindowController {
 		return "Welcome " + username;
 	}
 }
-
