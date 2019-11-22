@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class S3UploaderTest {
@@ -14,10 +15,20 @@ class S3UploaderTest {
 		LocalFile dir = createMockDirectory("directory");
 		LocalFile localFile = createMockFile("directory/file");
 		s3Adapter = new S3Adapter(new ClientWithPutRequestVerifyingParameters(
-				createUploadRequest("directory/" + localFile.getName(), localFile)
+				createUploadRequest("816033825058:username/directory/" + localFile.getName(), localFile)
 		));
 		uploader = new S3ObjectUploader(s3Adapter, walker);
+		uploader.setLoggedInUsername("username");
 		assertTrue(uploader.uploadFileFrom(dir, localFile));
+	}
+
+	@Test
+	void skipFileUploadWhenUsernameNotSet() {
+		LocalFile dir = createMockDirectory("directory");
+		LocalFile localFile = createMockFile("directory/file");
+		s3Adapter = new S3Adapter(new ClientPutRequestNotCalled());
+		uploader = new S3ObjectUploader(s3Adapter, walker);
+		assertFalse(uploader.uploadFileFrom(dir, localFile));
 	}
 
 	@Test
@@ -25,10 +36,10 @@ class S3UploaderTest {
 		LocalFile fileUnderDirectory = createMockFile("path/to/directory/file1");
 		walker.setFile(fileUnderDirectory);
 		s3Adapter = new S3Adapter(new ClientWithPutRequestVerifyingParameters(
-				createUploadRequest("directory/" + fileUnderDirectory.getName(), fileUnderDirectory)
+				createUploadRequest("816033825058:username/directory/" + fileUnderDirectory.getName(), fileUnderDirectory)
 		));
 		uploader = new S3ObjectUploader(s3Adapter, walker);
-
+		uploader.setLoggedInUsername("username");
 		uploader.uploadDirectory(createMockDirectory("path/to/directory"));
 	}
 
@@ -37,9 +48,10 @@ class S3UploaderTest {
 		LocalFile fileUnderSubdirectory = createMockFile("path/to/directory/secondDirectory/file2");
 		walker.setFile(fileUnderSubdirectory);
 		s3Adapter = new S3Adapter(new ClientWithPutRequestVerifyingParameters(
-				createUploadRequest("directory/secondDirectory/" + fileUnderSubdirectory.getName(), fileUnderSubdirectory)
+				createUploadRequest("816033825058:username/directory/secondDirectory/" + fileUnderSubdirectory.getName(), fileUnderSubdirectory)
 		));
 		uploader = new S3ObjectUploader(s3Adapter, walker);
+		uploader.setLoggedInUsername("username");
 		uploader.uploadDirectory(createMockDirectory("path/to/directory"));
 	}
 

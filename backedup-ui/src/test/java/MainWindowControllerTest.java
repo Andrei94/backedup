@@ -109,9 +109,23 @@ class MainWindowControllerTest {
 			add(Folder.createFolder("/home/directory"));
 			add(Folder.createFolder("/home/directory2"));
 		}}), saver);
+		controller.setLoggedInUsername("username");
 		controller.sync();
 		assertEquals(2, saver.getFoldersSavedCount());
 		assertEquals(2, uploader.getTimesUploadDirectoryCalled());
+	}
+
+	@Test
+	void skipSyncWhenUserNotLoggedIn() {
+		S3UploaderMock uploader = new S3UploaderMock();
+		FolderSaver saver = new FolderSaver();
+		controller = new MainWindowController(uploader, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
+			add(Folder.createFolder("/home/directory"));
+			add(Folder.createFolder("/home/directory2"));
+		}}), saver);
+		controller.sync();
+		assertEquals(2, saver.getFoldersSavedCount());
+		assertEquals(0, uploader.getTimesUploadDirectoryCalled());
 	}
 
 	private int getSizeOfFoldersToSync() {

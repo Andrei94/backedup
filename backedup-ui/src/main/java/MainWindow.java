@@ -49,6 +49,7 @@ public class MainWindow implements Initializable {
 
 	public void openLoginWindow(MouseEvent mouseEvent) {
 		String username = DialogOpener.openDialog("loginDialog.fxml", 400, 300);
+		controller.setLoggedInUsername(username);
 		loggedInUsername.setText(controller.getLoggedInText(username));
 	}
 }

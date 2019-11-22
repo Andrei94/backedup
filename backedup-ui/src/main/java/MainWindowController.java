@@ -9,6 +9,7 @@ class MainWindowController {
 	private List<Folder> folders;
 	private SyncFolderSaver saver;
 	private ObjectUploader uploader;
+	private String loggedInUsername;
 
 	MainWindowController() {
 		this(ObjectUploaderFactory.createS3ObjectUploader(), new SyncFolderLoader(), new SyncFolderSaver());
@@ -51,6 +52,7 @@ class MainWindowController {
 
 	void sync() {
 		saver.save(folders.stream().map(folder -> folder.path.toString()).collect(Collectors.toList()));
+		uploader.setLoggedInUsername(loggedInUsername);
 		folders.forEach(folder -> uploader.uploadDirectory(folder.path));
 	}
 
@@ -70,5 +72,9 @@ class MainWindowController {
 		if(username == null || username.isEmpty())
 			return "";
 		return "Welcome " + username;
+	}
+
+	public void setLoggedInUsername(String username) {
+		this.loggedInUsername = username;
 	}
 }
