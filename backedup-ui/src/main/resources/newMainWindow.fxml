@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="NewMainWindow">
+	<BorderPane prefHeight="768.0" prefWidth="1034.0">
+		<left>
+			<Pane prefHeight="665.0" prefWidth="200.0" style="-fx-background-color: #4f6eff; -fx-background-radius: 0 20 0 0;" BorderPane.alignment="CENTER">
+				<Button alignment="CENTER" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="148.0" stylesheets="@button.css" text="Sync" textFill="WHITE">
+					<font>
+						<Font size="18.0" />
+					</font>
+					<graphic>
+						<ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+							<Image url="@secure_cloud_40px.png" />
+						</ImageView>
+					</graphic>
+				</Button>
+			</Pane>
+		</left>
+		<top>
+			<Pane prefHeight="103.0" prefWidth="1034.0" BorderPane.alignment="CENTER">
+				<Label layoutX="890.0" layoutY="35.0" text="Welcome " textFill="#4f6eff">
+					<font>
+						<Font size="14.0" />
+					</font>
+				</Label>
+				<Label layoutX="14.0" layoutY="25.0" text="Backedup" textFill="#4f6eff">
+					<font>
+						<Font size="36.0" />
+					</font>
+					<graphic>
+						<ImageView fitHeight="56.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+							<Image url="@home_80px.png" />
+						</ImageView>
+					</graphic>
+				</Label>
+			</Pane>
+		</top>
+		<center>
+			<ScrollPane fitToHeight="true" fitToWidth="true" pannable="true" prefHeight="672.0" prefWidth="811.0" stylesheets="scrollpane.css, pane.css">
+				<TilePane fx:id="contents" cache="true" cacheHint="SPEED" hgap="10.0" prefTileHeight="150.0" prefTileWidth="150.0" vgap="20.0" BorderPane.alignment="CENTER">
+					<Pane prefHeight="150.0" prefWidth="150.0" styleClass="pane" stylesheets="@button.css">
+						<VBox alignment="CENTER" prefHeight="150.0" prefWidth="150.0">
+							<ImageView cache="true" cacheHint="SPEED" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+								<Image url="@plus_80px.png" />
+							</ImageView>
+							<Label text="Add folder" textAlignment="CENTER" wrapText="true" />
+						</VBox>
+					</Pane>
+				</TilePane>
+				<BorderPane.margin>
+					<Insets left="10.0" />
+				</BorderPane.margin>
+			</ScrollPane>
+		</center>
+	</BorderPane>
+</AnchorPane>

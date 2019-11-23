@@ -8,8 +8,8 @@ import java.io.IOException;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("mainWindow.fxml")), 600, 400));
-		primaryStage.getScene().getStylesheets().add(getClass().getResource("button.css").toExternalForm());
+		Scene value = new Scene(FXMLLoader.load(getClass().getResource("newMainWindow.fxml")));
+		primaryStage.setScene(value);
 		primaryStage.show();
 	}
 

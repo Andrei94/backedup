@@ -1,0 +1,6 @@
+.pane {
+}
+
+.pane:hover {
+    -fx-background-color: derive(#4f6eff, 80%);
+}

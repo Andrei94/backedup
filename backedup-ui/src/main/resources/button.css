@@ -1,5 +1,7 @@
-.button{
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 2em;
-    -fx-min-width: 40px;
+.button {
+    -fx-background-color: #4f6eff;
+}
+
+.button:hover {
+    -fx-text-fill: derive(#4f6eff, 80%);
 }
