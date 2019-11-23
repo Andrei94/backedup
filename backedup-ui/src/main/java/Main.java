@@ -10,6 +10,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws IOException {
 		Scene value = new Scene(FXMLLoader.load(getClass().getResource("newMainWindow.fxml")));
 		primaryStage.setScene(value);
+		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 
