@@ -17,7 +17,7 @@
 	<BorderPane prefHeight="768.0" prefWidth="1034.0">
 		<left>
 			<Pane prefHeight="665.0" prefWidth="200.0" style="-fx-background-color: #4f6eff; -fx-background-radius: 0 20 0 0;" BorderPane.alignment="CENTER">
-				<Button alignment="CENTER" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="148.0" stylesheets="@button.css" text="Sync" textFill="WHITE">
+				<Button alignment="CENTER" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="148.0" stylesheets="@button.css" text="Sync" textFill="WHITE" onMouseClicked="#syncFolders">
 					<font>
 						<Font size="18.0" />
 					</font>
@@ -50,8 +50,8 @@
 		</top>
 		<center>
 			<ScrollPane fitToHeight="true" fitToWidth="true" pannable="true" prefHeight="672.0" prefWidth="811.0" stylesheets="scrollpane.css, pane.css">
-				<TilePane fx:id="contents" cache="true" cacheHint="SPEED" hgap="10.0" prefTileHeight="150.0" prefTileWidth="150.0" vgap="20.0" BorderPane.alignment="CENTER">
-					<Pane prefHeight="150.0" prefWidth="150.0" styleClass="pane" stylesheets="@button.css">
+				<TilePane fx:id="foldersToSync" cache="true" cacheHint="SPEED" hgap="10.0" prefTileHeight="150.0" prefTileWidth="150.0" vgap="20.0" BorderPane.alignment="CENTER">
+					<Pane prefHeight="150.0" prefWidth="150.0" styleClass="pane" onMouseClicked="#openDirectoryChooser">
 						<VBox alignment="CENTER" prefHeight="150.0" prefWidth="150.0">
 							<ImageView cache="true" cacheHint="SPEED" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
 								<Image url="@plus_80px.png" />

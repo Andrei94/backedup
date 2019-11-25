@@ -10,7 +10,12 @@ class TileDecorator {
 	private int prefHeight = 150;
 	private int prefWidth = 150;
 
-	Pane tile(Pane pane, Image image, String text) {
+	Pane tile(Image image, Folder folder) {
+		return tile(image, folder.path.toString());
+	}
+
+	private Pane tile(Image image, String text) {
+		Pane pane = new Pane();
 		pane.setPrefHeight(prefHeight);
 		pane.setPrefWidth(prefWidth);
 		pane.setCache(true);

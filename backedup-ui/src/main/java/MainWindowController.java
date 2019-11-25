@@ -77,4 +77,8 @@ class MainWindowController {
 	public void setLoggedInUsername(String username) {
 		this.loggedInUsername = username;
 	}
+
+	String getFolderImagePath() {
+		return getClass().getResource("folder_80px.png").toExternalForm();
+	}
 }

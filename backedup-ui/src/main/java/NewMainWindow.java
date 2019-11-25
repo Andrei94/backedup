@@ -1,58 +1,39 @@
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
+import javafx.stage.DirectoryChooser;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class NewMainWindow implements Initializable {
-	public TilePane contents;
+	public TilePane foldersToSync;
+	private MainWindowController controller = new MainWindowController();
+	private TileDecorator decorator = new TileDecorator();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		try {
-			String url = new File("D:\\Programming\\Intellij\\backedup\\backedup-ui\\src\\main\\resources\\folder_80px.png").toURI().toURL().toExternalForm();
-			addContents(new Image(url, 80, 80, true, true));
-		} catch(MalformedURLException e) {
-			e.printStackTrace();
-		}
+		addContents(getFolderImage());
 	}
 
 	private void addContents(Image image) {
-		TileDecorator decorator = new TileDecorator();
-		contents.getChildren().addAll(contents.getChildren().size() - 1, Arrays.asList(
-				decorator.tile(new Pane(), image, "E:\\Workspace"),
-				decorator.tile(new Pane(), image, "E:\\Workspace\\dhjasdhjashdjashjdkhasjkdhjkak"),
-				decorator.tile(new Pane(), image, "E:\\Workspace"),
-				decorator.tile(new Pane(), image, "E:\\Workspace"),
-				decorator.tile(new Pane(), image, "E:\\Workspace"),
-				decorator.tile(new Pane(), image, "E:\\Workspace\\dhjasdhjashdjashjdkhasjkdhjkak"),
-				decorator.tile(new Pane(), image, "E:\\Workspace"),
-				decorator.tile(new Pane(), image, "E:\\Workspace"),
-				decorator.tile(new Pane(), image, "E:\\Workspace\\dhjasdhjashdjashjdkhasjkdhjkak"),
-				decorator.tile(new Pane(), image, "E:\\Workspace"),
-				decorator.tile(new Pane(), image, "E:\\Workspace"),
-				decorator.tile(new Pane(), image, "E:\\Workspace"),
-				decorator.tile(new Pane(), image, "E:\\Workspace\\dhjasdhjashdjashjdkhasjkdhjkak"),
-				decorator.tile(new Pane(), image, "E:\\Workspace"),
-				decorator.tile(new Pane(), image, "E:\\Workspace"),
-				decorator.tile(new Pane(), image, "E:\\Workspace\\dhjasdhjashdjashjdkhasjkdhjkak"),
-				decorator.tile(new Pane(), image, "E:\\Workspace"),
-				decorator.tile(new Pane(), image, "E:\\Workspace"),
-				decorator.tile(new Pane(), image, "E:\\Workspace"),
-				decorator.tile(new Pane(), image, "E:\\Workspace\\dhjasdhjashdjashjdkhasjkdhjkak"),
-				decorator.tile(new Pane(), image, "E:\\Workspace"),
-				decorator.tile(new Pane(), image, "E:\\Workspace"),
-				decorator.tile(new Pane(), image, "E:\\Workspace\\dhjasdhjashdjashjdkhasjkdhjkak"),
-				decorator.tile(new Pane(), image, "E:\\Workspace"),
-				decorator.tile(new Pane(), image, "E:\\Workspace"),
-				decorator.tile(new Pane(), image, "E:\\Workspace"),
-				decorator.tile(new Pane(), image, "E:\\Workspace\\dhjasdhjashdjashjdkhasjkdhjkak"),
-				decorator.tile(new Pane(), image, "E:\\Workspace"),
-				decorator.tile(new Pane(), image, "E:\\Workspace")));
+		foldersToSync.getChildren().addAll(foldersToSync.getChildren().size() - 1,
+				controller.getSyncList().stream().map(it -> decorator.tile(image, it)).collect(Collectors.toList()));
+	}
+
+	public void openDirectoryChooser(MouseEvent mouseEvent) {
+		File file = new DirectoryChooser().showDialog(foldersToSync.getScene().getWindow());
+		controller.addToSyncList(file).ifPresent(folder -> foldersToSync.getChildren().add(decorator.tile(getFolderImage(), folder)));
+	}
+
+	private Image getFolderImage() {
+		return new Image(controller.getFolderImagePath(), 80, 80, true, true);
+	}
+
+	public void syncFolders(MouseEvent mouseEvent) {
+		controller.sync();
 	}
 }

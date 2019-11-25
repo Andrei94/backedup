@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MainWindowControllerTest {
 	private MainWindowController controller;
@@ -42,6 +43,12 @@ class MainWindowControllerTest {
 		@Test
 		void loggedInUsernameEmpty() {
 			assertEquals("", controller.getLoggedInText(""));
+		}
+
+		@Test
+		void getFolderImagePath() {
+			assertTrue(controller.getFolderImagePath().startsWith("file"));
+			assertTrue(controller.getFolderImagePath().endsWith("folder_80px.png"));
 		}
 	}
 
