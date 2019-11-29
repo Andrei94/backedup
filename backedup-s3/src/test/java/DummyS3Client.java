@@ -36,11 +36,13 @@ public class DummyS3Client implements AmazonS3 {
 	}
 
 	@Override
+	@Deprecated
 	public void changeObjectStorageClass(String bucketName, String key, StorageClass newStorageClass) throws SdkClientException {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
+	@Deprecated
 	public void setObjectRedirectLocation(String bucketName, String key, String newRedirectLocation) throws SdkClientException {
 		throw new UnsupportedOperationException();
 	}
@@ -121,6 +123,7 @@ public class DummyS3Client implements AmazonS3 {
 	}
 
 	@Override
+	@Deprecated
 	public boolean doesBucketExist(String bucketName) throws SdkClientException {
 		throw new UnsupportedOperationException();
 	}
@@ -166,11 +169,13 @@ public class DummyS3Client implements AmazonS3 {
 	}
 
 	@Override
+	@Deprecated
 	public Bucket createBucket(String bucketName, com.amazonaws.services.s3.model.Region region) throws SdkClientException {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
+	@Deprecated
 	public Bucket createBucket(String bucketName, String region) throws SdkClientException {
 		throw new UnsupportedOperationException();
 	}
@@ -606,6 +611,7 @@ public class DummyS3Client implements AmazonS3 {
 	}
 
 	@Override
+	@Deprecated
 	public void restoreObject(RestoreObjectRequest request) throws AmazonServiceException {
 		throw new UnsupportedOperationException();
 	}
@@ -616,6 +622,7 @@ public class DummyS3Client implements AmazonS3 {
 	}
 
 	@Override
+	@Deprecated
 	public void restoreObject(String bucketName, String key, int expirationInDays) throws AmazonServiceException {
 		throw new UnsupportedOperationException();
 	}
