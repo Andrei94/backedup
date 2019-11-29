@@ -28,6 +28,7 @@ public class NewLoginDialog implements Dialog<String> {
 		if(l.isSuccessfulLogin()) {
 			loggedInUsername = username.getText();
 			close(new ActionEvent());
+			WindowOpener.openWindow("newMainWindow.fxml", loggedInUsername);
 		}
 		else {
 			loginResult.setText(l.getText());

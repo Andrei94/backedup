@@ -1,4 +1,5 @@
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
@@ -9,8 +10,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class NewMainWindow implements Initializable {
+public class NewMainWindow implements Initializable, WindowPayload<String> {
 	public TilePane foldersToSync;
+	public Label loggedInUsername;
 	private MainWindowController controller = new MainWindowController();
 	private TileDecorator decorator = new TileDecorator();
 
@@ -35,5 +37,11 @@ public class NewMainWindow implements Initializable {
 
 	public void syncFolders(MouseEvent mouseEvent) {
 		controller.sync();
+	}
+
+	@Override
+	public void setPayload(String payload) {
+		controller.setLoggedInUsername(payload);
+		loggedInUsername.setText(controller.getLoggedInText(payload));
 	}
 }
