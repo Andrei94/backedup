@@ -79,6 +79,6 @@ class MainWindowController {
 	}
 
 	String getFolderImagePath() {
-		return getClass().getResource("folder_80px.png").toExternalForm();
+		return getClass().getResource("icons/folder_80px.png").toExternalForm();
 	}
 }

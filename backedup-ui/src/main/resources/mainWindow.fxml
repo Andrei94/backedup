@@ -23,7 +23,7 @@
 					</font>
 					<graphic>
 						<ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-							<Image url="@secure_cloud_40px.png" />
+							<Image url="@icons/secure_cloud_40px.png" />
 						</ImageView>
 					</graphic>
 				</Button>
@@ -42,7 +42,7 @@
 					</font>
 					<graphic>
 						<ImageView fitHeight="56.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
-							<Image url="@home_80px.png" />
+							<Image url="@icons/home_80px.png" />
 						</ImageView>
 					</graphic>
 				</Label>
@@ -54,7 +54,7 @@
 					<Pane onMouseClicked="#openDirectoryChooser" prefHeight="150.0" prefWidth="150.0" styleClass="pane">
 						<VBox alignment="CENTER" prefHeight="150.0" prefWidth="150.0">
 							<ImageView cache="true" cacheHint="SPEED" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-								<Image url="@plus_80px.png" />
+								<Image url="@icons/plus_80px.png" />
 							</ImageView>
 							<Label text="Add folder" textAlignment="CENTER" wrapText="true" />
 						</VBox>

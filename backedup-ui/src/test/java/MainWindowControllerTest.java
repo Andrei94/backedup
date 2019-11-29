@@ -48,7 +48,7 @@ class MainWindowControllerTest {
 		@Test
 		void getFolderImagePath() {
 			assertTrue(controller.getFolderImagePath().startsWith("file"));
-			assertTrue(controller.getFolderImagePath().endsWith("folder_80px.png"));
+			assertTrue(controller.getFolderImagePath().endsWith("icons/folder_80px.png"));
 		}
 	}
 
