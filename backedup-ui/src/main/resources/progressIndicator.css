@@ -1,0 +1,3 @@
+.progress-indicator {
+    -fx-progress-color: derive(#4f6eff, -40%);
+}
