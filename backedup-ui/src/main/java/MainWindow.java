@@ -1,55 +1,47 @@
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.TilePane;
 import javafx.stage.DirectoryChooser;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
-public class MainWindow implements Initializable {
-	public ListView<Folder> foldersToSync;
+public class MainWindow implements Initializable, WindowPayload<String> {
+	public TilePane foldersToSync;
 	public Label loggedInUsername;
 	private MainWindowController controller = new MainWindowController();
+	private TileDecorator decorator = new TileDecorator();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		foldersToSync.getItems().setAll(controller.getSyncList());
+		addContents(getFolderImage());
 	}
 
-	public void openFileBrowser(MouseEvent mouseEvent) {
+	private void addContents(Image image) {
+		foldersToSync.getChildren().addAll(foldersToSync.getChildren().size() - 1,
+				controller.getSyncList().stream().map(it -> decorator.tile(image, it)).collect(Collectors.toList()));
+	}
+
+	public void openDirectoryChooser(MouseEvent mouseEvent) {
 		File file = new DirectoryChooser().showDialog(foldersToSync.getScene().getWindow());
-		controller.addToSyncList(file).ifPresent(folder -> foldersToSync.getItems().add(folder));
+		controller.addToSyncList(file).ifPresent(folder -> foldersToSync.getChildren().add(decorator.tile(getFolderImage(), folder)));
 	}
 
-	public void deleteTreeItemWithConfirmation(MouseEvent mouseEvent) {
-		Folder selectedItem = foldersToSync.getSelectionModel().getSelectedItem();
-		if(getSelectedButtonFromAlert() == ButtonBar.ButtonData.OK_DONE && controller.removeFromSyncList(selectedItem)) {
-			foldersToSync.getItems().remove(selectedItem);
-		}
-	}
-
-	private ButtonBar.ButtonData getSelectedButtonFromAlert() {
-		Alert alert = new Alert(Alert.AlertType.WARNING);
-		alert.setTitle(controller.getWarningTitle());
-		alert.setContentText(controller.getWarningText());
-		alert.getButtonTypes().setAll(
-				new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE),
-				new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE)
-		);
-		AtomicReference<ButtonBar.ButtonData> buttonData = new AtomicReference<>();
-		alert.showAndWait().ifPresent(buttonType -> buttonData.set(buttonType.getButtonData()));
-		return buttonData.get();
+	private Image getFolderImage() {
+		return new Image(controller.getFolderImagePath(), 80, 80, true, true);
 	}
 
 	public void syncFolders(MouseEvent mouseEvent) {
 		controller.sync();
 	}
 
-	public void openLoginWindow(MouseEvent mouseEvent) {
-		String username = WindowOpener.openDialog("loginDialog.fxml", 400, 300);
-		controller.setLoggedInUsername(username);
-		loggedInUsername.setText(controller.getLoggedInText(username));
+	@Override
+	public void setPayload(String payload) {
+		controller.setLoggedInUsername(payload);
+		loggedInUsername.setText(controller.getLoggedInText(payload));
 	}
 }

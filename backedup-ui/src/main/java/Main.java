@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		Scene value = new Scene(FXMLLoader.load(getClass().getResource("newLoginDialog.fxml")));
+		Scene value = new Scene(FXMLLoader.load(getClass().getResource("loginDialog.fxml")));
 		primaryStage.setScene(value);
 		primaryStage.setResizable(false);
 		primaryStage.show();
