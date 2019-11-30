@@ -47,7 +47,7 @@ public class S3Adapter {
 		try {
 			build.downloadDirectory("backedup-storage", name, new File(destPath), true).waitForCompletion();
 			return true;
-		} catch(InterruptedException e) {
+		} catch(RuntimeException | InterruptedException e) {
 			e.printStackTrace();
 			return false;
 		}
