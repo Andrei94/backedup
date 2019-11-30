@@ -4,6 +4,10 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.PutObjectResult;
+import com.amazonaws.services.s3.transfer.TransferManager;
+import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
+
+import java.io.File;
 
 public class S3Adapter {
 	private final AmazonS3 client;
@@ -36,5 +40,16 @@ public class S3Adapter {
 
 	private String makeS3FolderFromName(String folderName) {
 		return folderName + "/";
+	}
+
+	public boolean downloadDirectory(String name, String destPath) {
+		TransferManager build = TransferManagerBuilder.standard().withS3Client(client).build();
+		try {
+			build.downloadDirectory("backedup-storage", name, new File(destPath), true).waitForCompletion();
+			return true;
+		} catch(InterruptedException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 }
