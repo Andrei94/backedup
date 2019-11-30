@@ -43,9 +43,9 @@ public class S3Adapter {
 	}
 
 	public boolean downloadDirectory(String name, String destPath) {
-		TransferManager build = TransferManagerBuilder.standard().withS3Client(client).build();
+		TransferManager transferManager = TransferManagerBuilder.standard().withS3Client(client).build();
 		try {
-			build.downloadDirectory("backedup-storage", name, new File(destPath), true).waitForCompletion();
+			transferManager.downloadDirectory("backedup-storage", name, new File(destPath), true).waitForCompletion();
 			return true;
 		} catch(RuntimeException | InterruptedException e) {
 			e.printStackTrace();
