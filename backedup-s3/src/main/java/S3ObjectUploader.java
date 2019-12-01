@@ -38,7 +38,7 @@ public class S3ObjectUploader implements ObjectUploader {
 				.withBucket("backedup-storage")
 				.withRemoteFile("816033825058:" + username + "/" + adapter.toFileInRemoteFolder(directory.getName(), directory.relativize(localFile)))
 				.withLocalFile(localFile)
-				.withStorageClass("STANDARD");
+				.withStorageClass("INTELLIGENT_TIERING");
 		logger.info("Uploading " + uploadRequest);
 		return adapter.putObject(uploadRequest);
 	}

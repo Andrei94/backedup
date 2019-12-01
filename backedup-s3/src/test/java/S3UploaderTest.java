@@ -87,6 +87,6 @@ class S3UploaderTest {
 				.withBucket("backedup-storage")
 				.withRemoteFile(remoteFile)
 				.withLocalFile(localFile)
-				.withStorageClass("STANDARD");
+				.withStorageClass("INTELLIGENT_TIERING");
 	}
 }
