@@ -42,10 +42,11 @@ public class S3Adapter {
 		return folderName + "/";
 	}
 
-	public boolean downloadDirectory(String name, String destPath) {
+	public boolean downloadDirectoryExcludingGlacier(String name, String destPath) {
 		TransferManager transferManager = TransferManagerBuilder.standard().withS3Client(client).build();
 		try {
-			transferManager.downloadDirectory("backedup-storage", name, new File(destPath), true).waitForCompletion();
+			transferManager.downloadDirectory("backedup-storage", name, new File(destPath), true,
+					objectSummary -> !(objectSummary.getStorageClass().equals("GLACIER") && objectSummary.getStorageClass().equals("DEEP_ARCHIVE"))).waitForCompletion();
 			return true;
 		} catch(RuntimeException | InterruptedException e) {
 			e.printStackTrace();

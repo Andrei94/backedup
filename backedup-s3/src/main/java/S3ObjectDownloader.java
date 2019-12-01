@@ -6,6 +6,6 @@ public class S3ObjectDownloader {
 	}
 
 	boolean downloadDirectory(String remoteDir, LocalFile localDir) {
-		return adapter.downloadDirectory(remoteDir, localDir.getPath());
+		return adapter.downloadDirectoryExcludingGlacier(remoteDir, localDir.getPath());
 	}
 }

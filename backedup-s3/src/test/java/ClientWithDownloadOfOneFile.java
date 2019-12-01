@@ -12,6 +12,7 @@ public class ClientWithDownloadOfOneFile extends DummyS3Client {
 		S3ObjectSummary e = new S3ObjectSummary();
 		e.setBucketName("backedup-storage");
 		e.setKey("testFolder/file1");
+		e.setStorageClass("STANDARD");
 		objectListing.getObjectSummaries().add(e);
 		return objectListing;
 	}
