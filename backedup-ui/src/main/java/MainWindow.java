@@ -39,6 +39,10 @@ public class MainWindow implements Initializable, WindowPayload<String> {
 		controller.sync();
 	}
 
+	public void downloadFolders(MouseEvent mouseEvent) {
+		controller.download();
+	}
+
 	@Override
 	public void setPayload(String payload) {
 		controller.setLoggedInUsername(payload);

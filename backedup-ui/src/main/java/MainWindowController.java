@@ -9,14 +9,16 @@ class MainWindowController {
 	private List<Folder> folders;
 	private SyncFolderSaver saver;
 	private ObjectUploader uploader;
+	private ObjectDownloader downloader;
 	private String loggedInUsername;
 
 	MainWindowController() {
-		this(ObjectUploaderFactory.createS3ObjectUploader(), new SyncFolderLoader(), new SyncFolderSaver());
+		this(ObjectUploaderFactory.createS3ObjectUploader(), ObjectDownloaderFactory.createObjectDownloader(), new SyncFolderLoader(), new SyncFolderSaver());
 	}
 
-	MainWindowController(ObjectUploader uploader, SyncFolderLoader loader, SyncFolderSaver saver) {
+	MainWindowController(ObjectUploader uploader, ObjectDownloader downloader, SyncFolderLoader loader, SyncFolderSaver saver) {
 		this.uploader = uploader;
+		this.downloader = downloader;
 		this.saver = saver;
 		folders = loader.load();
 	}
@@ -54,6 +56,11 @@ class MainWindowController {
 		saver.save(folders.stream().map(folder -> folder.path.toString()).collect(Collectors.toList()));
 		uploader.setLoggedInUsername(loggedInUsername);
 		folders.forEach(folder -> uploader.uploadDirectory(folder.path));
+	}
+
+	boolean download() {
+		downloader.setLoggedInUsername(loggedInUsername);
+		return folders.stream().anyMatch(folder -> downloader.downloadDirectory(folder.path.getFileName().toString(), folder.path.getParent().toString()));
 	}
 
 	String getWarningTitle() {

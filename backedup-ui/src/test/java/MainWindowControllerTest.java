@@ -7,8 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MainWindowControllerTest {
 	private MainWindowController controller;
@@ -17,7 +16,7 @@ class MainWindowControllerTest {
 	class TextTests {
 		@BeforeEach
 		void setUp() {
-			controller = new MainWindowController(null, new SyncFolderLoader(), new FolderSaver());
+			controller = new MainWindowController(null, null, new SyncFolderLoader(), new FolderSaver());
 		}
 
 		@Test
@@ -54,27 +53,27 @@ class MainWindowControllerTest {
 
 	@Test
 	void loadSyncFolders() {
-		controller = new MainWindowController(null, new SyncFolderLoaderStub(Collections.singletonList(Folder.createFolder(""))), new FolderSaver());
+		controller = new MainWindowController(null, null, new SyncFolderLoaderStub(Collections.singletonList(Folder.createFolder(""))), new FolderSaver());
 		assertEquals(1, getSizeOfFoldersToSync());
 	}
 
 	@Test
 	void addFolderToSyncList() {
-		controller = new MainWindowController(null, new SyncFolderLoaderStub(new ArrayList<>()), new FolderSaver());
+		controller = new MainWindowController(null, null, new SyncFolderLoaderStub(new ArrayList<>()), new FolderSaver());
 		controller.addToSyncList(new File("directory"));
 		assertEquals(1, getSizeOfFoldersToSync());
 	}
 
 	@Test
 	void addSubfolderOfFolderToSyncList() {
-		controller = new MainWindowController(null, new SyncFolderLoaderStub(Collections.singletonList(Folder.createFolder("directory"))), new FolderSaver());
+		controller = new MainWindowController(null, null, new SyncFolderLoaderStub(Collections.singletonList(Folder.createFolder("directory"))), new FolderSaver());
 		controller.addToSyncList(new File("directory/subdirectory"));
 		assertEquals(1, getSizeOfFoldersToSync());
 	}
 
 	@Test
 	void addFolderToOneFolderList() {
-		controller = new MainWindowController(null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
+		controller = new MainWindowController(null, null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
 			add(Folder.createFolder("directory"));
 		}}), new FolderSaver());
 		controller.addToSyncList(new File("directory2"));
@@ -83,7 +82,7 @@ class MainWindowControllerTest {
 
 	@Test
 	void addWindowsFolderToLinuxFolderList() {
-		controller = new MainWindowController(null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
+		controller = new MainWindowController(null, null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
 			add(Folder.createFolder("/home/directory"));
 		}}), new FolderSaver());
 		controller.addToSyncList(new File("D:\\directory2"));
@@ -92,7 +91,7 @@ class MainWindowControllerTest {
 
 	@Test
 	void removeFolderFromSyncList() {
-		controller = new MainWindowController(null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
+		controller = new MainWindowController(null, null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
 			add(Folder.createFolder("/home/directory"));
 		}}), new FolderSaver());
 		controller.removeFromSyncList(new Folder(Paths.get("/home/directory")));
@@ -101,7 +100,7 @@ class MainWindowControllerTest {
 
 	@Test
 	void removeNullFolderFromSyncList() {
-		controller = new MainWindowController(null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
+		controller = new MainWindowController(null, null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
 			add(Folder.createFolder("/home/directory"));
 		}}), new FolderSaver());
 		controller.removeFromSyncList(null);
@@ -112,7 +111,7 @@ class MainWindowControllerTest {
 	void syncFolders() {
 		S3UploaderMock uploader = new S3UploaderMock();
 		FolderSaver saver = new FolderSaver();
-		controller = new MainWindowController(uploader, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
+		controller = new MainWindowController(uploader, null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
 			add(Folder.createFolder("/home/directory"));
 			add(Folder.createFolder("/home/directory2"));
 		}}), saver);
@@ -126,7 +125,7 @@ class MainWindowControllerTest {
 	void skipSyncWhenUserNotLoggedIn() {
 		S3UploaderMock uploader = new S3UploaderMock();
 		FolderSaver saver = new FolderSaver();
-		controller = new MainWindowController(uploader, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
+		controller = new MainWindowController(uploader, null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
 			add(Folder.createFolder("/home/directory"));
 			add(Folder.createFolder("/home/directory2"));
 		}}), saver);
@@ -137,5 +136,26 @@ class MainWindowControllerTest {
 
 	private int getSizeOfFoldersToSync() {
 		return controller.getSyncList().size();
+	}
+
+	@Test
+	void downloadFolder() {
+		S3DownloaderMock downloader = new S3DownloaderMock();
+		controller = new MainWindowController(null, downloader, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
+			add(Folder.createFolder("/home/directory"));
+			add(Folder.createFolder("/home/directory2"));
+		}}), null);
+		controller.setLoggedInUsername("username");
+		assertTrue(controller.download());
+	}
+
+	@Test
+	void skipDownloadIfUserNotLoggedIn() {
+		S3DownloaderMock downloader = new S3DownloaderMock();
+		controller = new MainWindowController(null, downloader, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
+			add(Folder.createFolder("/home/directory"));
+			add(Folder.createFolder("/home/directory2"));
+		}}), null);
+		assertFalse(controller.download());
 	}
 }

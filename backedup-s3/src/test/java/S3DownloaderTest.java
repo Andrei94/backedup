@@ -10,12 +10,23 @@ class S3DownloaderTest {
 
 	@BeforeEach
 	void setUp() {
-		objectDownloader = new S3ObjectDownloader(new S3Adapter(new ClientWithDownloadOfOneFile()));
+		objectDownloader = new S3ObjectDownloader(new S3Adapter(new ClientWithDownloadOfOneFile())) {
+			@Override
+			boolean exists(String remoteDir, LocalFile localDir) {
+				return true;
+			}
+		};
 	}
 
 	@Test
 	void downloadDirectoryFromS3() {
+		objectDownloader.setLoggedInUsername("username");
 		assertTrue(objectDownloader.downloadDirectory("testFolder", LocalFile.fromPath(Paths.get("D:\\"))));
+	}
+
+	@Test
+	void skipDownloadIfUserNotLoggedIn() {
+		assertFalse(objectDownloader.downloadDirectory("testFolder", LocalFile.fromPath(Paths.get("D:\\"))));
 	}
 
 	@Test

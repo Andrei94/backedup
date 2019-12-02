@@ -15,7 +15,7 @@ class S3UploaderTest {
 		LocalFile dir = createMockDirectory("directory");
 		LocalFile localFile = createMockFile("directory/file");
 		s3Adapter = new S3Adapter(new ClientWithPutRequestVerifyingParameters(
-				createUploadRequest("816033825058:username/directory/" + localFile.getName(), localFile)
+				createUploadRequest("username/directory/" + localFile.getName(), localFile)
 		));
 		uploader = new S3ObjectUploader(s3Adapter, walker);
 		uploader.setLoggedInUsername("username");
@@ -36,7 +36,7 @@ class S3UploaderTest {
 		LocalFile fileUnderDirectory = createMockFile("path/to/directory/file1");
 		walker.setFile(fileUnderDirectory);
 		s3Adapter = new S3Adapter(new ClientWithPutRequestVerifyingParameters(
-				createUploadRequest("816033825058:username/directory/" + fileUnderDirectory.getName(), fileUnderDirectory)
+				createUploadRequest("username/directory/" + fileUnderDirectory.getName(), fileUnderDirectory)
 		));
 		uploader = new S3ObjectUploader(s3Adapter, walker);
 		uploader.setLoggedInUsername("username");
@@ -48,7 +48,7 @@ class S3UploaderTest {
 		LocalFile fileUnderSubdirectory = createMockFile("path/to/directory/secondDirectory/file2");
 		walker.setFile(fileUnderSubdirectory);
 		s3Adapter = new S3Adapter(new ClientWithPutRequestVerifyingParameters(
-				createUploadRequest("816033825058:username/directory/secondDirectory/" + fileUnderSubdirectory.getName(), fileUnderSubdirectory)
+				createUploadRequest("username/directory/secondDirectory/" + fileUnderSubdirectory.getName(), fileUnderSubdirectory)
 		));
 		uploader = new S3ObjectUploader(s3Adapter, walker);
 		uploader.setLoggedInUsername("username");
