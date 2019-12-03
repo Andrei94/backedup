@@ -40,12 +40,12 @@ public class S3ObjectDownloader implements ObjectDownloader {
 		}
 	}
 
-	void deleteFolder(Path localDownloadDirectory) throws IOException {
-		Files.delete(localDownloadDirectory);
-	}
-
 	void moveFolder(Path src, Path dst) throws IOException {
 		Files.move(src, dst, StandardCopyOption.REPLACE_EXISTING);
+	}
+
+	void deleteFolder(Path localDownloadDirectory) throws IOException {
+		Files.delete(localDownloadDirectory);
 	}
 
 	Path getLocalDownloadDirectory(String remoteDirName, LocalFile localDir) {

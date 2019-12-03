@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -11,7 +10,6 @@ class S3DownloaderTest {
 	private S3ObjectDownloader objectDownloader = new S3ObjectDownloader(new S3Adapter(null));
 
 	@Test
-	@Disabled
 	void downloadDirectoryFromS3() {
 		objectDownloader = new S3ObjectDownloader(new S3AdapterSuccessfulDownloadStub(new ClientWithDownloadOfOneFile())) {
 			@Override
