@@ -21,30 +21,38 @@ public class S3ObjectDownloader implements ObjectDownloader {
 		if(username == null || username.isEmpty())
 			return false;
 		boolean isDownloadSuccessful = adapter.downloadDirectoryExcludingGlacier(username + "/" + remoteDir, localDir.getPath()) &&
-				exists(remoteDir, localDir);
+				exists(getLocalDownloadDirectory(remoteDir, localDir));
 		if(isDownloadSuccessful)
 			moveDownloadedFolder(remoteDir, localDir);
 		return isDownloadSuccessful;
 	}
 
-	private void moveDownloadedFolder(String remoteDir, LocalFile localDir) {
+	boolean exists(Path file) {
+		return Files.exists(file);
+	}
+
+	void moveDownloadedFolder(String remoteDir, LocalFile localDir) {
 		try {
-			Files.move(getLocalDownloadDirectory(remoteDir, localDir), getDestination(remoteDir, localDir), StandardCopyOption.REPLACE_EXISTING);
-			Files.delete(getLocalDownloadDirectory("", localDir));
+			moveFolder(getLocalDownloadDirectory(remoteDir, localDir), getDestination(remoteDir, localDir));
+			deleteFolder(getLocalDownloadDirectory("", localDir));
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	boolean exists(String remoteDir, LocalFile localDir) {
-		return Files.exists(getLocalDownloadDirectory(remoteDir, localDir));
+	void deleteFolder(Path localDownloadDirectory) throws IOException {
+		Files.delete(localDownloadDirectory);
 	}
 
-	private Path getLocalDownloadDirectory(String remoteDirName, LocalFile localDir) {
+	void moveFolder(Path src, Path dst) throws IOException {
+		Files.move(src, dst, StandardCopyOption.REPLACE_EXISTING);
+	}
+
+	Path getLocalDownloadDirectory(String remoteDirName, LocalFile localDir) {
 		return Paths.get(localDir.getPath() + "/" + username + "/" + remoteDirName);
 	}
 
-	private Path getDestination(String remoteDir, LocalFile localDir) {
+	Path getDestination(String remoteDir, LocalFile localDir) {
 		return Paths.get(localDir.getPath() + remoteDir);
 	}
 
