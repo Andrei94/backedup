@@ -1,8 +1,9 @@
+import org.apache.commons.io.FileUtils;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 
 public class S3ObjectDownloader implements ObjectDownloader {
@@ -39,12 +40,13 @@ public class S3ObjectDownloader implements ObjectDownloader {
 	}
 
 	void moveFolder(Path src, Path dst) throws IOException {
-		if(Files.exists(src))
-			Files.move(src, dst, StandardCopyOption.REPLACE_EXISTING);
+		if(Files.exists(src)) {
+			FileUtils.copyDirectory(src.toFile(), dst.toFile());
+		}
 	}
 
 	void deleteFolder(Path localDownloadDirectory) throws IOException {
-		Files.deleteIfExists(localDownloadDirectory);
+		FileUtils.deleteDirectory(localDownloadDirectory.toFile());
 	}
 
 	Path getLocalDownloadDirectory(String remoteDirName, LocalFile localDir) {
