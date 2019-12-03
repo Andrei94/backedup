@@ -17,11 +17,6 @@ class S3DownloaderTest {
 				assertEquals("testFolder", remoteDir);
 				assertEquals("D:\\", localDir.getPath());
 			}
-
-			@Override
-			boolean exists(Path file) {
-				return file.toString().equals("D:\\username\\testFolder");
-			}
 		};
 		objectDownloader.setLoggedInUsername("username");
 		assertTrue(objectDownloader.downloadDirectory("testFolder", LocalFile.fromPath(Paths.get("D:\\"))));

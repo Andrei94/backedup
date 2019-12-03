@@ -16,6 +16,7 @@ public class ClientWithDownloadOfOneFile extends DummyS3Client {
 		objectListing.getObjectSummaries().add(e);
 		return objectListing;
 	}
+
 	@Override
 	public ObjectMetadata getObjectMetadata(GetObjectMetadataRequest getObjectMetadataRequest) throws SdkClientException {
 		ObjectMetadata objectMetadata = new ObjectMetadata();

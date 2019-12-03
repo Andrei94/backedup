@@ -3,6 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Optional;
 
 public class S3ObjectDownloader implements ObjectDownloader {
 	private S3Adapter adapter;
@@ -20,15 +21,12 @@ public class S3ObjectDownloader implements ObjectDownloader {
 	boolean downloadDirectory(String remoteDir, LocalFile localDir) {
 		if(username == null || username.isEmpty())
 			return false;
-		boolean isDownloadSuccessful = adapter.downloadDirectoryExcludingGlacier(username + "/" + remoteDir, localDir.getPath()) &&
-				exists(getLocalDownloadDirectory(remoteDir, localDir));
-		if(isDownloadSuccessful)
+		Optional<LocalFile> isDownloadSuccessful = adapter.downloadDirectoryExcludingGlacier(username + "/" + remoteDir, localDir.getPath());
+		if(isDownloadSuccessful.isPresent()) {
 			moveDownloadedFolder(remoteDir, localDir);
-		return isDownloadSuccessful;
-	}
-
-	boolean exists(Path file) {
-		return Files.exists(file);
+			return true;
+		}
+		return false;
 	}
 
 	void moveDownloadedFolder(String remoteDir, LocalFile localDir) {
@@ -41,11 +39,12 @@ public class S3ObjectDownloader implements ObjectDownloader {
 	}
 
 	void moveFolder(Path src, Path dst) throws IOException {
-		Files.move(src, dst, StandardCopyOption.REPLACE_EXISTING);
+		if(Files.exists(src))
+			Files.move(src, dst, StandardCopyOption.REPLACE_EXISTING);
 	}
 
 	void deleteFolder(Path localDownloadDirectory) throws IOException {
-		Files.delete(localDownloadDirectory);
+		Files.deleteIfExists(localDownloadDirectory);
 	}
 
 	Path getLocalDownloadDirectory(String remoteDirName, LocalFile localDir) {

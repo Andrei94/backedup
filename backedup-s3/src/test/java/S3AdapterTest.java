@@ -2,8 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 class S3AdapterTest {
 	private S3Adapter adapter;
@@ -23,5 +22,29 @@ class S3AdapterTest {
 				.withStorageClass("STANDARD");
 		adapter = new S3Adapter(new ClientWithPutRequestThrowingException());
 		assertFalse(adapter.putObject(req));
+	}
+
+	@Test
+	void downloadFolder() {
+		adapter = new S3Adapter(new ClientWithDownloadOfOneFile());
+		assertEquals("D:\\username\\testFolder", adapter.downloadDirectoryExcludingGlacier("username/testFolder", "D:\\").orElseThrow(RuntimeException::new).getPath());
+	}
+
+	@Test
+	void downloadFolderThrowsExceptionAtListObjects() {
+		adapter = new S3Adapter(new ClientWithListObjectsThrowingException());
+		assertFalse(adapter.downloadDirectoryExcludingGlacier("username/testFolder", "D:\\").isPresent());
+	}
+
+	@Test
+	void downloadFolderThrowsExceptionAtGetObjectMetadata() {
+		adapter = new S3Adapter(new ClientWithGetObjectMetadataThrowingException());
+		assertFalse(adapter.downloadDirectoryExcludingGlacier("username/testFolder", "D:\\").isPresent());
+	}
+
+	@Test
+	void downloadFolderThrowsExceptionAtGetObject() {
+		adapter = new S3Adapter(new ClientWithGetObjectThrowingException());
+		assertFalse(adapter.downloadDirectoryExcludingGlacier("username/testFolder", "D:\\").isPresent());
 	}
 }

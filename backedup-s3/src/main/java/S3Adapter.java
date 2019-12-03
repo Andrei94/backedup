@@ -8,9 +8,11 @@ import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
 
 import java.io.File;
+import java.util.Optional;
 
 public class S3Adapter {
 	private final AmazonS3 client;
+	private final TransferManager transferManager;
 
 	public S3Adapter() {
 		this(AmazonS3ClientBuilder
@@ -22,6 +24,7 @@ public class S3Adapter {
 
 	public S3Adapter(AmazonS3 client) {
 		this.client = client;
+		transferManager = TransferManagerBuilder.standard().withS3Client(client).build();
 	}
 
 	public boolean putObject(UploadObjectRequest request) {
@@ -42,15 +45,14 @@ public class S3Adapter {
 		return folderName + "/";
 	}
 
-	public boolean downloadDirectoryExcludingGlacier(String name, String destPath) {
-		TransferManager transferManager = TransferManagerBuilder.standard().withS3Client(client).build();
+	public Optional<LocalFile> downloadDirectoryExcludingGlacier(String name, String destPath) {
 		try {
 			transferManager.downloadDirectory("backedup-storage", name, new File(destPath), true,
 					objectSummary -> !(objectSummary.getStorageClass().equals("GLACIER") && objectSummary.getStorageClass().equals("DEEP_ARCHIVE"))).waitForCompletion();
-			return true;
+			return Optional.of(LocalFile.fromFile(new File(destPath, name)));
 		} catch(RuntimeException | InterruptedException e) {
 			e.printStackTrace();
-			return false;
+			return Optional.empty();
 		}
 	}
 }
