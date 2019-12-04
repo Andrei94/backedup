@@ -158,4 +158,15 @@ class MainWindowControllerTest {
 		}}), null);
 		assertFalse(controller.download());
 	}
+
+	@Test
+	void cleanupCallsDownloaderShutdown() {
+		S3DownloaderMock downloader = new S3DownloaderMock();
+		controller = new MainWindowController(null, downloader, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
+			add(Folder.createFolder("/home/directory"));
+			add(Folder.createFolder("/home/directory2"));
+		}}), null);
+		controller.cleanup();
+		assertTrue(downloader.shutdownCalled);
+	}
 }

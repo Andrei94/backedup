@@ -55,4 +55,8 @@ public class S3Adapter {
 			return Optional.empty();
 		}
 	}
+
+	void shutdownTransferManager() {
+		transferManager.shutdownNow(true);
+	}
 }

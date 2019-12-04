@@ -71,4 +71,11 @@ class S3DownloaderTest {
 		objectDownloader.setLoggedInUsername("username");
 		objectDownloader.moveDownloadedFolder("testFolder", LocalFile.fromPath(Paths.get("D:\\")));
 	}
+
+	@Test
+	void shutdownOnAdapterIsCalled() {
+		S3AdapterSuccessfulDownloadStub adapter = new S3AdapterSuccessfulDownloadStub(null);
+		new S3ObjectDownloader(adapter).shutdown();
+		assertTrue(adapter.shutdownCalled);
+	}
 }

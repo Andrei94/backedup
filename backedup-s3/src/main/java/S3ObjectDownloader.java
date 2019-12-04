@@ -64,4 +64,9 @@ public class S3ObjectDownloader implements ObjectDownloader {
 	public void setLoggedInUsername(String username) {
 		this.username = username;
 	}
+
+	@Override
+	public void shutdown() {
+		adapter.shutdownTransferManager();
+	}
 }

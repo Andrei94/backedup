@@ -19,6 +19,7 @@ public class MainWindow implements Initializable, WindowPayload<String> {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		addContents(getFolderImage());
+		cleanupOnWindowClose();
 	}
 
 	private void addContents(Image image) {
@@ -33,6 +34,10 @@ public class MainWindow implements Initializable, WindowPayload<String> {
 
 	private Image getFolderImage() {
 		return new Image(controller.getFolderImagePath(), 80, 80, true, true);
+	}
+
+	private void cleanupOnWindowClose() {
+		foldersToSync.getScene().getWindow().setOnCloseRequest(event -> controller.cleanup());
 	}
 
 	public void syncFolders(MouseEvent mouseEvent) {

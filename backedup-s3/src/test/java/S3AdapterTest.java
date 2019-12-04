@@ -47,4 +47,17 @@ class S3AdapterTest {
 		adapter = new S3Adapter(new ClientWithGetObjectThrowingException());
 		assertFalse(adapter.downloadDirectoryExcludingGlacier("username/testFolder", "D:\\").isPresent());
 	}
+
+	@Test
+	void shutdownTransferManagerShutsDownClientAsWell() {
+		final boolean[] shutdownCalledOnClient = {false};
+		adapter = new S3Adapter(new DummyS3Client() {
+			@Override
+			public void shutdown() {
+				shutdownCalledOnClient[0] = true;
+			}
+		});
+		adapter.shutdownTransferManager();
+		assertTrue(shutdownCalledOnClient[0]);
+	}
 }

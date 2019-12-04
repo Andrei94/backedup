@@ -88,4 +88,8 @@ class MainWindowController {
 	String getFolderImagePath() {
 		return getClass().getResource("icons/folder_80px.png").toExternalForm();
 	}
+
+	void cleanup() {
+		downloader.shutdown();
+	}
 }

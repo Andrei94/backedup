@@ -1,5 +1,6 @@
 public class S3DownloaderMock implements ObjectDownloader {
 	private String loggedInUsername;
+	public boolean shutdownCalled = false;
 
 	@Override
 	public boolean downloadDirectory(String remoteDir, String localDir) {
@@ -9,5 +10,10 @@ public class S3DownloaderMock implements ObjectDownloader {
 	@Override
 	public void setLoggedInUsername(String username) {
 		this.loggedInUsername = username;
+	}
+
+	@Override
+	public void shutdown() {
+		shutdownCalled = true;
 	}
 }
