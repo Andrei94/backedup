@@ -5,8 +5,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 public class S3ObjectDownloader implements ObjectDownloader {
+	private Logger logger = Logger.getLogger(this.getClass().getName());
 	private S3Adapter adapter;
 	private String username;
 
@@ -22,6 +24,7 @@ public class S3ObjectDownloader implements ObjectDownloader {
 	boolean downloadDirectory(String remoteDir, LocalFile localDir) {
 		if(username == null || username.isEmpty())
 			return false;
+		logger.info("Downloading " + remoteDir);
 		Optional<LocalFile> isDownloadSuccessful = adapter.downloadDirectoryExcludingGlacier(username + "/" + remoteDir, localDir.getPath());
 		if(isDownloadSuccessful.isPresent()) {
 			moveDownloadedFolder(remoteDir, localDir);
