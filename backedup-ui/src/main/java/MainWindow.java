@@ -28,7 +28,7 @@ public class MainWindow implements Initializable, WindowPayload<String> {
 
 	public void openDirectoryChooser(MouseEvent mouseEvent) {
 		File file = new DirectoryChooser().showDialog(foldersToSync.getScene().getWindow());
-		controller.addToSyncList(file).ifPresent(folder -> foldersToSync.getChildren().add(decorator.tile(getFolderImage(), folder)));
+		controller.addToSyncList(file).ifPresent(folder -> foldersToSync.getChildren().add(foldersToSync.getChildren().size() - 1, decorator.tile(getFolderImage(), folder)));
 	}
 
 	private Image getFolderImage() {
