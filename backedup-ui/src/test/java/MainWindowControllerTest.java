@@ -49,6 +49,21 @@ class MainWindowControllerTest {
 			assertTrue(controller.getFolderImagePath().startsWith("file"));
 			assertTrue(controller.getFolderImagePath().endsWith("icons/folder_80px.png"));
 		}
+
+		@Test
+		void getDownloadFinishedText() {
+			assertEquals("Download finished", controller.getDownloadFinishedText());
+		}
+
+		@Test
+		void getInformationTitle() {
+			assertEquals("Backedup", controller.getInformationTitle());
+		}
+
+		@Test
+		void getUploadFinishedText() {
+			assertEquals("Upload Finished", controller.getUploadFinishedText());
+		}
 	}
 
 	@Test

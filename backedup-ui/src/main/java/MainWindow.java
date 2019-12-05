@@ -37,11 +37,13 @@ public class MainWindow implements Initializable, WindowPayload<String> {
 
 	public void syncFolders(MouseEvent mouseEvent) {
 		controller.sync();
+		WindowOpener.openInformationDialog(controller.getInformationTitle(), controller.getUploadFinishedText());
 	}
 
 	public void downloadFolders(MouseEvent mouseEvent) {
 		controller.download();
 		cleanupOnWindowClose();
+		WindowOpener.openInformationDialog(controller.getInformationTitle(), controller.getDownloadFinishedText());
 	}
 
 	private void cleanupOnWindowClose() {

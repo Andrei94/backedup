@@ -1,11 +1,24 @@
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 class WindowOpener {
+	static void openInformationDialog(String title, String text) {
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle(title);
+		alert.setHeaderText(text);
+		alert.getButtonTypes().setAll(
+				new ButtonType("OK", ButtonBar.ButtonData.OK_DONE)
+		);
+		alert.showAndWait();
+	}
+
 	static <T> T openDialog(String fxmlFile, int width, int height) {
 		Stage stage = new Stage();
 		stage.initModality(Modality.APPLICATION_MODAL);

@@ -92,4 +92,16 @@ class MainWindowController {
 	void cleanup() {
 		downloader.shutdown();
 	}
+
+	public String getDownloadFinishedText() {
+		return "Download finished";
+	}
+
+	public String getInformationTitle() {
+		return "Backedup";
+	}
+
+	public String getUploadFinishedText() {
+		return "Upload Finished";
+	}
 }
