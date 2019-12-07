@@ -56,9 +56,12 @@ public class MainWindow implements Initializable, WindowPayload<String> {
 	}
 
 	public void downloadFolders(MouseEvent mouseEvent) {
-		controller.download();
+		controller.getSyncList().forEach(folder ->
+				new DownloadDirectoryWorker(controller,
+						new FolderProgressMediator(folder, getFolderImage(getFolderTile(folder)))
+				).restart()
+		);
 		cleanupOnWindowClose();
-		WindowOpener.openInformationDialog(controller.getInformationTitle(), controller.getDownloadFinishedText());
 	}
 
 	private void cleanupOnWindowClose() {

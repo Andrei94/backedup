@@ -161,7 +161,8 @@ class MainWindowControllerTest {
 			add(Folder.createFolder("/home/directory2"));
 		}}), null);
 		controller.setLoggedInUsername("username");
-		assertTrue(controller.download());
+		assertTrue(controller.download(Folder.createFolder("/home/directory")));
+		assertTrue(controller.download(Folder.createFolder("/home/directory2")));
 	}
 
 	@Test
@@ -171,7 +172,8 @@ class MainWindowControllerTest {
 			add(Folder.createFolder("/home/directory"));
 			add(Folder.createFolder("/home/directory2"));
 		}}), null);
-		assertFalse(controller.download());
+		assertFalse(controller.download(Folder.createFolder("/home/directory")));
+		assertFalse(controller.download(Folder.createFolder("/home/directory2")));
 	}
 
 	@Test

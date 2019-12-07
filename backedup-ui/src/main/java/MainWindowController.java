@@ -52,9 +52,9 @@ class MainWindowController {
 		return folders.remove(folder);
 	}
 
-	boolean download() {
+	boolean download(Folder folder) {
 		downloader.setLoggedInUsername(loggedInUsername);
-		return folders.stream().anyMatch(folder -> downloader.downloadDirectory(folder.path.getFileName().toString(), folder.path.getParent().toString()));
+		return downloader.downloadDirectory(folder.path.getFileName().toString(), folder.path.getParent().toString());
 	}
 
 	String getWarningTitle() {
