@@ -16,27 +16,27 @@
 <AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindow">
 	<BorderPane prefHeight="768.0" prefWidth="1034.0">
 		<left>
-			<Pane prefHeight="665.0" prefWidth="200.0" style="-fx-background-color: #4f6eff; -fx-background-radius: 0 20 0 0;" BorderPane.alignment="CENTER">
-				<Button alignment="CENTER" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#uploadFolders" prefHeight="34.0" prefWidth="148.0" stylesheets="@button.css" text="Upload" textFill="WHITE">
+			<Pane prefHeight="665.0" prefWidth="200.0" style="-fx-background-color: derive(#4f6eff, -15%); -fx-background-radius: 0 20 0 0;" BorderPane.alignment="CENTER">
+				<Button alignment="TOP_LEFT" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#uploadFolders" prefHeight="52.0" prefWidth="162.0" stylesheets="@button.css" text="Upload" textFill="WHITE">
 					<font>
 						<Font size="18.0" />
 					</font>
 					<graphic>
 						<ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-							<Image url="@icons/secure_cloud_40px.png" />
+							<Image url="@icons/upload_to_the_cloud_40px.png" />
 						</ImageView>
 					</graphic>
 				</Button>
-            <Button alignment="CENTER" layoutX="21.0" layoutY="66.0" mnemonicParsing="false" onMouseClicked="#downloadFolders" prefHeight="52.0" prefWidth="162.0" stylesheets="@button.css" text="Download" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <graphic>
-	               <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-		               <Image url="@icons/secure_cloud_40px.png" />
-	               </ImageView>
-               </graphic>
-            </Button>
+				<Button alignment="TOP_LEFT" layoutX="21.0" layoutY="66.0" mnemonicParsing="false" onMouseClicked="#downloadFolders" prefHeight="52.0" prefWidth="162.0" stylesheets="@button.css" text="Download" textFill="WHITE">
+					<font>
+						<Font size="18.0" />
+					</font>
+					<graphic>
+						<ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+							<Image url="@icons/download_from_cloud_40px.png" />
+						</ImageView>
+					</graphic>
+				</Button>
 			</Pane>
 		</left>
 		<top>
