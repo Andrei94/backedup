@@ -5,10 +5,11 @@ class S3UploaderMock implements ObjectUploader {
 	private String loggedInUsername;
 
 	@Override
-	public void uploadDirectory(Path directory) {
+	public boolean uploadDirectory(Path directory) {
 		if(loggedInUsername == null || loggedInUsername.isEmpty())
-			return;
+			return false;
 		timesUploadDirectoryCalled++;
+		return true;
 	}
 
 	@Override

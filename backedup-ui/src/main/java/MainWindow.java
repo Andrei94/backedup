@@ -1,7 +1,9 @@
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.DirectoryChooser;
 
@@ -35,9 +37,22 @@ public class MainWindow implements Initializable, WindowPayload<String> {
 		return new Image(controller.getFolderImagePath(), 80, 80, true, true);
 	}
 
-	public void syncFolders(MouseEvent mouseEvent) {
-		controller.sync();
-		WindowOpener.openInformationDialog(controller.getInformationTitle(), controller.getUploadFinishedText());
+	public void uploadFolders(MouseEvent mouseEvent) {
+		controller.saveFolders();
+		controller.getSyncList().forEach(folder ->
+				new UploadDirectoryWorker(controller,
+						new FolderProgressMediator(folder, getFolderImage(getFolderTile(folder)))
+				).restart()
+		);
+	}
+
+	private ImageView getFolderImage(Pane folderTile) {
+		return (ImageView) folderTile.getChildren().get(1);
+	}
+
+	private Pane getFolderTile(Folder folder) {
+		int index = controller.getSyncList().indexOf(folder);
+		return (Pane) foldersToSync.getChildren().get(index);
 	}
 
 	public void downloadFolders(MouseEvent mouseEvent) {

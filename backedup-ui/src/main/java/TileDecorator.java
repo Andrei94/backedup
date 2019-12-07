@@ -22,6 +22,7 @@ class TileDecorator {
 		pane.setCacheHint(CacheHint.SPEED);
 		pane.getStyleClass().add("pane");
 		pane.getChildren().add(center(new VBox(new ImageView(image), centeredWrapableText(new Label(text)))));
+		pane.getChildren().add(progressImage());
 		return pane;
 	}
 
@@ -38,5 +39,14 @@ class TileDecorator {
 		label.setAlignment(Pos.CENTER);
 		label.setLabelFor(label.getParent());
 		return label;
+	}
+
+	private ImageView progressImage() {
+		ImageView image = new ImageView();
+		image.setPreserveRatio(true);
+		image.setPickOnBounds(true);
+		image.setFitHeight(40);
+		image.setFitWidth(40);
+		return image;
 	}
 }

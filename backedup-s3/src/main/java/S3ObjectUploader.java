@@ -14,8 +14,8 @@ public class S3ObjectUploader implements ObjectUploader {
 	}
 
 	@Override
-	public void uploadDirectory(Path path) {
-		uploadDirectory(LocalFile.fromPath(path));
+	public boolean uploadDirectory(Path path) {
+		return uploadDirectory(LocalFile.fromPath(path));
 	}
 
 	@Override
@@ -23,12 +23,17 @@ public class S3ObjectUploader implements ObjectUploader {
 		this.username = username;
 	}
 
-	void uploadDirectory(LocalFile directory) {
-		walker.walkTreeFromRoot(directory)
-				.filter(LocalFile::isFile)
-				.collect(Collectors.toList())
-				.parallelStream()
-				.forEach(localFile -> uploadFileFrom(directory, localFile));
+	boolean uploadDirectory(LocalFile directory) {
+		try {
+			walker.walkTreeFromRoot(directory)
+					.filter(LocalFile::isFile)
+					.collect(Collectors.toList())
+					.parallelStream()
+					.forEach(localFile -> uploadFileFrom(directory, localFile));
+			return true;
+		} catch(RuntimeException ex) {
+			return false;
+		}
 	}
 
 	boolean uploadFileFrom(LocalFile directory, LocalFile localFile) {

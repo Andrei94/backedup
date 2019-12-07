@@ -104,4 +104,22 @@ class MainWindowController {
 	public String getUploadFinishedText() {
 		return "Upload Finished";
 	}
+
+	public boolean upload(Folder folder) {
+		uploader.setLoggedInUsername(loggedInUsername);
+		uploader.uploadDirectory(folder.path);
+		return true;
+	}
+
+	public void saveFolders() {
+		saver.save(folders.stream().map(folder -> folder.path.toString()).collect(Collectors.toList()));
+	}
+
+	public String getWIPImageUrl() {
+		return "icons/refresh_40px.png";
+	}
+
+	public String getSucceededImageUrl() {
+		return "icons/ok_40px.png";
+	}
 }

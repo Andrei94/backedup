@@ -123,7 +123,7 @@ class MainWindowControllerTest {
 	}
 
 	@Test
-	void syncFolders() {
+	void uploadFolders() {
 		S3UploaderMock uploader = new S3UploaderMock();
 		FolderSaver saver = new FolderSaver();
 		controller = new MainWindowController(uploader, null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
@@ -131,21 +131,21 @@ class MainWindowControllerTest {
 			add(Folder.createFolder("/home/directory2"));
 		}}), saver);
 		controller.setLoggedInUsername("username");
-		controller.sync();
-		assertEquals(2, saver.getFoldersSavedCount());
+		controller.upload(Folder.createFolder("/home/directory"));
+		controller.upload(Folder.createFolder("/home/directory2"));
 		assertEquals(2, uploader.getTimesUploadDirectoryCalled());
 	}
 
 	@Test
-	void skipSyncWhenUserNotLoggedIn() {
+	void skipUploadWhenUserNotLoggedIn() {
 		S3UploaderMock uploader = new S3UploaderMock();
 		FolderSaver saver = new FolderSaver();
 		controller = new MainWindowController(uploader, null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
 			add(Folder.createFolder("/home/directory"));
 			add(Folder.createFolder("/home/directory2"));
 		}}), saver);
-		controller.sync();
-		assertEquals(2, saver.getFoldersSavedCount());
+		controller.upload(Folder.createFolder("/home/directory"));
+		controller.upload(Folder.createFolder("/home/directory2"));
 		assertEquals(0, uploader.getTimesUploadDirectoryCalled());
 	}
 

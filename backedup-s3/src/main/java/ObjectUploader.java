@@ -1,7 +1,7 @@
 import java.nio.file.Path;
 
 public interface ObjectUploader {
-	void uploadDirectory(Path path);
+	boolean uploadDirectory(Path path);
 
 	void setLoggedInUsername(String username);
 }

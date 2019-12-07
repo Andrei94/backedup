@@ -17,7 +17,7 @@
 	<BorderPane prefHeight="768.0" prefWidth="1034.0">
 		<left>
 			<Pane prefHeight="665.0" prefWidth="200.0" style="-fx-background-color: #4f6eff; -fx-background-radius: 0 20 0 0;" BorderPane.alignment="CENTER">
-				<Button alignment="CENTER" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#syncFolders" prefHeight="34.0" prefWidth="148.0" stylesheets="@button.css" text="Upload" textFill="WHITE">
+				<Button alignment="CENTER" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#uploadFolders" prefHeight="34.0" prefWidth="148.0" stylesheets="@button.css" text="Upload" textFill="WHITE">
 					<font>
 						<Font size="18.0" />
 					</font>
