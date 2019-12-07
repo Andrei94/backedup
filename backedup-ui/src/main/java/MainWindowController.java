@@ -52,12 +52,6 @@ class MainWindowController {
 		return folders.remove(folder);
 	}
 
-	void sync() {
-		saver.save(folders.stream().map(folder -> folder.path.toString()).collect(Collectors.toList()));
-		uploader.setLoggedInUsername(loggedInUsername);
-		folders.forEach(folder -> uploader.uploadDirectory(folder.path));
-	}
-
 	boolean download() {
 		downloader.setLoggedInUsername(loggedInUsername);
 		return folders.stream().anyMatch(folder -> downloader.downloadDirectory(folder.path.getFileName().toString(), folder.path.getParent().toString()));
