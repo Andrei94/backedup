@@ -1,3 +1,6 @@
+import uploader.ObjectUploader;
+import uploader.ObjectUploaderFactory;
+
 import java.nio.file.Paths;
 
 public class Main {
