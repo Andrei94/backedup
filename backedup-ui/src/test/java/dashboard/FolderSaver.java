@@ -1,7 +1,5 @@
 package dashboard;
 
-import dashboard.SyncFolderSaver;
-
 import java.util.List;
 
 class FolderSaver extends SyncFolderSaver {

@@ -113,14 +113,16 @@ class DashboardController {
 	}
 
 	public void saveFolders() {
+		if(loggedInUsername == null || loggedInUsername.isEmpty())
+			return;
 		saver.save(folders.stream().map(folder -> folder.path.toString()).collect(Collectors.toList()));
 	}
 
 	public String getWIPImageUrl() {
-		return "/icons/dashboard/refresh_40px.png";
+		return getClass().getResource("/icons/dashboard/refresh_40px.png").toExternalForm();
 	}
 
 	public String getSucceededImageUrl() {
-		return "/icons/dashboard/ok_40px.png";
+		return getClass().getResource("/icons/dashboard/ok_40px.png").toExternalForm();
 	}
 }

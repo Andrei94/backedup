@@ -1,6 +1,5 @@
 package dashboard;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -8,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -67,89 +65,95 @@ class DashboardControllerTest {
 		void getUploadFinishedText() {
 			assertEquals("Upload Finished", controller.getUploadFinishedText());
 		}
+
+		@Test
+		void getWIPImageUrl() {
+			assertTrue(controller.getWIPImageUrl().startsWith("file"));
+			assertTrue(controller.getWIPImageUrl().endsWith("icons/dashboard/refresh_40px.png"));
+		}
+
+		@Test
+		void getSucceededImageUrl() {
+			assertTrue(controller.getSucceededImageUrl().startsWith("file"));
+			assertTrue(controller.getSucceededImageUrl().endsWith("icons/dashboard/ok_40px.png"));
+		}
 	}
 
 	@Test
 	void loadSyncFolders() {
-		controller = new DashboardController(null, null, new SyncFolderLoaderStub(Collections.singletonList(Folder.createFolder(""))), new FolderSaver());
+		controller = getControllerWithOneLoadedFile();
 		assertEquals(1, getSizeOfFoldersToSync());
 	}
 
 	@Test
 	void addFolderToSyncList() {
-		controller = new DashboardController(null, null, new SyncFolderLoaderStub(new ArrayList<>()), new FolderSaver());
+		controller = getControllerWithNoLoadedFiles();
 		controller.addToSyncList(new File("directory"));
 		assertEquals(1, getSizeOfFoldersToSync());
 	}
 
+	private DashboardController getControllerWithNoLoadedFiles() {
+		return new DashboardController(null, null, new SyncFolderLoaderStub(new ArrayList<>()), new FolderSaver());
+	}
+
 	@Test
 	void addSubfolderOfFolderToSyncList() {
-		controller = new DashboardController(null, null, new SyncFolderLoaderStub(Collections.singletonList(Folder.createFolder("directory"))), new FolderSaver());
-		controller.addToSyncList(new File("directory/subdirectory"));
+		controller = getControllerWithOneLoadedFile();
+		controller.addToSyncList(new File("/home/directory/subdirectory"));
 		assertEquals(1, getSizeOfFoldersToSync());
 	}
 
 	@Test
 	void addFolderToOneFolderList() {
-		controller = new DashboardController(null, null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
-			add(Folder.createFolder("directory"));
-		}}), new FolderSaver());
+		controller = getControllerWithOneLoadedFile();
 		controller.addToSyncList(new File("directory2"));
 		assertEquals(2, getSizeOfFoldersToSync());
 	}
 
 	@Test
 	void addWindowsFolderToLinuxFolderList() {
-		controller = new DashboardController(null, null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
-			add(Folder.createFolder("/home/directory"));
-		}}), new FolderSaver());
+		controller = getControllerWithOneLoadedFile();
 		controller.addToSyncList(new File("D:\\directory2"));
 		assertEquals(2, getSizeOfFoldersToSync());
 	}
 
 	@Test
 	void removeFolderFromSyncList() {
-		controller = new DashboardController(null, null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
-			add(Folder.createFolder("/home/directory"));
-		}}), new FolderSaver());
+		controller = getControllerWithOneLoadedFile();
 		controller.removeFromSyncList(new Folder(Paths.get("/home/directory")));
 		assertEquals(0, getSizeOfFoldersToSync());
 	}
 
 	@Test
 	void removeNullFolderFromSyncList() {
-		controller = new DashboardController(null, null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
-			add(Folder.createFolder("/home/directory"));
-		}}), new FolderSaver());
+		controller = getControllerWithOneLoadedFile();
 		controller.removeFromSyncList(null);
 		assertEquals(1, getSizeOfFoldersToSync());
+	}
+
+	private DashboardController getControllerWithOneLoadedFile() {
+		return new DashboardController(null, null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
+			add(Folder.createFolder("/home/directory"));
+		}}), new FolderSaver());
 	}
 
 	@Test
 	void uploadFolders() {
 		S3UploaderMock uploader = new S3UploaderMock();
-		FolderSaver saver = new FolderSaver();
-		controller = new DashboardController(uploader, null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
-			add(Folder.createFolder("/home/directory"));
-			add(Folder.createFolder("/home/directory2"));
-		}}), saver);
+		controller = getControllerForUpload(uploader, new FolderSaver());
 		controller.setLoggedInUsername("username");
 		controller.upload(Folder.createFolder("/home/directory"));
 		controller.upload(Folder.createFolder("/home/directory2"));
-		Assertions.assertEquals(2, uploader.getTimesUploadDirectoryCalled());
+		assertEquals(2, uploader.getTimesUploadDirectoryCalled());
 	}
 
 	@Test
 	void skipUploadWhenUserNotLoggedIn() {
 		S3UploaderMock uploader = new S3UploaderMock();
-		FolderSaver saver = new FolderSaver();
-		controller = new DashboardController(uploader, null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
-			add(Folder.createFolder("/home/directory"));
-			add(Folder.createFolder("/home/directory2"));
-		}}), saver);
+		controller = getControllerForUpload(uploader, new FolderSaver());
 		controller.upload(Folder.createFolder("/home/directory"));
 		controller.upload(Folder.createFolder("/home/directory2"));
-		Assertions.assertEquals(0, uploader.getTimesUploadDirectoryCalled());
+		assertEquals(0, uploader.getTimesUploadDirectoryCalled());
 	}
 
 	private int getSizeOfFoldersToSync() {
@@ -158,11 +162,7 @@ class DashboardControllerTest {
 
 	@Test
 	void downloadFolder() {
-		S3DownloaderMock downloader = new S3DownloaderMock();
-		controller = new DashboardController(null, downloader, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
-			add(Folder.createFolder("/home/directory"));
-			add(Folder.createFolder("/home/directory2"));
-		}}), null);
+		controller = getControllerForDownload(new S3DownloaderMock());
 		controller.setLoggedInUsername("username");
 		assertTrue(controller.download(Folder.createFolder("/home/directory")));
 		assertTrue(controller.download(Folder.createFolder("/home/directory2")));
@@ -170,11 +170,7 @@ class DashboardControllerTest {
 
 	@Test
 	void skipDownloadIfUserNotLoggedIn() {
-		S3DownloaderMock downloader = new S3DownloaderMock();
-		controller = new DashboardController(null, downloader, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
-			add(Folder.createFolder("/home/directory"));
-			add(Folder.createFolder("/home/directory2"));
-		}}), null);
+		controller = getControllerForDownload(new S3DownloaderMock());
 		assertFalse(controller.download(Folder.createFolder("/home/directory")));
 		assertFalse(controller.download(Folder.createFolder("/home/directory2")));
 	}
@@ -182,11 +178,39 @@ class DashboardControllerTest {
 	@Test
 	void cleanupCallsDownloaderShutdown() {
 		S3DownloaderMock downloader = new S3DownloaderMock();
-		controller = new DashboardController(null, downloader, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
+		controller = getControllerForDownload(downloader);
+		controller.cleanup();
+		assertTrue(downloader.shutdownCalled);
+	}
+
+	private DashboardController getControllerForDownload(S3DownloaderMock downloader) {
+		return new DashboardController(null, downloader, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
 			add(Folder.createFolder("/home/directory"));
 			add(Folder.createFolder("/home/directory2"));
 		}}), null);
-		controller.cleanup();
-		Assertions.assertTrue(downloader.shutdownCalled);
+	}
+
+	@Test
+	void saveWhenUserLoggedIn() {
+		FolderSaver saver = new FolderSaver();
+		controller = getControllerForUpload(new S3UploaderMock(), saver);
+		controller.setLoggedInUsername("username");
+		controller.saveFolders();
+		assertEquals(2, saver.getFoldersSavedCount());
+	}
+
+	@Test
+	void skipSaveWhenUserIsNotLoggedIn() {
+		FolderSaver saver = new FolderSaver();
+		controller = getControllerForUpload(new S3UploaderMock(), saver);
+		controller.saveFolders();
+		assertEquals(0, saver.getFoldersSavedCount());
+	}
+
+	private DashboardController getControllerForUpload(S3UploaderMock uploader, FolderSaver saver) {
+		return new DashboardController(uploader, null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
+			add(Folder.createFolder("/home/directory"));
+			add(Folder.createFolder("/home/directory2"));
+		}}), saver);
 	}
 }
