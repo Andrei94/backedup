@@ -8,6 +8,7 @@ import file.LocalFile;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -47,7 +48,7 @@ class S3UploaderTest {
 		));
 		uploader = new S3ObjectUploader(s3Adapter, walker);
 		uploader.setLoggedInUsername("username");
-		uploader.uploadDirectory(createMockDirectory("path/to/directory"));
+		assertTrue(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
 	}
 
 	@Test
@@ -59,7 +60,7 @@ class S3UploaderTest {
 		));
 		uploader = new S3ObjectUploader(s3Adapter, walker);
 		uploader.setLoggedInUsername("username");
-		uploader.uploadDirectory(createMockDirectory("path/to/directory"));
+		assertTrue(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
 	}
 
 	@Test
@@ -68,7 +69,22 @@ class S3UploaderTest {
 		walker.setFile(subDirectory);
 		s3Adapter = new S3Adapter(new ClientPutRequestNotCalled());
 		uploader = new S3ObjectUploader(s3Adapter, walker);
-		uploader.uploadDirectory(createMockDirectory("path/to/directory"));
+		assertFalse(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
+	}
+
+	@Test
+	void directoryTraversingThrowsRuntimeException() {
+		LocalFile fileUnderSubdirectory = createMockFile("path/to/directory/secondDirectory/file2");
+		walker = new LocalFileWalkerStub() {
+			@Override
+			protected Stream<LocalFile> walkTreeFromRoot(LocalFile root) {
+				throw new RuntimeException();
+			}
+		};
+		walker.setFile(fileUnderSubdirectory);
+		s3Adapter = new S3Adapter(new ClientPutRequestNotCalled());
+		uploader = new S3ObjectUploader(s3Adapter, walker);
+		assertFalse(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
 	}
 
 	private LocalFile createMockFile(String filePath) {

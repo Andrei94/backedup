@@ -31,12 +31,11 @@ public class S3ObjectUploader implements ObjectUploader {
 
 	boolean uploadDirectory(LocalFile directory) {
 		try {
-			walker.walkTreeFromRoot(directory)
+			return walker.walkTreeFromRoot(directory)
 					.filter(LocalFile::isFile)
 					.collect(Collectors.toList())
 					.parallelStream()
-					.forEach(localFile -> uploadFileFrom(directory, localFile));
-			return true;
+					.anyMatch(localFile -> uploadFileFrom(directory, localFile));
 		} catch(RuntimeException ex) {
 			return false;
 		}

@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class S3Adapter {
 	private final AmazonS3 client;
-	private final TransferManager transferManager;
+	private TransferManager transferManager;
 
 	public S3Adapter() {
 		this(AmazonS3ClientBuilder
@@ -27,7 +27,7 @@ public class S3Adapter {
 
 	public S3Adapter(AmazonS3 client) {
 		this.client = client;
-		transferManager = TransferManagerBuilder.standard().withS3Client(client).build();
+		this.transferManager = TransferManagerBuilder.standard().withS3Client(client).build();
 	}
 
 	public boolean putObject(UploadObjectRequest request) {

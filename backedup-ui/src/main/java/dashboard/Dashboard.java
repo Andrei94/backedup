@@ -49,8 +49,8 @@ public class Dashboard implements Initializable, WindowPayload<String> {
 		);
 	}
 
-	private ImageView getFolderImage(Pane folderTile) {
-		return (ImageView) folderTile.getChildren().get(1);
+	private ImageViewAdapter getFolderImage(Pane folderTile) {
+		return new ImageViewAdapter((ImageView) folderTile.getChildren().get(1));
 	}
 
 	private Pane getFolderTile(Folder folder) {
