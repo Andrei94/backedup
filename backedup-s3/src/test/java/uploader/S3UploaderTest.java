@@ -1,9 +1,6 @@
 package uploader;
 
-import adapter.ClientPutRequestNotCalled;
-import adapter.ClientWithPutRequestVerifyingParameters;
-import adapter.S3Adapter;
-import adapter.UploadObjectRequest;
+import adapter.*;
 import file.LocalFile;
 import org.junit.jupiter.api.Test;
 
@@ -22,9 +19,9 @@ class S3UploaderTest {
 	void uploadFileObject() {
 		LocalFile dir = createMockDirectory("directory");
 		LocalFile localFile = createMockFile("directory/file");
-		s3Adapter = new S3Adapter(new ClientWithPutRequestVerifyingParameters(
+		s3Adapter = new S3AdapterWithPutRequestVerifyingParameters(
 				createUploadRequest("username/directory/" + localFile.getName(), localFile)
-		));
+		);
 		uploader = new S3ObjectUploader(s3Adapter, walker);
 		uploader.setLoggedInUsername("username");
 		assertTrue(uploader.uploadFileFrom(dir, localFile));
@@ -34,7 +31,7 @@ class S3UploaderTest {
 	void skipFileUploadWhenUsernameNotSet() {
 		LocalFile dir = createMockDirectory("directory");
 		LocalFile localFile = createMockFile("directory/file");
-		s3Adapter = new S3Adapter(new ClientPutRequestNotCalled());
+		s3Adapter = new S3AdapterWithPutRequestNotCalled();
 		uploader = new S3ObjectUploader(s3Adapter, walker);
 		assertFalse(uploader.uploadFileFrom(dir, localFile));
 	}
@@ -43,9 +40,9 @@ class S3UploaderTest {
 	void uploadDirectoryWithOneFile() {
 		LocalFile fileUnderDirectory = createMockFile("path/to/directory/file1");
 		walker.setFile(fileUnderDirectory);
-		s3Adapter = new S3Adapter(new ClientWithPutRequestVerifyingParameters(
+		s3Adapter = new S3AdapterWithPutRequestVerifyingParameters(
 				createUploadRequest("username/directory/" + fileUnderDirectory.getName(), fileUnderDirectory)
-		));
+		);
 		uploader = new S3ObjectUploader(s3Adapter, walker);
 		uploader.setLoggedInUsername("username");
 		assertTrue(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
@@ -55,9 +52,9 @@ class S3UploaderTest {
 	void uploadDirectoryWithOneFileInSubdirectory() {
 		LocalFile fileUnderSubdirectory = createMockFile("path/to/directory/secondDirectory/file2");
 		walker.setFile(fileUnderSubdirectory);
-		s3Adapter = new S3Adapter(new ClientWithPutRequestVerifyingParameters(
+		s3Adapter = new S3AdapterWithPutRequestVerifyingParameters(
 				createUploadRequest("username/directory/secondDirectory/" + fileUnderSubdirectory.getName(), fileUnderSubdirectory)
-		));
+		);
 		uploader = new S3ObjectUploader(s3Adapter, walker);
 		uploader.setLoggedInUsername("username");
 		assertTrue(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
@@ -67,7 +64,7 @@ class S3UploaderTest {
 	void uploadDirectoryWithAnotherDirectory() {
 		LocalFile subDirectory = createMockDirectory("path/to/directory/secondDirectory");
 		walker.setFile(subDirectory);
-		s3Adapter = new S3Adapter(new ClientPutRequestNotCalled());
+		s3Adapter = new S3AdapterWithPutRequestNotCalled();
 		uploader = new S3ObjectUploader(s3Adapter, walker);
 		assertFalse(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
 	}
@@ -82,7 +79,7 @@ class S3UploaderTest {
 			}
 		};
 		walker.setFile(fileUnderSubdirectory);
-		s3Adapter = new S3Adapter(new ClientPutRequestNotCalled());
+		s3Adapter = new S3AdapterWithPutRequestNotCalled();
 		uploader = new S3ObjectUploader(s3Adapter, walker);
 		assertFalse(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
 	}

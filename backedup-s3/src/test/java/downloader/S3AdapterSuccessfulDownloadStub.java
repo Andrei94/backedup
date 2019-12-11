@@ -1,16 +1,16 @@
-package adapter;
+package downloader;
 
-import com.amazonaws.services.s3.AmazonS3;
+import adapter.S3Adapter;
 import file.LocalFile;
 
 import java.io.File;
 import java.util.Optional;
 
-public class S3AdapterSuccessfulDownloadStub extends S3Adapter {
+class S3AdapterSuccessfulDownloadStub extends S3Adapter {
 	public boolean shutdownCalled = false;
 
-	public S3AdapterSuccessfulDownloadStub(AmazonS3 client) {
-		super(client);
+	public S3AdapterSuccessfulDownloadStub() {
+		super(null);
 	}
 
 	@Override

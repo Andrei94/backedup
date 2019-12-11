@@ -1,5 +1,7 @@
-package adapter;
+package uploader;
 
+import adapter.DummyS3Client;
+import adapter.UploadObjectRequest;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
@@ -7,7 +9,7 @@ import com.amazonaws.services.s3.model.PutObjectResult;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ClientWithPutRequestVerifyingParameters extends DummyS3Client {
+class ClientWithPutRequestVerifyingParameters extends DummyS3Client {
 	private final UploadObjectRequest expectedReq;
 
 	public ClientWithPutRequestVerifyingParameters(UploadObjectRequest expectedRequest) {

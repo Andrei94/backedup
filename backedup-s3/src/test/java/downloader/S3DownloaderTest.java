@@ -1,8 +1,6 @@
 package downloader;
 
-import adapter.ClientWithDownloadOfOneFile;
-import adapter.S3Adapter;
-import adapter.S3AdapterSuccessfulDownloadStub;
+import adapter.S3AdapterStub;
 import file.LocalFile;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,11 +12,11 @@ import java.nio.file.Paths;
 import static org.junit.jupiter.api.Assertions.*;
 
 class S3DownloaderTest {
-	private S3ObjectDownloader objectDownloader = new S3ObjectDownloader(new S3Adapter(null));
+	private S3ObjectDownloader objectDownloader = new S3ObjectDownloader(new S3AdapterStub());
 
 	@Test
 	void downloadDirectoryFromS3() {
-		objectDownloader = new S3ObjectDownloader(new S3AdapterSuccessfulDownloadStub(new ClientWithDownloadOfOneFile())) {
+		objectDownloader = new S3ObjectDownloader(new S3AdapterSuccessfulDownloadStub()) {
 			@Override
 			void moveDownloadedFolder(String remoteDir, LocalFile localDir) {
 				assertEquals("testFolder", remoteDir);
@@ -40,13 +38,20 @@ class S3DownloaderTest {
 	}
 
 	@Test
+	void failedDownload() {
+		objectDownloader = new S3ObjectDownloader(new S3AdapterFailedDownloadStub());
+		objectDownloader.setLoggedInUsername("username");
+		assertFalse(objectDownloader.downloadDirectory("testFolder", LocalFile.fromPath(Paths.get("D:\\"))));
+	}
+
+	@Test
 	void getDestination() {
 		assertEquals("D:\\testFolder", objectDownloader.getDestination("testFolder", LocalFile.fromPath(Paths.get("D:\\"))).toString());
 	}
 
 	@Test
 	void moveDownloadedFolder() {
-		objectDownloader = new S3ObjectDownloader(new S3Adapter(null)) {
+		objectDownloader = new S3ObjectDownloader(new S3AdapterStub()) {
 			@Override
 			void moveFolder(Path src, Path dst) {
 				assertEquals("D:\\username\\testFolder", src.toString());
@@ -64,7 +69,7 @@ class S3DownloaderTest {
 
 	@Test
 	void movingInnexistentDownloadedFolderDoesntCallDelete() {
-		objectDownloader = new S3ObjectDownloader(new S3Adapter(null)) {
+		objectDownloader = new S3ObjectDownloader(new S3AdapterStub()) {
 			@Override
 			void moveFolder(Path src, Path dst) throws IOException {
 				throw new IOException();
@@ -81,7 +86,7 @@ class S3DownloaderTest {
 
 	@Test
 	void shutdownOnAdapterIsCalled() {
-		S3AdapterSuccessfulDownloadStub adapter = new S3AdapterSuccessfulDownloadStub(null);
+		S3AdapterSuccessfulDownloadStub adapter = new S3AdapterSuccessfulDownloadStub();
 		new S3ObjectDownloader(adapter).shutdown();
 		Assertions.assertTrue(adapter.shutdownCalled);
 	}
