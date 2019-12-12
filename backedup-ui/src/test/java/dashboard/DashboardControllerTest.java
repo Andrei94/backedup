@@ -73,6 +73,12 @@ class DashboardControllerTest {
 		}
 
 		@Test
+		void getFailedImageUrl() {
+			assertTrue(controller.getFailedImageUrl().startsWith("file"));
+			assertTrue(controller.getFailedImageUrl().endsWith("icons/dashboard/cancel_40px.png"));
+		}
+
+		@Test
 		void getSucceededImageUrl() {
 			assertTrue(controller.getSucceededImageUrl().startsWith("file"));
 			assertTrue(controller.getSucceededImageUrl().endsWith("icons/dashboard/ok_40px.png"));

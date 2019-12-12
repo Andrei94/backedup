@@ -122,6 +122,10 @@ class DashboardController {
 		return getClass().getResource("/icons/dashboard/refresh_40px.png").toExternalForm();
 	}
 
+	public String getFailedImageUrl() {
+		return getClass().getResource("/icons/dashboard/cancel_40px.png").toExternalForm();
+	}
+
 	public String getSucceededImageUrl() {
 		return getClass().getResource("/icons/dashboard/ok_40px.png").toExternalForm();
 	}

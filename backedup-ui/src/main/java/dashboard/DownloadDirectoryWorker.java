@@ -17,7 +17,10 @@ public class DownloadDirectoryWorker extends Service<Boolean> {
 		return new Task<Boolean>() {
 			@Override
 			protected Boolean call() {
-				return controller.download(mediator.getFolder());
+				boolean download = controller.download(mediator.getFolder());
+				if(!download)
+					throw new RuntimeException();
+				return true;
 			}
 		};
 	}
@@ -25,6 +28,11 @@ public class DownloadDirectoryWorker extends Service<Boolean> {
 	@Override
 	protected void running() {
 		mediator.update(controller.getWIPImageUrl());
+	}
+
+	@Override
+	protected void failed() {
+		mediator.update(controller.getFailedImageUrl());
 	}
 
 	@Override

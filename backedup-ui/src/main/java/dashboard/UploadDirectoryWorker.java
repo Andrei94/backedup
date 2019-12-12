@@ -17,7 +17,10 @@ public class UploadDirectoryWorker extends Service<Boolean> {
 		return new Task<Boolean>() {
 			@Override
 			protected Boolean call() {
-				return controller.upload(mediator.getFolder());
+				boolean upload = controller.upload(mediator.getFolder());
+				if(!upload)
+					throw new RuntimeException();
+				return true;
 			}
 		};
 	}
@@ -25,6 +28,11 @@ public class UploadDirectoryWorker extends Service<Boolean> {
 	@Override
 	protected void running() {
 		mediator.update(controller.getWIPImageUrl());
+	}
+
+	@Override
+	protected void failed() {
+		mediator.update(controller.getFailedImageUrl());
 	}
 
 	@Override

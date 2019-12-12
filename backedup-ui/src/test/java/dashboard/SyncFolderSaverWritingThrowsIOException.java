@@ -1,7 +1,5 @@
 package dashboard;
 
-import dashboard.SyncFolderSaver;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.StringWriter;
