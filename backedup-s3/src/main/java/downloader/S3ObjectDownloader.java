@@ -29,7 +29,7 @@ public class S3ObjectDownloader implements ObjectDownloader {
 		if(username == null || username.isEmpty())
 			return false;
 		logger.info("Downloading " + remoteDir);
-		Optional<LocalFile> isDownloadSuccessful = adapter.downloadDirectoryExcludingGlacier(username + "/" + remoteDir, localDir.getPath());
+		Optional<LocalFile> isDownloadSuccessful = adapter.downloadDirectory(username + "/" + remoteDir, localDir.getPath());
 		if(isDownloadSuccessful.isPresent()) {
 			moveDownloadedFolder(remoteDir, localDir);
 			return true;

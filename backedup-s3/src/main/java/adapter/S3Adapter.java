@@ -2,6 +2,7 @@ package adapter;
 
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.event.ProgressListener;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.transfer.MultipleFileDownload;
@@ -12,6 +13,7 @@ import file.LocalFile;
 
 import java.io.File;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class S3Adapter {
 	private TransferManager transferManager;
@@ -50,19 +52,25 @@ public class S3Adapter {
 		return folderName + "/";
 	}
 
-	public Optional<LocalFile> downloadDirectoryExcludingGlacier(String name, String destPath) {
+	public Optional<LocalFile> downloadDirectory(String name, String destPath) {
 		try {
-			downloadAsync(name, destPath).waitForCompletion();
-			return Optional.of(LocalFile.fromFile(new File(destPath, name)));
+			long bytesTransferred = downloadAsync(name, destPath);
+			File downloadedFile = new File(destPath, name);
+			if(bytesTransferred == 0 && !downloadedFile.exists())
+				return Optional.empty();
+			return Optional.of(LocalFile.fromFile(downloadedFile));
 		} catch(RuntimeException | InterruptedException e) {
 			e.printStackTrace();
 			return Optional.empty();
 		}
 	}
 
-	MultipleFileDownload downloadAsync(String name, String destPath) {
-		return transferManager.downloadDirectory("backedup-storage", name, new File(destPath), true,
-				objectSummary -> !(objectSummary.getStorageClass().equals("GLACIER") && objectSummary.getStorageClass().equals("DEEP_ARCHIVE")));
+	long downloadAsync(String name, String destPath) throws InterruptedException {
+		AtomicLong bytesTransferred = new AtomicLong(0);
+		MultipleFileDownload multipleFileDownload = transferManager.downloadDirectory("backedup-storage", name, new File(destPath), true);
+		multipleFileDownload.addProgressListener((ProgressListener) progressEvent -> bytesTransferred.addAndGet(progressEvent.getBytes()));
+		multipleFileDownload.waitForCompletion();
+		return bytesTransferred.longValue();
 	}
 
 	public void shutdownTransferManager() {

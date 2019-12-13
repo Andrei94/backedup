@@ -2,7 +2,6 @@ package adapter;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.SdkClientException;
-import com.amazonaws.services.s3.transfer.MultipleFileDownload;
 import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
 import com.amazonaws.services.s3.transfer.Upload;
 import file.LocalFile;
@@ -66,34 +65,36 @@ class S3AdapterTest {
 	void downloadFolder() {
 		adapter = new S3Adapter(null) {
 			@Override
-			MultipleFileDownload downloadAsync(String name, String destPath) {
-				return new DummyMultipleFileDownload() {
-					@Override
-					public void waitForCompletion() throws AmazonClientException {
-					}
-				};
+			long downloadAsync(String name, String destPath) {
+				return 10;
 			}
 		};
 		assertEquals("D:\\username\\testFolder",
-				adapter.downloadDirectoryExcludingGlacier("username/testFolder", "D:\\")
+				adapter.downloadDirectory("username/testFolder", "D:\\")
 						.orElseThrow(RuntimeException::new).getPath()
 		);
 	}
 
 	@Test
-	void downloadFolderThrowsExceptionAtGetObject() {
+	void downloadFolderThrowsExceptionWhileWaiting() {
 		adapter = new S3Adapter(null) {
 			@Override
-			MultipleFileDownload downloadAsync(String name, String destPath) {
-				return new DummyMultipleFileDownload() {
-					@Override
-					public void waitForCompletion() throws AmazonClientException {
-						throw new SdkClientException("Exception");
-					}
-				};
+			long downloadAsync(String name, String destPath) throws InterruptedException {
+				throw new InterruptedException();
 			}
 		};
-		assertFalse(adapter.downloadDirectoryExcludingGlacier("username/testFolder", "D:\\").isPresent());
+		assertFalse(adapter.downloadDirectory("username/testFolder", "D:\\").isPresent());
+	}
+
+	@Test
+	void downloadFolderDoesntDownloadAnything() {
+		adapter = new S3Adapter(null) {
+			@Override
+			long downloadAsync(String name, String destPath) {
+				return 0;
+			}
+		};
+		assertFalse(adapter.downloadDirectory("username/testFolder", "D:\\").isPresent());
 	}
 
 	@Test

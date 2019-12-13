@@ -10,7 +10,7 @@ public class S3AdapterStub extends S3Adapter {
 	}
 
 	@Override
-	public Optional<LocalFile> downloadDirectoryExcludingGlacier(String name, String destPath) {
+	public Optional<LocalFile> downloadDirectory(String name, String destPath) {
 		return Optional.empty();
 	}
 }
