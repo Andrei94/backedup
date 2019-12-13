@@ -32,8 +32,10 @@ public class S3ObjectDownloader implements ObjectDownloader {
 		Optional<LocalFile> isDownloadSuccessful = adapter.downloadDirectory(username + "/" + remoteDir, localDir.getPath());
 		if(isDownloadSuccessful.isPresent()) {
 			moveDownloadedFolder(remoteDir, localDir);
+			logger.info("Finished downloading " + remoteDir + " to " + getDestination(remoteDir, localDir));
 			return true;
 		}
+		logger.info("Failed to download " + remoteDir + " to " + getDestination(remoteDir, localDir));
 		return false;
 	}
 
