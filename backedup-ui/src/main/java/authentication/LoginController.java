@@ -1,5 +1,7 @@
 package authentication;
 
+import drive.DriveGateway;
+
 class LoginController {
 	private Authenticator authenticator;
 
@@ -12,8 +14,12 @@ class LoginController {
 	}
 
 	LoginFeedback authenticate(String username, String password) {
-		return authenticator.authenticate(username, password) ?
-				LoginFeedback.createSuccessfulLoginFeedback() :
-				LoginFeedback.createIncorrectCredentialsFeedback();
+		if(authenticator.authenticate(username, password)) {
+			DriveGateway gateway = new DriveGateway();
+			gateway.mount(username, password);
+			return LoginFeedback.createSuccessfulLoginFeedback(gateway);
+		} else {
+			return LoginFeedback.createIncorrectCredentialsFeedback();
+		}
 	}
 }

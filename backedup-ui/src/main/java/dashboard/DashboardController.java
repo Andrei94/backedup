@@ -2,6 +2,7 @@ package dashboard;
 
 import downloader.ObjectDownloader;
 import downloader.ObjectDownloaderFactory;
+import drive.DriveGateway;
 import uploader.ObjectUploader;
 import uploader.ObjectUploaderFactory;
 
@@ -18,6 +19,7 @@ class DashboardController {
 	private ObjectUploader uploader;
 	private ObjectDownloader downloader;
 	private String loggedInUsername;
+	private DriveGateway driveGateway;
 
 	DashboardController() {
 		this(ObjectUploaderFactory.createS3ObjectUploader(), ObjectDownloaderFactory.createObjectDownloader(), new SyncFolderLoader(), new SyncFolderSaver());
@@ -92,6 +94,7 @@ class DashboardController {
 
 	void cleanup() {
 		downloader.shutdown();
+		driveGateway.unmount();
 	}
 
 	public String getDownloadFinishedText() {
@@ -128,5 +131,9 @@ class DashboardController {
 
 	public String getSucceededImageUrl() {
 		return getClass().getResource("/icons/dashboard/ok_40px.png").toExternalForm();
+	}
+
+	public void setDriveGateway(DriveGateway driveGateway) {
+		this.driveGateway = driveGateway;
 	}
 }

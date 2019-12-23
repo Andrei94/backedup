@@ -1,22 +1,25 @@
 package authentication;
 
+import drive.DriveGateway;
 import javafx.scene.paint.Color;
 
 class LoginFeedback {
 	private final String message;
 	private final Color color;
+	private DriveGateway driveGateway;
 
-	private LoginFeedback(String message, Color messageColor) {
+	private LoginFeedback(String message, Color messageColor, DriveGateway driveGateway) {
 		this.message = message;
 		this.color = messageColor;
+		this.driveGateway = driveGateway;
 	}
 
 	static LoginFeedback createIncorrectCredentialsFeedback() {
-		return new LoginFeedback("Incorrect credentials", Color.RED);
+		return new LoginFeedback("Incorrect credentials", Color.RED, null);
 	}
 
-	static LoginFeedback createSuccessfulLoginFeedback() {
-		return new LoginFeedback("", Color.GREEN);
+	static LoginFeedback createSuccessfulLoginFeedback(DriveGateway gateway) {
+		return new LoginFeedback("", Color.GREEN, gateway);
 	}
 
 	boolean isSuccessfulLogin() {
@@ -29,5 +32,9 @@ class LoginFeedback {
 
 	Color getColor() {
 		return color;
+	}
+
+	DriveGateway getDriveGateway() {
+		return driveGateway;
 	}
 }

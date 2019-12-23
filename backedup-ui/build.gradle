@@ -1,4 +1,5 @@
 dependencies {
     implementation project(':backedup-s3')
     implementation project(':backedup-identity')
+    implementation project(':backedup-mount')
 }

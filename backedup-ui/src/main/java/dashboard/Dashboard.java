@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class Dashboard implements Initializable, WindowPayload<String> {
+public class Dashboard implements Initializable, WindowPayload<LoginPayloadDashboard> {
 	public TilePane foldersToSync;
 	public Label loggedInUsername;
 	private DashboardController controller = new DashboardController();
@@ -64,16 +64,17 @@ public class Dashboard implements Initializable, WindowPayload<String> {
 						new FolderProgressMediator(folder, getFolderImage(getFolderTile(folder)))
 				).restart()
 		);
+	}
+
+	@Override
+	public void setPayload(LoginPayloadDashboard payload) {
+		controller.setLoggedInUsername(payload.getLoggedInUsername());
+		controller.setDriveGateway(payload.getDriveGateway());
+		loggedInUsername.setText(controller.getLoggedInText(payload.getLoggedInUsername()));
 		cleanupOnWindowClose();
 	}
 
 	private void cleanupOnWindowClose() {
 		loggedInUsername.getScene().getWindow().setOnCloseRequest(event -> controller.cleanup());
-	}
-
-	@Override
-	public void setPayload(String payload) {
-		controller.setLoggedInUsername(payload);
-		loggedInUsername.setText(controller.getLoggedInText(payload));
 	}
 }

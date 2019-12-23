@@ -1,5 +1,6 @@
 package authentication;
 
+import dashboard.LoginPayloadDashboard;
 import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;
@@ -32,7 +33,7 @@ public class LoginDialog implements Dialog<String> {
 		if(l.isSuccessfulLogin()) {
 			loggedInUsername = username.getText();
 			close(new ActionEvent());
-			WindowOpener.openWindow("/dashboard.fxml", loggedInUsername);
+			WindowOpener.openWindow("/dashboard.fxml", new LoginPayloadDashboard(loggedInUsername, l.getDriveGateway()));
 		}
 		else {
 			loginResult.setText(l.getText());
