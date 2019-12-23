@@ -7,16 +7,14 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import utils.Dialog;
 import utils.WindowOpener;
 
-public class LoginDialog implements Dialog<String> {
+public class LoginDialog {
 	public TextField username;
 	public PasswordField password;
 	public ProgressIndicator loginIndicator;
 	public Text loginResult;
 
-	private String loggedInUsername;
 	private LoginController controller = new LoginController();
 	private LoginWorker loginWorker = new LoginWorker(controller);
 
@@ -31,9 +29,8 @@ public class LoginDialog implements Dialog<String> {
 	private void showLoginCallFeedback() {
 		LoginFeedback l = loginWorker.getValue();
 		if(l.isSuccessfulLogin()) {
-			loggedInUsername = username.getText();
 			close(new ActionEvent());
-			WindowOpener.openWindow("/dashboard.fxml", new LoginPayloadDashboard(loggedInUsername, l.getDriveGateway()));
+			WindowOpener.openWindow("/dashboard.fxml", new LoginPayloadDashboard(username.getText(), l.getDriveGateway()));
 		}
 		else {
 			loginResult.setText(l.getText());
@@ -43,10 +40,5 @@ public class LoginDialog implements Dialog<String> {
 
 	public void close(ActionEvent actionEvent) {
 		((Stage) username.getScene().getWindow()).close();
-	}
-
-	@Override
-	public String getResult() {
-		return loggedInUsername;
 	}
 }

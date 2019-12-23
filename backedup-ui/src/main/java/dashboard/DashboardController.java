@@ -55,12 +55,6 @@ class DashboardController {
 		return subpath.startsWith("..");
 	}
 
-	boolean removeFromSyncList(Folder folder) {
-		if(folder == null)
-			return false;
-		return folders.remove(folder);
-	}
-
 	boolean download(Folder folder) {
 		downloader.setLoggedInUsername(loggedInUsername);
 		return downloader.downloadDirectory(folder.path.getFileName().toString(), folder.path.getParent().toString());
