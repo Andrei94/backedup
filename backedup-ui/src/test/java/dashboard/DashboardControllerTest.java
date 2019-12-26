@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -121,20 +120,6 @@ class DashboardControllerTest {
 		controller = getControllerWithOneLoadedFile();
 		controller.addToSyncList(new File("D:\\directory2"));
 		assertEquals(2, getSizeOfFoldersToSync());
-	}
-
-	@Test
-	void removeFolderFromSyncList() {
-		controller = getControllerWithOneLoadedFile();
-		controller.removeFromSyncList(new Folder(Paths.get("/home/directory")));
-		assertEquals(0, getSizeOfFoldersToSync());
-	}
-
-	@Test
-	void removeNullFolderFromSyncList() {
-		controller = getControllerWithOneLoadedFile();
-		controller.removeFromSyncList(null);
-		assertEquals(1, getSizeOfFoldersToSync());
 	}
 
 	private DashboardController getControllerWithOneLoadedFile() {
