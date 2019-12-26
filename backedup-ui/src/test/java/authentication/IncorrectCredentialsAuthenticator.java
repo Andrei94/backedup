@@ -5,7 +5,7 @@ class IncorrectCredentialsAuthenticator implements Authenticator {
 	}
 
 	@Override
-	public boolean authenticate(String username, String password) {
-		return false;
+	public User authenticate(String username, String password) {
+		return new UnauthenticadUser(username);
 	}
 }

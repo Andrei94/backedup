@@ -4,6 +4,7 @@ import drive.DriveGateway;
 
 class LoginController {
 	private Authenticator authenticator;
+	private User user;
 
 	LoginController() {
 		this(new CognitoAuthenticator());
@@ -14,12 +15,17 @@ class LoginController {
 	}
 
 	LoginFeedback authenticate(String username, String password) {
-		if(authenticator.authenticate(username, password)) {
+		user = authenticator.authenticate(username, password);
+		if(user.isAuthenticated()) {
 			DriveGateway gateway = new DriveGateway();
 			gateway.mount(username, password);
 			return LoginFeedback.createSuccessfulLoginFeedback(gateway);
 		} else {
 			return LoginFeedback.createIncorrectCredentialsFeedback();
 		}
+	}
+
+	public User getUser() {
+		return user;
 	}
 }
