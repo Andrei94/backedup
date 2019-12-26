@@ -1,5 +1,6 @@
 package dashboard;
 
+import drive.DriveGateway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -170,6 +171,15 @@ class DashboardControllerTest {
 	void cleanupCallsDownloaderShutdown() {
 		S3DownloaderMock downloader = new S3DownloaderMock();
 		controller = getControllerForDownload(downloader);
+		controller.setDriveGateway(new DriveGateway() {
+			@Override
+			public void mount(String username, String password) {
+			}
+
+			@Override
+			public void unmount() {
+			}
+		});
 		controller.cleanup();
 		assertTrue(downloader.shutdownCalled);
 	}
