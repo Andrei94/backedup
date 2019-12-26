@@ -1,3 +1,5 @@
+package authentication;
+
 import com.amazonaws.services.cognitoidentity.model.*;
 
 public class AmazonCognitoIdentityProviderStub extends DummyAmazonCognitoIdentity {

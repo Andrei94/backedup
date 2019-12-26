@@ -49,7 +49,7 @@ public class CognitoAuthenticator implements Authenticator {
 		);
 	}
 
-	public CognitoAuthenticator(AWSCognitoIdentityProvider awsCognitoIdentityProvider, AmazonCognitoIdentity cognitoIdentity, AWSSecurityTokenService stsClient) {
+	CognitoAuthenticator(AWSCognitoIdentityProvider awsCognitoIdentityProvider, AmazonCognitoIdentity cognitoIdentity, AWSSecurityTokenService stsClient) {
 		this.awsCognitoIdentityProvider = awsCognitoIdentityProvider;
 		this.cognitoIdentity = cognitoIdentity;
 		this.stsClient = stsClient;
@@ -62,7 +62,7 @@ public class CognitoAuthenticator implements Authenticator {
 			String openIdToken = getOpenIdTokenFromAuthenticatedUser(authenticationResult);
 			return new AuthenticatedUser(username, assumeRoleWebIdentityWithPolicy(openIdToken, username));
 		} catch(AWSCognitoIdentityProviderException | AWSSecurityTokenServiceException | AmazonCognitoIdentityException ex) {
-			return new UnauthenticadUser(username);
+			return new UnauthenticatedUser(username);
 		}
 	}
 

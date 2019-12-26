@@ -10,7 +10,7 @@ public class CognitoJWTParser {
 	private static final int PAYLOAD = 1;
 	private static final int JWT_PARTS = 3;
 
-	public static JSONObject getPayload(String jwt) {
+	static JSONObject getPayload(String jwt) {
 		try {
 			validateJWT(jwt);
 			final String payload = jwt.split("\\.")[PAYLOAD];

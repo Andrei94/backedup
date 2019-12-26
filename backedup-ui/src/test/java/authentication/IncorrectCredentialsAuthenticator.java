@@ -6,6 +6,6 @@ class IncorrectCredentialsAuthenticator implements Authenticator {
 
 	@Override
 	public User authenticate(String username, String password) {
-		return new UnauthenticadUser(username);
+		return new UnauthenticatedUser(username);
 	}
 }

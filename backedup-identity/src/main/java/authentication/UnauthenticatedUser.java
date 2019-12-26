@@ -2,10 +2,10 @@ package authentication;
 
 import java.util.Optional;
 
-class UnauthenticadUser implements User {
+class UnauthenticatedUser implements User {
 	private String name;
 
-	public UnauthenticadUser(String name) {
+	public UnauthenticatedUser(String name) {
 		this.name = name;
 	}
 
