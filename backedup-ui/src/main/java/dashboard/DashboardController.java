@@ -1,5 +1,6 @@
 package dashboard;
 
+import authentication.User;
 import downloader.ObjectDownloader;
 import downloader.ObjectDownloaderFactory;
 import drive.DriveGateway;
@@ -18,7 +19,7 @@ class DashboardController {
 	private SyncFolderSaver saver;
 	private ObjectUploader uploader;
 	private ObjectDownloader downloader;
-	private String loggedInUsername;
+	private User loggedInUser;
 	private DriveGateway driveGateway;
 
 	DashboardController() {
@@ -56,7 +57,7 @@ class DashboardController {
 	}
 
 	boolean download(Folder folder) {
-		downloader.setLoggedInUsername(loggedInUsername);
+		downloader.setLoggedInUser(loggedInUser);
 		return downloader.downloadDirectory(folder.path.getFileName().toString(), folder.path.getParent().toString());
 	}
 
@@ -78,8 +79,8 @@ class DashboardController {
 		return "Welcome " + username;
 	}
 
-	public void setLoggedInUsername(String username) {
-		this.loggedInUsername = username;
+	public void setLoggedInUser(User user) {
+		this.loggedInUser = user;
 	}
 
 	String getFolderImagePath() {
@@ -104,13 +105,13 @@ class DashboardController {
 	}
 
 	public boolean upload(Folder folder) {
-		uploader.setLoggedInUsername(loggedInUsername);
+		uploader.setLoggedInUser(loggedInUser);
 		uploader.uploadDirectory(folder.path);
 		return true;
 	}
 
 	public void saveFolders() {
-		if(loggedInUsername == null || loggedInUsername.isEmpty())
+		if(loggedInUser == null || !loggedInUser.isAuthenticated())
 			return;
 		saver.save(folders.stream().map(folder -> folder.path.toString()).collect(Collectors.toList()));
 	}

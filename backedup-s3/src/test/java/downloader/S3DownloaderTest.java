@@ -1,6 +1,9 @@
 package downloader;
 
 import adapter.S3AdapterStub;
+import authentication.AuthenticatedUser;
+import authentication.User;
+import authentication.UserCredentials;
 import file.LocalFile;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -8,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,7 +27,7 @@ class S3DownloaderTest {
 				assertEquals("D:\\", localDir.getPath());
 			}
 		};
-		objectDownloader.setLoggedInUsername("username");
+		objectDownloader.setLoggedInUser(createAuthenticatedUser("username"));
 		assertTrue(objectDownloader.downloadDirectory("testFolder", LocalFile.fromPath(Paths.get("D:\\"))));
 	}
 
@@ -40,7 +44,7 @@ class S3DownloaderTest {
 	@Test
 	void failedDownload() {
 		objectDownloader = new S3ObjectDownloader(new S3AdapterFailedDownloadStub());
-		objectDownloader.setLoggedInUsername("username");
+		objectDownloader.setLoggedInUser(createAuthenticatedUser("username"));
 		assertFalse(objectDownloader.downloadDirectory("testFolder", LocalFile.fromPath(Paths.get("D:\\"))));
 	}
 
@@ -63,7 +67,7 @@ class S3DownloaderTest {
 				assertEquals("D:\\username", localDownloadDirectory.toString());
 			}
 		};
-		objectDownloader.setLoggedInUsername("username");
+		objectDownloader.setLoggedInUser(createAuthenticatedUser("username"));
 		objectDownloader.moveDownloadedFolder("testFolder", LocalFile.fromPath(Paths.get("D:\\")));
 	}
 
@@ -80,7 +84,7 @@ class S3DownloaderTest {
 				fail();
 			}
 		};
-		objectDownloader.setLoggedInUsername("username");
+		objectDownloader.setLoggedInUser(createAuthenticatedUser("username"));
 		objectDownloader.moveDownloadedFolder("testFolder", LocalFile.fromPath(Paths.get("D:\\")));
 	}
 
@@ -89,5 +93,14 @@ class S3DownloaderTest {
 		S3AdapterSuccessfulDownloadStub adapter = new S3AdapterSuccessfulDownloadStub();
 		new S3ObjectDownloader(adapter).shutdown();
 		Assertions.assertTrue(adapter.shutdownCalled);
+	}
+
+	private User createAuthenticatedUser(String username) {
+		return new AuthenticatedUser(username,
+				new UserCredentials("accessKey",
+						"secretKey",
+						"sessionToken",
+						new Date(new Date().getTime() + 12 * 3600 * 100))
+		);
 	}
 }

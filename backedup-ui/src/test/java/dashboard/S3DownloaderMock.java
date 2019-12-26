@@ -1,19 +1,20 @@
 package dashboard;
 
+import authentication.User;
 import downloader.ObjectDownloader;
 
 public class S3DownloaderMock implements ObjectDownloader {
-	private String loggedInUsername;
+	private User loggedInUser;
 	public boolean shutdownCalled = false;
 
 	@Override
 	public boolean downloadDirectory(String remoteDir, String localDir) {
-		return loggedInUsername != null && !loggedInUsername.isEmpty();
+		return loggedInUser != null && loggedInUser.isAuthenticated();
 	}
 
 	@Override
-	public void setLoggedInUsername(String username) {
-		this.loggedInUsername = username;
+	public void setLoggedInUser(User user) {
+		this.loggedInUser = user;
 	}
 
 	@Override

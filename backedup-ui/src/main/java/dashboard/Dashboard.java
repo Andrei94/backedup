@@ -68,9 +68,9 @@ public class Dashboard implements Initializable, WindowPayload<LoginPayloadDashb
 
 	@Override
 	public void setPayload(LoginPayloadDashboard payload) {
-		controller.setLoggedInUsername(payload.getLoggedInUsername());
+		controller.setLoggedInUser(payload.getLoggedInUser());
 		controller.setDriveGateway(payload.getDriveGateway());
-		loggedInUsername.setText(controller.getLoggedInText(payload.getLoggedInUsername()));
+		loggedInUsername.setText(controller.getLoggedInText(payload.getLoggedInUser().getName()));
 		cleanupOnWindowClose();
 	}
 

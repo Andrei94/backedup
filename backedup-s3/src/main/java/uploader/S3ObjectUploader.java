@@ -2,6 +2,7 @@ package uploader;
 
 import adapter.S3Adapter;
 import adapter.UploadObjectRequest;
+import authentication.User;
 import file.LocalFile;
 
 import java.nio.file.Path;
@@ -12,7 +13,7 @@ public class S3ObjectUploader implements ObjectUploader {
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	private final S3Adapter adapter;
 	private final LocalFileWalker walker;
-	private String username;
+	private User user;
 
 	public S3ObjectUploader(S3Adapter adapter, LocalFileWalker walker) {
 		this.adapter = adapter;
@@ -25,8 +26,8 @@ public class S3ObjectUploader implements ObjectUploader {
 	}
 
 	@Override
-	public void setLoggedInUsername(String username) {
-		this.username = username;
+	public void setLoggedInUser(User user) {
+		this.user = user;
 	}
 
 	boolean uploadDirectory(LocalFile directory) {
@@ -42,11 +43,11 @@ public class S3ObjectUploader implements ObjectUploader {
 	}
 
 	boolean uploadFileFrom(LocalFile directory, LocalFile localFile) {
-		if(username == null || username.isEmpty())
+		if(user == null || !user.isAuthenticated())
 			return false;
 		UploadObjectRequest uploadRequest = new UploadObjectRequest()
 				.withBucket("backedup-storage")
-				.withRemoteFile(username + "/" + adapter.toFileInRemoteFolder(directory.getName(), directory.relativize(localFile)))
+				.withRemoteFile(user.getName() + "/" + adapter.toFileInRemoteFolder(directory.getName(), directory.relativize(localFile)))
 				.withLocalFile(localFile)
 				.withStorageClass("INTELLIGENT_TIERING");
 		logger.info("Uploading " + uploadRequest);

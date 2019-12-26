@@ -1,6 +1,7 @@
 package downloader;
 
 import adapter.S3Adapter;
+import authentication.User;
 import file.LocalFile;
 import org.apache.commons.io.FileUtils;
 
@@ -14,7 +15,7 @@ import java.util.logging.Logger;
 public class S3ObjectDownloader implements ObjectDownloader {
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	private S3Adapter adapter;
-	private String username;
+	private User user;
 
 	public S3ObjectDownloader(S3Adapter adapter) {
 		this.adapter = adapter;
@@ -26,10 +27,10 @@ public class S3ObjectDownloader implements ObjectDownloader {
 	}
 
 	boolean downloadDirectory(String remoteDir, LocalFile localDir) {
-		if(username == null || username.isEmpty())
+		if(user == null || !user.isAuthenticated())
 			return false;
 		logger.info("Downloading " + remoteDir);
-		Optional<LocalFile> isDownloadSuccessful = adapter.downloadDirectory(username + "/" + remoteDir, localDir.getPath());
+		Optional<LocalFile> isDownloadSuccessful = adapter.downloadDirectory(user.getName() + "/" + remoteDir, localDir.getPath());
 		if(isDownloadSuccessful.isPresent()) {
 			moveDownloadedFolder(remoteDir, localDir);
 			logger.info("Finished downloading " + remoteDir + " to " + getDestination(remoteDir, localDir));
@@ -59,7 +60,7 @@ public class S3ObjectDownloader implements ObjectDownloader {
 	}
 
 	Path getLocalDownloadDirectory(String remoteDirName, LocalFile localDir) {
-		return Paths.get(localDir.getPath() + "/" + username + "/" + remoteDirName);
+		return Paths.get(localDir.getPath() + "/" + user.getName() + "/" + remoteDirName);
 	}
 
 	Path getDestination(String remoteDir, LocalFile localDir) {
@@ -67,8 +68,8 @@ public class S3ObjectDownloader implements ObjectDownloader {
 	}
 
 	@Override
-	public void setLoggedInUsername(String username) {
-		this.username = username;
+	public void setLoggedInUser(User user) {
+		this.user = user;
 	}
 
 	@Override

@@ -1,10 +1,14 @@
 package uploader;
 
 import adapter.*;
+import authentication.AuthenticatedUser;
+import authentication.User;
+import authentication.UserCredentials;
 import file.LocalFile;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.util.Date;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -23,7 +27,7 @@ class S3UploaderTest {
 				createUploadRequest("username/directory/" + localFile.getName(), localFile)
 		);
 		uploader = new S3ObjectUploader(s3Adapter, walker);
-		uploader.setLoggedInUsername("username");
+		uploader.setLoggedInUser(createAuthenticatedUser("username"));
 		assertTrue(uploader.uploadFileFrom(dir, localFile));
 	}
 
@@ -44,7 +48,7 @@ class S3UploaderTest {
 				createUploadRequest("username/directory/" + fileUnderDirectory.getName(), fileUnderDirectory)
 		);
 		uploader = new S3ObjectUploader(s3Adapter, walker);
-		uploader.setLoggedInUsername("username");
+		uploader.setLoggedInUser(createAuthenticatedUser("username"));
 		assertTrue(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
 	}
 
@@ -56,7 +60,7 @@ class S3UploaderTest {
 				createUploadRequest("username/directory/secondDirectory/" + fileUnderSubdirectory.getName(), fileUnderSubdirectory)
 		);
 		uploader = new S3ObjectUploader(s3Adapter, walker);
-		uploader.setLoggedInUsername("username");
+		uploader.setLoggedInUser(createAuthenticatedUser("username"));
 		assertTrue(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
 	}
 
@@ -108,5 +112,14 @@ class S3UploaderTest {
 				.withRemoteFile(remoteFile)
 				.withLocalFile(localFile)
 				.withStorageClass("INTELLIGENT_TIERING");
+	}
+
+	private User createAuthenticatedUser(String username) {
+		return new AuthenticatedUser(username,
+				new UserCredentials("accessKey",
+						"secretKey",
+						"sessionToken",
+						new Date(new Date().getTime() + 12 * 3600 * 100))
+		);
 	}
 }

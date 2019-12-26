@@ -1,5 +1,8 @@
 package dashboard;
 
+import authentication.AuthenticatedUser;
+import authentication.User;
+import authentication.UserCredentials;
 import drive.DriveGateway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -7,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -133,7 +137,7 @@ class DashboardControllerTest {
 	void uploadFolders() {
 		S3UploaderMock uploader = new S3UploaderMock();
 		controller = getControllerForUpload(uploader, new FolderSaver());
-		controller.setLoggedInUsername("username");
+		controller.setLoggedInUser(createAuthenticatedUser("username"));
 		controller.upload(Folder.createFolder("/home/directory"));
 		controller.upload(Folder.createFolder("/home/directory2"));
 		assertEquals(2, uploader.getTimesUploadDirectoryCalled());
@@ -155,7 +159,7 @@ class DashboardControllerTest {
 	@Test
 	void downloadFolder() {
 		controller = getControllerForDownload(new S3DownloaderMock());
-		controller.setLoggedInUsername("username");
+		controller.setLoggedInUser(createAuthenticatedUser("username"));
 		assertTrue(controller.download(Folder.createFolder("/home/directory")));
 		assertTrue(controller.download(Folder.createFolder("/home/directory2")));
 	}
@@ -195,7 +199,7 @@ class DashboardControllerTest {
 	void saveWhenUserLoggedIn() {
 		FolderSaver saver = new FolderSaver();
 		controller = getControllerForUpload(new S3UploaderMock(), saver);
-		controller.setLoggedInUsername("username");
+		controller.setLoggedInUser(createAuthenticatedUser("username"));
 		controller.saveFolders();
 		assertEquals(2, saver.getFoldersSavedCount());
 	}
@@ -213,5 +217,14 @@ class DashboardControllerTest {
 			add(Folder.createFolder("/home/directory"));
 			add(Folder.createFolder("/home/directory2"));
 		}}), saver);
+	}
+
+	private User createAuthenticatedUser(String username) {
+		return new AuthenticatedUser(username,
+				new UserCredentials("accessKey",
+						"secretKey",
+						"sessionToken",
+						new Date(new Date().getTime() + 12 * 3600 * 100))
+		);
 	}
 }

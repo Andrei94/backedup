@@ -1,9 +1,11 @@
 package uploader;
 
+import authentication.User;
+
 import java.nio.file.Path;
 
 public interface ObjectUploader {
 	boolean uploadDirectory(Path path);
 
-	void setLoggedInUsername(String username);
+	void setLoggedInUser(User user);
 }

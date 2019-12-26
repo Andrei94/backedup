@@ -1,18 +1,19 @@
 package dashboard;
 
+import authentication.User;
 import drive.DriveGateway;
 
 public class LoginPayloadDashboard {
-	private String loggedInUsername;
+	private User loggedInUser;
 	private DriveGateway driveGateway;
 
-	public LoginPayloadDashboard(String loggedInUsername, DriveGateway driveGateway) {
-		this.loggedInUsername = loggedInUsername;
+	public LoginPayloadDashboard(User loggedInUser, DriveGateway driveGateway) {
+		this.loggedInUser = loggedInUser;
 		this.driveGateway = driveGateway;
 	}
 
-	public String getLoggedInUsername() {
-		return loggedInUsername;
+	public User getLoggedInUser() {
+		return loggedInUser;
 	}
 
 	public DriveGateway getDriveGateway() {
