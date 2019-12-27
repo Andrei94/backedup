@@ -64,7 +64,7 @@ public class S3ObjectDownloader implements ObjectDownloader {
 	}
 
 	Path getDestination(String remoteDir, LocalFile localDir) {
-		return Paths.get(localDir.getPath() + remoteDir);
+		return Paths.get(localDir.getPath() + "/" + remoteDir);
 	}
 
 	@Override

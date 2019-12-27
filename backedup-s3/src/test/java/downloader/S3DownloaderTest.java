@@ -54,6 +54,11 @@ class S3DownloaderTest {
 	}
 
 	@Test
+	void getDestinationUnderRoot() {
+		assertEquals("D:\\folder\\testFolder", objectDownloader.getDestination("testFolder", LocalFile.fromPath(Paths.get("D:\\folder"))).toString());
+	}
+
+	@Test
 	void moveDownloadedFolder() {
 		objectDownloader = new S3ObjectDownloader(new S3AdapterStub()) {
 			@Override
