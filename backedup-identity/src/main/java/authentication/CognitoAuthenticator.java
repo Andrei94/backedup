@@ -8,6 +8,7 @@ import com.amazonaws.auth.policy.actions.S3Actions;
 import com.amazonaws.auth.policy.conditions.S3ConditionFactory;
 import com.amazonaws.auth.policy.conditions.StringCondition;
 import com.amazonaws.auth.policy.resources.S3BucketResource;
+import com.amazonaws.auth.policy.resources.S3ObjectResource;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.cognitoidentity.AmazonCognitoIdentity;
 import com.amazonaws.services.cognitoidentity.AmazonCognitoIdentityClientBuilder;
@@ -94,7 +95,10 @@ public class CognitoAuthenticator implements Authenticator {
 				new Statement(Statement.Effect.Allow)
 						.withActions(S3Actions.ListObjects)
 						.withResources(new S3BucketResource("backedup-storage-2"))
-						.withConditions(new StringCondition(StringCondition.StringComparisonType.StringLike, S3ConditionFactory.PREFIX_CONDITION_KEY, username + "/"))
+						.withConditions(new StringCondition(StringCondition.StringComparisonType.StringLike, S3ConditionFactory.PREFIX_CONDITION_KEY, username + "/*")),
+				new Statement(Statement.Effect.Allow)
+						.withActions(S3Actions.GetObject, S3Actions.PutObject)
+						.withResources(new S3ObjectResource("backedup-storage-2", username + "/*"))
 		);
 		Credentials credentials = stsClient.assumeRoleWithWebIdentity(new AssumeRoleWithWebIdentityRequest()
 				.withWebIdentityToken(openIdToken)

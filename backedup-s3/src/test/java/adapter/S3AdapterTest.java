@@ -2,6 +2,7 @@ package adapter;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.SdkClientException;
+import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
 import com.amazonaws.services.s3.transfer.Upload;
 import file.LocalFile;
@@ -16,18 +17,18 @@ class S3AdapterTest {
 
 	@Test
 	void mappingLocalFileToRemoteFolder() {
-		adapter = new S3Adapter(null);
+		adapter = new S3Adapter((TransferManager) null);
 		assertEquals("s3Uploader/file", adapter.toFileInRemoteFolder("s3Uploader", "file"));
 	}
 
 	@Test
 	void uploadFile() {
 		UploadObjectRequest req = new UploadObjectRequest()
-				.withBucket("backedup-storage")
+				.withBucket("backedup-storage-2")
 				.withRemoteFile("123")
 				.withLocalFile(LocalFile.fromFile(new File("file1")))
 				.withStorageClass("STANDARD");
-		adapter = new S3Adapter(null) {
+		adapter = new S3Adapter((TransferManager) null) {
 			@Override
 			Upload uploadAsync(UploadObjectRequest request) {
 				return new DummyUpload() {
@@ -47,7 +48,7 @@ class S3AdapterTest {
 				.withRemoteFile("123")
 				.withLocalFile(LocalFile.fromFile(new File("file1")))
 				.withStorageClass("STANDARD");
-		adapter = new S3Adapter(null) {
+		adapter = new S3Adapter((TransferManager) null) {
 			@Override
 			Upload uploadAsync(UploadObjectRequest request) {
 				return new DummyUpload() {
@@ -63,7 +64,7 @@ class S3AdapterTest {
 
 	@Test
 	void downloadFolder() {
-		adapter = new S3Adapter(null) {
+		adapter = new S3Adapter((TransferManager) null) {
 			@Override
 			long downloadAsync(String name, String destPath) {
 				return 10;
@@ -77,7 +78,7 @@ class S3AdapterTest {
 
 	@Test
 	void downloadFolderThrowsExceptionWhileWaiting() {
-		adapter = new S3Adapter(null) {
+		adapter = new S3Adapter((TransferManager) null) {
 			@Override
 			long downloadAsync(String name, String destPath) throws InterruptedException {
 				throw new InterruptedException();
@@ -88,7 +89,7 @@ class S3AdapterTest {
 
 	@Test
 	void downloadFolderDoesntDownloadAnything() {
-		adapter = new S3Adapter(null) {
+		adapter = new S3Adapter((TransferManager) null) {
 			@Override
 			long downloadAsync(String name, String destPath) {
 				return 0;

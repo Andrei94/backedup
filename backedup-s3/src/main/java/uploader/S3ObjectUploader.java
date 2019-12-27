@@ -46,7 +46,7 @@ public class S3ObjectUploader implements ObjectUploader {
 		if(user == null || !user.isAuthenticated())
 			return false;
 		UploadObjectRequest uploadRequest = new UploadObjectRequest()
-				.withBucket("backedup-storage")
+				.withBucket("backedup-storage-2")
 				.withRemoteFile(user.getName() + "/" + adapter.toFileInRemoteFolder(directory.getName(), directory.relativize(localFile)))
 				.withLocalFile(localFile)
 				.withStorageClass("INTELLIGENT_TIERING");

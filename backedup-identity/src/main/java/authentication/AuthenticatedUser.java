@@ -14,7 +14,7 @@ public class AuthenticatedUser implements User {
 
 	@Override
 	public boolean isAuthenticated() {
-		return keys != null && keys.getExpiration().after(new Date());
+		return Optional.ofNullable(keys).isPresent() && keys.getExpiration().after(new Date());
 	}
 
 	@Override

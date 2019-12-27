@@ -108,7 +108,7 @@ class S3UploaderTest {
 
 	private UploadObjectRequest createUploadRequest(String remoteFile, LocalFile localFile) {
 		return new UploadObjectRequest()
-				.withBucket("backedup-storage")
+				.withBucket("backedup-storage-2")
 				.withRemoteFile(remoteFile)
 				.withLocalFile(localFile)
 				.withStorageClass("INTELLIGENT_TIERING");

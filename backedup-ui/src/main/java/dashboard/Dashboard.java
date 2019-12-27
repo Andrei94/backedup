@@ -1,6 +1,5 @@
 package dashboard;
 
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,34 +10,13 @@ import javafx.stage.DirectoryChooser;
 import utils.WindowPayload;
 
 import java.io.File;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class Dashboard implements Initializable, WindowPayload<LoginPayloadDashboard> {
+public class Dashboard implements WindowPayload<LoginPayloadDashboard> {
 	public TilePane foldersToSync;
 	public Label loggedInUsername;
-	private DashboardController controller = new DashboardController();
+	private DashboardController controller;
 	private TileDecorator decorator = new TileDecorator();
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		addContents(getFolderImage());
-	}
-
-	private void addContents(Image image) {
-		foldersToSync.getChildren().addAll(foldersToSync.getChildren().size() - 1,
-				controller.getSyncList().stream().map(it -> decorator.tile(image, it)).collect(Collectors.toList()));
-	}
-
-	public void openDirectoryChooser(MouseEvent mouseEvent) {
-		File file = new DirectoryChooser().showDialog(foldersToSync.getScene().getWindow());
-		controller.addToSyncList(file).ifPresent(folder -> foldersToSync.getChildren().add(foldersToSync.getChildren().size() - 1, decorator.tile(getFolderImage(), folder)));
-	}
-
-	private Image getFolderImage() {
-		return new Image(controller.getFolderImagePath(), 80, 80, true, true);
-	}
 
 	public void uploadFolders(MouseEvent mouseEvent) {
 		controller.saveFolders();
@@ -68,10 +46,26 @@ public class Dashboard implements Initializable, WindowPayload<LoginPayloadDashb
 
 	@Override
 	public void setPayload(LoginPayloadDashboard payload) {
+		controller = new DashboardController(payload.getLoggedInUser());
 		controller.setLoggedInUser(payload.getLoggedInUser());
 		controller.setDriveGateway(payload.getDriveGateway());
 		loggedInUsername.setText(controller.getLoggedInText(payload.getLoggedInUser().getName()));
+		addContents(getFolderImage());
 		cleanupOnWindowClose();
+	}
+
+	private void addContents(Image image) {
+		foldersToSync.getChildren().addAll(foldersToSync.getChildren().size() - 1,
+				controller.getSyncList().stream().map(it -> decorator.tile(image, it)).collect(Collectors.toList()));
+	}
+
+	public void openDirectoryChooser(MouseEvent mouseEvent) {
+		File file = new DirectoryChooser().showDialog(foldersToSync.getScene().getWindow());
+		controller.addToSyncList(file).ifPresent(folder -> foldersToSync.getChildren().add(foldersToSync.getChildren().size() - 1, decorator.tile(getFolderImage(), folder)));
+	}
+
+	private Image getFolderImage() {
+		return new Image(controller.getFolderImagePath(), 80, 80, true, true);
 	}
 
 	private void cleanupOnWindowClose() {

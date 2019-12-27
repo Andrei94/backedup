@@ -1,7 +1,9 @@
 package adapter;
 
+import authentication.UserCredentials;
 import com.amazonaws.SdkClientException;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicSessionCredentials;
 import com.amazonaws.event.ProgressListener;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
@@ -18,11 +20,11 @@ import java.util.concurrent.atomic.AtomicLong;
 public class S3Adapter {
 	private TransferManager transferManager;
 
-	public S3Adapter() {
+	public S3Adapter(UserCredentials credentials) {
 		this(TransferManagerBuilder.standard().withS3Client(AmazonS3ClientBuilder
 				.standard()
-				.withCredentials(new ProfileCredentialsProvider("backedup-storage"))
-				.withRegion(Regions.US_EAST_1)
+				.withCredentials(new AWSStaticCredentialsProvider(new BasicSessionCredentials(credentials.getAccessKeyId(), credentials.getSecretAccessKey(), credentials.getSessionToken())))
+				.withRegion(Regions.EU_CENTRAL_1)
 				.build()).build());
 	}
 
@@ -67,7 +69,7 @@ public class S3Adapter {
 
 	long downloadAsync(String name, String destPath) throws InterruptedException {
 		AtomicLong bytesTransferred = new AtomicLong(0);
-		MultipleFileDownload multipleFileDownload = transferManager.downloadDirectory("backedup-storage", name, new File(destPath), true);
+		MultipleFileDownload multipleFileDownload = transferManager.downloadDirectory("backedup-storage-2", name, new File(destPath), true);
 		multipleFileDownload.addProgressListener((ProgressListener) progressEvent -> bytesTransferred.addAndGet(progressEvent.getBytes()));
 		multipleFileDownload.waitForCompletion();
 		return bytesTransferred.longValue();

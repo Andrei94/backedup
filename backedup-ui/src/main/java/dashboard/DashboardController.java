@@ -22,8 +22,8 @@ class DashboardController {
 	private User loggedInUser;
 	private DriveGateway driveGateway;
 
-	DashboardController() {
-		this(ObjectUploaderFactory.createS3ObjectUploader(), ObjectDownloaderFactory.createObjectDownloader(), new SyncFolderLoader(), new SyncFolderSaver());
+	DashboardController(User loggedInUser) {
+		this(ObjectUploaderFactory.createS3ObjectUploader(loggedInUser), ObjectDownloaderFactory.createObjectDownloader(loggedInUser), new SyncFolderLoader(), new SyncFolderSaver());
 	}
 
 	DashboardController(ObjectUploader uploader, ObjectDownloader downloader, SyncFolderLoader loader, SyncFolderSaver saver) {
@@ -106,8 +106,7 @@ class DashboardController {
 
 	public boolean upload(Folder folder) {
 		uploader.setLoggedInUser(loggedInUser);
-		uploader.uploadDirectory(folder.path);
-		return true;
+		return uploader.uploadDirectory(folder.path);
 	}
 
 	public void saveFolders() {
