@@ -8,11 +8,13 @@ import com.amazonaws.services.securitytoken.model.*;
 
 public class DummyAWSSecurityTokenService implements AWSSecurityTokenService {
 	@Override
+	@Deprecated
 	public void setEndpoint(String endpoint) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
+	@Deprecated
 	public void setRegion(Region region) {
 		throw new UnsupportedOperationException();
 	}

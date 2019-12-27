@@ -8,11 +8,13 @@ import com.amazonaws.services.cognitoidp.model.*;
 
 public class DummyAWSCognitoIdentityProvider implements AWSCognitoIdentityProvider {
 	@Override
+	@Deprecated
 	public void setEndpoint(String endpoint) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
+	@Deprecated
 	public void setRegion(Region region) {
 		throw new UnsupportedOperationException();
 	}
