@@ -5,7 +5,9 @@ import adapter.UploadObjectRequest;
 import authentication.User;
 import file.LocalFile;
 
+import java.io.IOException;
 import java.nio.file.Path;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -36,8 +38,9 @@ public class S3ObjectUploader implements ObjectUploader {
 					.filter(LocalFile::isFile)
 					.collect(Collectors.toList())
 					.parallelStream()
-					.anyMatch(localFile -> uploadFileFrom(directory, localFile));
-		} catch(RuntimeException ex) {
+					.allMatch(localFile -> uploadFileFrom(directory, localFile));
+		} catch(IOException | RuntimeException ex) {
+			logger.log(Level.SEVERE, "An error occurred while uploading " + directory.getPath(), ex);
 			return false;
 		}
 	}

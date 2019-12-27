@@ -10,12 +10,11 @@ import java.util.stream.Stream;
 
 public class LocalFileWalker {
 	private Logger logger = Logger.getLogger(this.getClass().getName());
-	protected Stream<LocalFile> walkTreeFromRoot(LocalFile root) {
-		try {
-			return Files.walk(Paths.get(root.getPath())).map(path -> LocalFile.fromFile(path.toFile()));
-		} catch(IOException e) {
-			logger.warning(e.getMessage());
-		}
-		return Stream.empty();
+
+	protected Stream<LocalFile> walkTreeFromRoot(LocalFile root) throws IOException {
+		return Files.walk(Paths.get(root.getPath())).map(path -> {
+			logger.info("Discovered " + path.toAbsolutePath());
+			return LocalFile.fromFile(path.toFile());
+		});
 	}
 }

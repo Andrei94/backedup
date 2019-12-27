@@ -16,8 +16,11 @@ import file.LocalFile;
 import java.io.File;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class S3Adapter {
+	private Logger logger = Logger.getLogger(this.getClass().getName());
 	private TransferManager transferManager;
 
 	public S3Adapter(UserCredentials credentials) {
@@ -37,7 +40,7 @@ public class S3Adapter {
 			uploadAsync(request).waitForCompletion();
 			return true;
 		} catch(SdkClientException | InterruptedException ex) {
-			ex.printStackTrace();
+			logger.log(Level.SEVERE, "An error occurred while uploading to S3", ex);
 			return false;
 		}
 	}
@@ -57,12 +60,13 @@ public class S3Adapter {
 	public Optional<LocalFile> downloadDirectory(String name, String destPath) {
 		try {
 			long bytesTransferred = downloadAsync(name, destPath);
+			logger.info("Downloaded " + bytesTransferred + " bytes to " + destPath);
 			File downloadedFile = new File(destPath, name);
 			if(bytesTransferred == 0 && !downloadedFile.exists())
 				return Optional.empty();
 			return Optional.of(LocalFile.fromFile(downloadedFile));
 		} catch(RuntimeException | InterruptedException e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, "An error occured while downloading", e);
 			return Optional.empty();
 		}
 	}

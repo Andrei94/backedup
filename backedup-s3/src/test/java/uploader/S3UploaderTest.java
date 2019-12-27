@@ -1,6 +1,7 @@
 package uploader;
 
-import adapter.*;
+import adapter.S3Adapter;
+import adapter.UploadObjectRequest;
 import authentication.AuthenticatedUser;
 import authentication.User;
 import authentication.UserCredentials;
@@ -70,7 +71,7 @@ class S3UploaderTest {
 		walker.setFile(subDirectory);
 		s3Adapter = new S3AdapterWithPutRequestNotCalled();
 		uploader = new S3ObjectUploader(s3Adapter, walker);
-		assertFalse(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
+		assertTrue(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
 	}
 
 	@Test

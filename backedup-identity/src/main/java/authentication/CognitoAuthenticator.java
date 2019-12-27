@@ -30,8 +30,11 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CognitoAuthenticator implements Authenticator {
+	private Logger logger = Logger.getLogger(this.getClass().getName());
 	private final AWSCognitoIdentityProvider awsCognitoIdentityProvider;
 	private AmazonCognitoIdentity cognitoIdentity;
 	private final AWSSecurityTokenService stsClient;
@@ -60,14 +63,18 @@ public class CognitoAuthenticator implements Authenticator {
 	public User authenticate(String username, String password) {
 		try {
 			AuthenticationResultType authenticationResult = performAuthentication(username, password);
+			logger.info("Successfully authenticated " + username);
 			String openIdToken = getOpenIdTokenFromAuthenticatedUser(authenticationResult);
+			logger.info("Successfully obtained OpenID token " + openIdToken);
 			return new AuthenticatedUser(username, assumeRoleWebIdentityWithPolicy(openIdToken, username));
 		} catch(AWSCognitoIdentityProviderException | AWSSecurityTokenServiceException | AmazonCognitoIdentityException ex) {
+			logger.log(Level.SEVERE, "Could not get credentials for " + username, ex);
 			return new UnauthenticatedUser(username);
 		}
 	}
 
 	private AuthenticationResultType performAuthentication(String username, String password) {
+		logger.info("Performing authentication for user " + username);
 		return awsCognitoIdentityProvider.initiateAuth(
 				new InitiateAuthRequest()
 						.withAuthFlow(AuthFlowType.USER_PASSWORD_AUTH)
@@ -77,6 +84,7 @@ public class CognitoAuthenticator implements Authenticator {
 	}
 
 	private String getOpenIdTokenFromAuthenticatedUser(AuthenticationResultType authenticationToken) {
+		logger.info("Getting OpenId token...");
 		GetIdRequest idRequest = new GetIdRequest();
 		idRequest.setIdentityPoolId("us-east-1:716c0519-8401-480f-acbc-b54fa2d416f7");
 		idRequest.addLoginsEntry(getProviderFromIdToken(authenticationToken.getIdToken()), authenticationToken.getIdToken());
@@ -107,6 +115,7 @@ public class CognitoAuthenticator implements Authenticator {
 				.withRoleArn("arn:aws:iam::816033825058:role/CognitoAfterAuth")
 				.withPolicy(allowAccessToUsersFolderInS3Policy.toJson())
 		).getCredentials();
+		logger.info("Credentials successfully obtained");
 		return new UserCredentials(credentials.getAccessKeyId(), credentials.getSecretAccessKey(), credentials.getSessionToken(), credentials.getExpiration());
 	}
 

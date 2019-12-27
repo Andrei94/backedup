@@ -29,14 +29,14 @@ public class S3ObjectDownloader implements ObjectDownloader {
 	boolean downloadDirectory(String remoteDir, LocalFile localDir) {
 		if(user == null || !user.isAuthenticated())
 			return false;
-		logger.info("Downloading " + remoteDir);
+		logger.info("Downloading " + remoteDir + " to " + getDestination(remoteDir, localDir));
 		Optional<LocalFile> isDownloadSuccessful = adapter.downloadDirectory(user.getName() + "/" + remoteDir, localDir.getPath());
 		if(isDownloadSuccessful.isPresent()) {
 			moveDownloadedFolder(remoteDir, localDir);
 			logger.info("Finished downloading " + remoteDir + " to " + getDestination(remoteDir, localDir));
 			return true;
 		}
-		logger.info("Failed to download " + remoteDir + " to " + getDestination(remoteDir, localDir));
+		logger.warning("Failed to download " + remoteDir + " to " + getDestination(remoteDir, localDir));
 		return false;
 	}
 
