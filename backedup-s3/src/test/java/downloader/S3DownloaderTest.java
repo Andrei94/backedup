@@ -100,7 +100,7 @@ class S3DownloaderTest {
 				new UserCredentials("accessKey",
 						"secretKey",
 						"sessionToken",
-						new Date(new Date().getTime() + 12 * 3600 * 100))
+						new Date(new Date().getTime() + 12 * 3600 * 1000))
 		);
 	}
 }

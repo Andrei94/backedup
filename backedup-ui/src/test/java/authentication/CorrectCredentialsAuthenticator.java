@@ -8,6 +8,6 @@ class CorrectCredentialsAuthenticator implements Authenticator {
 
 	@Override
 	public User authenticate(String username, String password) {
-		return new AuthenticatedUser(username, new UserCredentials("accessKey", "secretKey", "sessionToken", new Date(new Date().getTime() + 12 * 3600 * 100)));
+		return new AuthenticatedUser(username, new UserCredentials("accessKey", "secretKey", "sessionToken", new Date(new Date().getTime() + 12 * 3600 * 1000)));
 	}
 }

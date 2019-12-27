@@ -21,6 +21,6 @@ public class AWSSecurityTokenServiceStub extends DummyAWSSecurityTokenService {
 	}
 
 	private Date getExpiration(long durationInSeconds) {
-		return new Date(new Date().getTime() + durationInSeconds * 100);
+		return new Date(new Date().getTime() + durationInSeconds * 1000);
 	}
 }
