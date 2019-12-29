@@ -8,4 +8,6 @@ public interface User {
 	String getName();
 
 	Optional<UserCredentials> getCredentials();
+
+	String getRefreshToken();
 }

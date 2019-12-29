@@ -4,6 +4,8 @@ import authentication.User;
 import downloader.ObjectDownloader;
 import downloader.ObjectDownloaderFactory;
 import drive.DriveGateway;
+import sessionRefresher.AssumedRoleRefresher;
+import sessionRefresher.SessionRefresher;
 import uploader.ObjectUploader;
 import uploader.ObjectUploaderFactory;
 
@@ -21,9 +23,11 @@ class DashboardController {
 	private ObjectDownloader downloader;
 	private User loggedInUser;
 	private DriveGateway driveGateway;
+	private SessionRefresher refresher;
 
 	DashboardController(User loggedInUser) {
 		this(ObjectUploaderFactory.createS3ObjectUploader(loggedInUser), ObjectDownloaderFactory.createObjectDownloader(loggedInUser), new SyncFolderLoader(), new SyncFolderSaver());
+		setRefresher(new AssumedRoleRefresher());
 	}
 
 	DashboardController(ObjectUploader uploader, ObjectDownloader downloader, SyncFolderLoader loader, SyncFolderSaver saver) {
@@ -57,6 +61,8 @@ class DashboardController {
 	}
 
 	boolean download(Folder folder) {
+		if(isUserWithCredentialsExpired())
+			loggedInUser = refresher.refresh(loggedInUser);
 		downloader.setLoggedInUser(loggedInUser);
 		return downloader.downloadDirectory(folder.path.getFileName().toString(), folder.path.getParent().toString());
 	}
@@ -105,8 +111,14 @@ class DashboardController {
 	}
 
 	public boolean upload(Folder folder) {
+		if(isUserWithCredentialsExpired())
+			loggedInUser = refresher.refresh(loggedInUser);
 		uploader.setLoggedInUser(loggedInUser);
 		return uploader.uploadDirectory(folder.path);
+	}
+
+	private boolean isUserWithCredentialsExpired() {
+		return loggedInUser != null && !loggedInUser.isAuthenticated();
 	}
 
 	public void saveFolders() {
@@ -129,5 +141,9 @@ class DashboardController {
 
 	public void setDriveGateway(DriveGateway driveGateway) {
 		this.driveGateway = driveGateway;
+	}
+
+	public void setRefresher(SessionRefresher refresher) {
+		this.refresher = refresher;
 	}
 }

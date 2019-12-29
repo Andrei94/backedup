@@ -82,4 +82,12 @@ public class S3Adapter {
 	public void shutdownTransferManager() {
 		transferManager.shutdownNow(true);
 	}
+
+	public void updateCredentials(UserCredentials credentials) {
+		transferManager = TransferManagerBuilder.standard().withS3Client(AmazonS3ClientBuilder
+				.standard()
+				.withCredentials(new AWSStaticCredentialsProvider(new BasicSessionCredentials(credentials.getAccessKeyId(), credentials.getSecretAccessKey(), credentials.getSessionToken())))
+				.withRegion(Regions.EU_CENTRAL_1)
+				.build()).build();
+	}
 }

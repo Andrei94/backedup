@@ -1,5 +1,6 @@
 package adapter;
 
+import authentication.UserCredentials;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import file.LocalFile;
 
@@ -13,5 +14,9 @@ public class S3AdapterStub extends S3Adapter {
 	@Override
 	public Optional<LocalFile> downloadDirectory(String name, String destPath) {
 		return Optional.empty();
+	}
+
+	@Override
+	public void updateCredentials(UserCredentials credentials) {
 	}
 }

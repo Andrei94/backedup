@@ -6,10 +6,12 @@ import java.util.Optional;
 public class AuthenticatedUser implements User {
 	private String name;
 	private UserCredentials keys;
+	private final String refreshToken;
 
-	public AuthenticatedUser(String name, UserCredentials keys) {
+	public AuthenticatedUser(String name, UserCredentials keys, String refreshToken) {
 		this.name = name;
 		this.keys = keys;
+		this.refreshToken = refreshToken;
 	}
 
 	@Override
@@ -25,5 +27,10 @@ public class AuthenticatedUser implements User {
 	@Override
 	public Optional<UserCredentials> getCredentials() {
 		return Optional.of(keys);
+	}
+
+	@Override
+	public String getRefreshToken() {
+		return refreshToken;
 	}
 }

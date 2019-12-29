@@ -66,7 +66,7 @@ public class CognitoAuthenticator implements Authenticator {
 			logger.info("Successfully authenticated " + username);
 			String openIdToken = getOpenIdTokenFromAuthenticatedUser(authenticationResult);
 			logger.info("Successfully obtained OpenID token " + openIdToken);
-			return new AuthenticatedUser(username, assumeRoleWebIdentityWithPolicy(openIdToken, username));
+			return new AuthenticatedUser(username, assumeRoleWebIdentityWithPolicy(openIdToken, username), authenticationResult.getRefreshToken());
 		} catch(AWSCognitoIdentityProviderException | AWSSecurityTokenServiceException | AmazonCognitoIdentityException ex) {
 			logger.log(Level.SEVERE, "Could not get credentials for " + username, ex);
 			return new UnauthenticatedUser(username);
@@ -124,6 +124,37 @@ public class CognitoAuthenticator implements Authenticator {
 			{
 				put("USERNAME", username);
 				put("PASSWORD", password);
+			}
+		};
+	}
+
+	@Override
+	public User refresh(User user) {
+		try {
+			AuthenticationResultType authenticationResult = performAuthenticationWithRefreshToken(user.getRefreshToken());
+			logger.info("Successfully refreshed authentication for user " + user.getName());
+			String openIdToken = getOpenIdTokenFromAuthenticatedUser(authenticationResult);
+			logger.info("Successfully obtained OpenID token " + openIdToken);
+			return new AuthenticatedUser(user.getName(), assumeRoleWebIdentityWithPolicy(openIdToken, user.getName()), user.getRefreshToken());
+		} catch(AWSCognitoIdentityProviderException | AWSSecurityTokenServiceException | AmazonCognitoIdentityException ex) {
+			logger.log(Level.SEVERE, "Could not re-obtain credentials for " + user.getName(), ex);
+			return new UnauthenticatedUser(user.getName());
+		}
+	}
+
+	private AuthenticationResultType performAuthenticationWithRefreshToken(String refreshToken) {
+		return awsCognitoIdentityProvider.initiateAuth(
+				new InitiateAuthRequest()
+						.withAuthFlow(AuthFlowType.REFRESH_TOKEN)
+						.withClientId("1f4ffgtrirl4e3j0ale6359tl4")
+						.withAuthParameters(constructRefreshTokenMap(refreshToken))
+		).getAuthenticationResult();
+	}
+
+	private Map<String, String> constructRefreshTokenMap(String refreshToken) {
+		return new HashMap<String, String>() {
+			{
+				put("REFRESH_TOKEN", refreshToken);
 			}
 		};
 	}

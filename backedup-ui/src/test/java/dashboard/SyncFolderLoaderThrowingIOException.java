@@ -1,7 +1,5 @@
 package dashboard;
 
-import dashboard.SyncFolderLoader;
-
 import java.io.IOException;
 import java.util.stream.Stream;
 

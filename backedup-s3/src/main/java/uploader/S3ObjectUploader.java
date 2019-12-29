@@ -30,6 +30,7 @@ public class S3ObjectUploader implements ObjectUploader {
 	@Override
 	public void setLoggedInUser(User user) {
 		this.user = user;
+		user.getCredentials().ifPresent(adapter::updateCredentials);
 	}
 
 	boolean uploadDirectory(LocalFile directory) {

@@ -27,7 +27,7 @@ class S3DownloaderTest {
 				assertEquals("D:\\", localDir.getPath());
 			}
 		};
-		objectDownloader.setLoggedInUser(createAuthenticatedUser("username"));
+		objectDownloader.setLoggedInUser(createAuthenticatedUser());
 		assertTrue(objectDownloader.downloadDirectory("testFolder", LocalFile.fromPath(Paths.get("D:\\"))));
 	}
 
@@ -44,7 +44,7 @@ class S3DownloaderTest {
 	@Test
 	void failedDownload() {
 		objectDownloader = new S3ObjectDownloader(new S3AdapterFailedDownloadStub());
-		objectDownloader.setLoggedInUser(createAuthenticatedUser("username"));
+		objectDownloader.setLoggedInUser(createAuthenticatedUser());
 		assertFalse(objectDownloader.downloadDirectory("testFolder", LocalFile.fromPath(Paths.get("D:\\"))));
 	}
 
@@ -72,7 +72,7 @@ class S3DownloaderTest {
 				assertEquals("D:\\username", localDownloadDirectory.toString());
 			}
 		};
-		objectDownloader.setLoggedInUser(createAuthenticatedUser("username"));
+		objectDownloader.setLoggedInUser(createAuthenticatedUser());
 		objectDownloader.moveDownloadedFolder("testFolder", LocalFile.fromPath(Paths.get("D:\\")));
 	}
 
@@ -89,8 +89,14 @@ class S3DownloaderTest {
 				fail();
 			}
 		};
-		objectDownloader.setLoggedInUser(createAuthenticatedUser("username"));
+		objectDownloader.setLoggedInUser(createAuthenticatedUser());
 		objectDownloader.moveDownloadedFolder("testFolder", LocalFile.fromPath(Paths.get("D:\\")));
+	}
+
+	@Test
+	void skipDownloadWhenUserCredentialsExpired() {
+		objectDownloader.setLoggedInUser(createUserWithExpiredCredentials());
+		assertFalse(objectDownloader.downloadDirectory("testFolder", LocalFile.fromPath(Paths.get("D:\\"))));
 	}
 
 	@Test
@@ -100,12 +106,21 @@ class S3DownloaderTest {
 		Assertions.assertTrue(adapter.shutdownCalled);
 	}
 
-	private User createAuthenticatedUser(String username) {
-		return new AuthenticatedUser(username,
+	private User createAuthenticatedUser() {
+		return new AuthenticatedUser("username",
 				new UserCredentials("accessKey",
 						"secretKey",
 						"sessionToken",
-						new Date(new Date().getTime() + 12 * 3600 * 1000))
-		);
+						new Date(new Date().getTime() + 12 * 3600 * 1000)),
+				"refreshToken");
+	}
+
+	private User createUserWithExpiredCredentials() {
+		return new AuthenticatedUser("username",
+				new UserCredentials("accessKey",
+						"secretKey",
+						"sessionToken",
+						new Date(new Date().getTime() - 12 * 3600 * 1000)),
+				"refreshToken");
 	}
 }

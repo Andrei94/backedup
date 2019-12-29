@@ -23,4 +23,9 @@ class UnauthenticatedUser implements User {
 	public Optional<UserCredentials> getCredentials() {
 		return Optional.empty();
 	}
+
+	@Override
+	public String getRefreshToken() {
+		return "";
+	}
 }

@@ -137,7 +137,7 @@ class DashboardControllerTest {
 	void uploadFolders() {
 		S3UploaderMock uploader = new S3UploaderMock();
 		controller = getControllerForUpload(uploader, new FolderSaver());
-		controller.setLoggedInUser(createAuthenticatedUser("username"));
+		controller.setLoggedInUser(createAuthenticatedUser());
 		controller.upload(Folder.createFolder("/home/directory"));
 		controller.upload(Folder.createFolder("/home/directory2"));
 		assertEquals(2, uploader.getTimesUploadDirectoryCalled());
@@ -148,8 +148,27 @@ class DashboardControllerTest {
 		S3UploaderMock uploader = new S3UploaderMock();
 		controller = getControllerForUpload(uploader, new FolderSaver());
 		controller.upload(Folder.createFolder("/home/directory"));
-		controller.upload(Folder.createFolder("/home/directory2"));
 		assertEquals(0, uploader.getTimesUploadDirectoryCalled());
+	}
+
+	@Test
+	void skipUploadWhenUserCredentialsExpired() {
+		S3UploaderMock uploader = new S3UploaderMock();
+		controller = getControllerForUpload(uploader, new FolderSaver());
+		controller.setLoggedInUser(createUserWithExpiredCredentials());
+		controller.setRefresher(refreshToken -> createUserWithExpiredCredentials());
+		controller.upload(Folder.createFolder("/home/directory"));
+		assertEquals(0, uploader.getTimesUploadDirectoryCalled());
+	}
+
+	@Test
+	void refreshExpiredCredentialsOfAuthenticatedUserWhenUploading() {
+		S3UploaderMock uploader = new S3UploaderMock();
+		controller = getControllerForUpload(uploader, new FolderSaver());
+		controller.setLoggedInUser(createUserWithExpiredCredentials());
+		controller.setRefresher(refreshToken -> createAuthenticatedUser());
+		controller.upload(Folder.createFolder("/home/directory"));
+		assertEquals(1, uploader.getTimesUploadDirectoryCalled());
 	}
 
 	private int getSizeOfFoldersToSync() {
@@ -159,7 +178,7 @@ class DashboardControllerTest {
 	@Test
 	void downloadFolder() {
 		controller = getControllerForDownload(new S3DownloaderMock());
-		controller.setLoggedInUser(createAuthenticatedUser("username"));
+		controller.setLoggedInUser(createAuthenticatedUser());
 		assertTrue(controller.download(Folder.createFolder("/home/directory")));
 		assertTrue(controller.download(Folder.createFolder("/home/directory2")));
 	}
@@ -169,6 +188,22 @@ class DashboardControllerTest {
 		controller = getControllerForDownload(new S3DownloaderMock());
 		assertFalse(controller.download(Folder.createFolder("/home/directory")));
 		assertFalse(controller.download(Folder.createFolder("/home/directory2")));
+	}
+
+	@Test
+	void skipDownloadWhenUserCredentialsExpired() {
+		controller = getControllerForDownload(new S3DownloaderMock());
+		controller.setLoggedInUser(createUserWithExpiredCredentials());
+		controller.setRefresher(refreshToken -> createUserWithExpiredCredentials());
+		assertFalse(controller.download(Folder.createFolder("/home/directory")));
+	}
+
+	@Test
+	void refreshExpiredCredentialsOfAuthenticatedUserWhenDownloading() {
+		controller = getControllerForDownload(new S3DownloaderMock());
+		controller.setLoggedInUser(createUserWithExpiredCredentials());
+		controller.setRefresher(refreshToken -> createAuthenticatedUser());
+		assertTrue(controller.download(Folder.createFolder("/home/directory")));
 	}
 
 	@Test
@@ -199,7 +234,7 @@ class DashboardControllerTest {
 	void saveWhenUserLoggedIn() {
 		FolderSaver saver = new FolderSaver();
 		controller = getControllerForUpload(new S3UploaderMock(), saver);
-		controller.setLoggedInUser(createAuthenticatedUser("username"));
+		controller.setLoggedInUser(createAuthenticatedUser());
 		controller.saveFolders();
 		assertEquals(2, saver.getFoldersSavedCount());
 	}
@@ -212,6 +247,15 @@ class DashboardControllerTest {
 		assertEquals(0, saver.getFoldersSavedCount());
 	}
 
+	@Test
+	void skipSaveWhenUserCredentialsExpired() {
+		FolderSaver saver = new FolderSaver();
+		controller = getControllerForUpload(new S3UploaderMock(), saver);
+		controller.setLoggedInUser(createUserWithExpiredCredentials());
+		controller.saveFolders();
+		assertEquals(0, saver.getFoldersSavedCount());
+	}
+
 	private DashboardController getControllerForUpload(S3UploaderMock uploader, FolderSaver saver) {
 		return new DashboardController(uploader, null, new SyncFolderLoaderStub(new ArrayList<Folder>() {{
 			add(Folder.createFolder("/home/directory"));
@@ -219,12 +263,21 @@ class DashboardControllerTest {
 		}}), saver);
 	}
 
-	private User createAuthenticatedUser(String username) {
-		return new AuthenticatedUser(username,
+	private User createAuthenticatedUser() {
+		return new AuthenticatedUser("username",
 				new UserCredentials("accessKey",
 						"secretKey",
 						"sessionToken",
-						new Date(new Date().getTime() + 12 * 3600 * 1000))
-		);
+						new Date(new Date().getTime() + 12 * 3600 * 1000)),
+				"refreshToken");
+	}
+
+	private User createUserWithExpiredCredentials() {
+		return new AuthenticatedUser("username",
+				new UserCredentials("accessKey",
+						"secretKey",
+						"sessionToken",
+						new Date(new Date().getTime() - 12 * 3600 * 1000)),
+				"refreshToken");
 	}
 }

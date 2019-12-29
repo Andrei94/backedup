@@ -70,6 +70,7 @@ public class S3ObjectDownloader implements ObjectDownloader {
 	@Override
 	public void setLoggedInUser(User user) {
 		this.user = user;
+		user.getCredentials().ifPresent(adapter::updateCredentials);
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package downloader;
 
 import adapter.S3Adapter;
+import authentication.UserCredentials;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import file.LocalFile;
 
@@ -22,5 +23,9 @@ class S3AdapterSuccessfulDownloadStub extends S3Adapter {
 	@Override
 	public void shutdownTransferManager() {
 		shutdownCalled = true;
+	}
+
+	@Override
+	public void updateCredentials(UserCredentials credentials) {
 	}
 }

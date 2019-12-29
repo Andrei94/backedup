@@ -28,7 +28,7 @@ class S3UploaderTest {
 				createUploadRequest("username/directory/" + localFile.getName(), localFile)
 		);
 		uploader = new S3ObjectUploader(s3Adapter, walker);
-		uploader.setLoggedInUser(createAuthenticatedUser("username"));
+		uploader.setLoggedInUser(createAuthenticatedUser());
 		assertTrue(uploader.uploadFileFrom(dir, localFile));
 	}
 
@@ -49,7 +49,7 @@ class S3UploaderTest {
 				createUploadRequest("username/directory/" + fileUnderDirectory.getName(), fileUnderDirectory)
 		);
 		uploader = new S3ObjectUploader(s3Adapter, walker);
-		uploader.setLoggedInUser(createAuthenticatedUser("username"));
+		uploader.setLoggedInUser(createAuthenticatedUser());
 		assertTrue(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
 	}
 
@@ -61,7 +61,7 @@ class S3UploaderTest {
 				createUploadRequest("username/directory/secondDirectory/" + fileUnderSubdirectory.getName(), fileUnderSubdirectory)
 		);
 		uploader = new S3ObjectUploader(s3Adapter, walker);
-		uploader.setLoggedInUser(createAuthenticatedUser("username"));
+		uploader.setLoggedInUser(createAuthenticatedUser());
 		assertTrue(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
 	}
 
@@ -71,7 +71,27 @@ class S3UploaderTest {
 		walker.setFile(subDirectory);
 		s3Adapter = new S3AdapterWithPutRequestNotCalled();
 		uploader = new S3ObjectUploader(s3Adapter, walker);
+		uploader.setLoggedInUser(createAuthenticatedUser());
 		assertTrue(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
+	}
+
+	@Test
+	void skipUploadWhenCredentialsAreExpired() {
+		LocalFile subDirectory = createMockFile("path/to/directory/secondDirectory/file2");
+		walker.setFile(subDirectory);
+		s3Adapter = new S3AdapterWithPutRequestNotCalled();
+		uploader = new S3ObjectUploader(s3Adapter, walker);
+		uploader.setLoggedInUser(createUserWithExpiredCredentials());
+		assertFalse(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
+	}
+
+	private User createUserWithExpiredCredentials() {
+		return new AuthenticatedUser("username",
+				new UserCredentials("accessKey",
+						"secretKey",
+						"sessionToken",
+						new Date(new Date().getTime() - 12 * 3600 * 1000)),
+				"refreshToken");
 	}
 
 	@Test
@@ -115,12 +135,12 @@ class S3UploaderTest {
 				.withStorageClass("INTELLIGENT_TIERING");
 	}
 
-	private User createAuthenticatedUser(String username) {
-		return new AuthenticatedUser(username,
+	private User createAuthenticatedUser() {
+		return new AuthenticatedUser("username",
 				new UserCredentials("accessKey",
 						"secretKey",
 						"sessionToken",
-						new Date(new Date().getTime() + 12 * 3600 * 1000))
-		);
+						new Date(new Date().getTime() + 12 * 3600 * 1000)),
+				"refreshToken");
 	}
 }
