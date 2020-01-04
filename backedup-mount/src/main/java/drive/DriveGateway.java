@@ -11,7 +11,7 @@ public class DriveGateway {
 	public void mount(String username, String password) {
 		mount(new MountArguments(
 				"D:\\Programming\\Win-SSHFS\\Sshfs\\Sshfs\\bin\\Release\\WinSshFS.exe",
-				"18.197.191.171",
+				"18.197.49.138",
 				"files",
 				username, password));
 	}
