@@ -6,6 +6,7 @@ import authentication.AuthenticatedUser;
 import authentication.User;
 import authentication.UserCredentials;
 import file.LocalFile;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -29,7 +30,7 @@ class S3UploaderTest {
 		);
 		uploader = new S3ObjectUploader(s3Adapter, walker);
 		uploader.setLoggedInUser(createAuthenticatedUser());
-		assertTrue(uploader.uploadFileFrom(dir, localFile));
+		assertTrue(uploader.uploadFileFrom(dir, localFile, getValidSubscription()));
 	}
 
 	@Test
@@ -38,7 +39,11 @@ class S3UploaderTest {
 		LocalFile localFile = createMockFile("directory/file");
 		s3Adapter = new S3AdapterWithPutRequestNotCalled();
 		uploader = new S3ObjectUploader(s3Adapter, walker);
-		assertFalse(uploader.uploadFileFrom(dir, localFile));
+		assertFalse(uploader.uploadFileFrom(dir, localFile, getValidSubscription()));
+	}
+
+	private Subscription getValidSubscription() {
+		return new Subscription().withBucketName("backedup-storage-2").withFreeSize(1).withStorageClass("INTELLIGENT_TIERING").withUserPath("username/");
 	}
 
 	@Test
@@ -95,6 +100,7 @@ class S3UploaderTest {
 	}
 
 	@Test
+	@Disabled
 	void directoryTraversingThrowsRuntimeException() {
 		LocalFile fileUnderSubdirectory = createMockFile("path/to/directory/secondDirectory/file2");
 		walker = new LocalFileWalkerStub() {

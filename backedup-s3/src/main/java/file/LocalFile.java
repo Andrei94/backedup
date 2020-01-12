@@ -8,6 +8,7 @@ public class LocalFile {
 	private String name;
 	private String path;
 	private boolean isFile;
+	private long size;
 
 	private LocalFile() {
 	}
@@ -17,6 +18,7 @@ public class LocalFile {
 		localFile.name = file.getName();
 		localFile.path = file.getPath();
 		localFile.isFile = file.isFile();
+		localFile.size = file.length();
 		return localFile;
 	}
 
@@ -45,6 +47,10 @@ public class LocalFile {
 				.toUri()
 				.relativize(Paths.get(other.path).toUri())
 				.getPath();
+	}
+
+	public long getSize() {
+		return size;
 	}
 
 	@Override
