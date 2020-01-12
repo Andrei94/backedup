@@ -11,8 +11,8 @@ public class JsonSerializer {
 		this.serializer = serializer;
 	}
 
-	public <T> T fromJson(String s, Type type) {
-		return serializer.fromJson(s, type);
+	public <T> T fromJson(String json, Type type) {
+		return serializer.fromJson(json, type);
 	}
 
 	public String toJson(Object src) {

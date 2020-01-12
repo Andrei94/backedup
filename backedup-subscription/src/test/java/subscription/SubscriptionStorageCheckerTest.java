@@ -26,8 +26,8 @@ class SubscriptionStorageCheckerTest {
 
 			@SuppressWarnings("unchecked")
 			@Override
-			public <T> T fromJson(String s, Type type) {
-				return (T) s;
+			public <T> T fromJson(String json, Type type) {
+				return (T) json;
 			}
 		};
 		Subscription subscription = new SubscriptionStorageChecker(jsonSerializer, httpClient).checkSubscription(10, "username");
@@ -59,7 +59,7 @@ class SubscriptionStorageCheckerTest {
 
 			@SuppressWarnings("unchecked")
 			@Override
-			public <T> T fromJson(String s, Type type) {
+			public <T> T fromJson(String json, Type type) {
 				return (T) new Subscription().withBucketName("backedup-storage-2").withStorageClass("INTELLIGENT_TIERING").withUserPath("username/").withFreeSize(1099511627775L);
 			}
 		};

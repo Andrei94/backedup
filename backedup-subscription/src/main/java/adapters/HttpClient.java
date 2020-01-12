@@ -19,7 +19,7 @@ public class HttpClient {
 		logger.info("Sending request " + body);
 		try(Response response = httpClient.newCall(createPutRequest(url, body)).execute()) {
 			String responseBody = Objects.requireNonNull(response.body()).string();
-			logger.info("Response from subscription-checker: " + responseBody);
+			logger.info("Response from subscription-plan: " + responseBody);
 			return responseBody;
 		} catch(IOException ex) {
 			logger.log(Level.SEVERE, "An error occurred while sending request to subscription server", ex);
