@@ -3,14 +3,13 @@ package uploader;
 import adapter.S3Adapter;
 import adapter.UploadObjectRequest;
 import authentication.User;
-import com.google.gson.Gson;
 import file.LocalFile;
-import okhttp3.*;
+import subscription.Subscription;
+import subscription.SubscriptionChecker;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -20,10 +19,12 @@ public class S3ObjectUploader implements ObjectUploader {
 	private final S3Adapter adapter;
 	private final LocalFileWalker walker;
 	private User user;
+	private SubscriptionChecker subscriptionStorageChecker;
 
-	public S3ObjectUploader(S3Adapter adapter, LocalFileWalker walker) {
+	public S3ObjectUploader(S3Adapter adapter, LocalFileWalker walker, SubscriptionChecker subscriptionStorageChecker) {
 		this.adapter = adapter;
 		this.walker = walker;
+		this.subscriptionStorageChecker = subscriptionStorageChecker;
 	}
 
 	@Override
@@ -43,46 +44,20 @@ public class S3ObjectUploader implements ObjectUploader {
 					.filter(LocalFile::isFile)
 					.collect(Collectors.toList());
 			long dirSize = filesFromDirectory.parallelStream().map(LocalFile::getSize).reduce(0L, Long::sum);
-			String json = "{" +
-					"\"usedSize\": " + dirSize + "," +
-					"\"user\": " + "\"" + user.getName() + "\"" +
-					"}";
-
-			Subscription subscription = getUserSubscription(json);
+			Subscription subscription = subscriptionStorageChecker.checkSubscription(dirSize, user.getName());
+			if(!subscription.isValid())
+				return false;
 			return filesFromDirectory
 					.parallelStream()
 					.allMatch(localFile -> uploadFileFrom(directory, localFile, subscription));
-		} catch(IOException ex) {
+		} catch(IOException | SecurityException ex) {
 			logger.log(Level.SEVERE, "An error occurred while uploading " + directory.getPath(), ex);
 			return false;
 		}
 	}
 
-	private Subscription getUserSubscription(String requestJson) {
-		Request request = createRequest(requestJson);
-		logger.info("Sending request " + requestJson);
-		try(Response response = new OkHttpClient().newCall(request).execute()) {
-			String responseBody = Objects.requireNonNull(response.body()).string();
-			logger.info("Response from subscription-checker: " + responseBody);
-			return new Gson().fromJson(responseBody, Subscription.class);
-		} catch(IOException ex) {
-			logger.log(Level.SEVERE, "An error occurred while sending request to subscription server", ex);
-			return new Subscription();
-		}
-	}
-
-	private Request createRequest(String json) {
-		RequestBody body = RequestBody.create(
-				MediaType.parse("application/json; charset=utf-8"),
-				json);
-		return new Request.Builder()
-				.url("http://localhost:8080/checkStorage")
-				.put(body)
-				.build();
-	}
-
 	boolean uploadFileFrom(LocalFile directory, LocalFile localFile, Subscription subscription) {
-		if(user == null || !user.isAuthenticated() || subscription.getFreeSize() == 0)
+		if(user == null || !user.isAuthenticated())
 			return false;
 		UploadObjectRequest uploadRequest = new UploadObjectRequest()
 				.withBucket(subscription.getBucketName())

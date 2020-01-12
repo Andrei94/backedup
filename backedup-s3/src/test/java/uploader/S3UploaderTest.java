@@ -6,8 +6,9 @@ import authentication.AuthenticatedUser;
 import authentication.User;
 import authentication.UserCredentials;
 import file.LocalFile;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import subscription.Subscription;
+import subscription.SubscriptionChecker;
 
 import java.io.File;
 import java.util.Date;
@@ -20,6 +21,7 @@ class S3UploaderTest {
 	private S3Adapter s3Adapter;
 	private S3ObjectUploader uploader;
 	private LocalFileWalkerStub walker = new LocalFileWalkerStub();
+	private SubscriptionChecker subscriptionStorageChecker = new ValidSubscriptionStorageChecker();
 
 	@Test
 	void uploadFileObject() {
@@ -28,7 +30,7 @@ class S3UploaderTest {
 		s3Adapter = new S3AdapterWithPutRequestVerifyingParameters(
 				createUploadRequest("username/directory/" + localFile.getName(), localFile)
 		);
-		uploader = new S3ObjectUploader(s3Adapter, walker);
+		uploader = new S3ObjectUploader(s3Adapter, walker, subscriptionStorageChecker);
 		uploader.setLoggedInUser(createAuthenticatedUser());
 		assertTrue(uploader.uploadFileFrom(dir, localFile, getValidSubscription()));
 	}
@@ -38,7 +40,7 @@ class S3UploaderTest {
 		LocalFile dir = createMockDirectory("directory");
 		LocalFile localFile = createMockFile("directory/file");
 		s3Adapter = new S3AdapterWithPutRequestNotCalled();
-		uploader = new S3ObjectUploader(s3Adapter, walker);
+		uploader = new S3ObjectUploader(s3Adapter, walker, subscriptionStorageChecker);
 		assertFalse(uploader.uploadFileFrom(dir, localFile, getValidSubscription()));
 	}
 
@@ -53,7 +55,7 @@ class S3UploaderTest {
 		s3Adapter = new S3AdapterWithPutRequestVerifyingParameters(
 				createUploadRequest("username/directory/" + fileUnderDirectory.getName(), fileUnderDirectory)
 		);
-		uploader = new S3ObjectUploader(s3Adapter, walker);
+		uploader = new S3ObjectUploader(s3Adapter, walker, subscriptionStorageChecker);
 		uploader.setLoggedInUser(createAuthenticatedUser());
 		assertTrue(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
 	}
@@ -65,7 +67,7 @@ class S3UploaderTest {
 		s3Adapter = new S3AdapterWithPutRequestVerifyingParameters(
 				createUploadRequest("username/directory/secondDirectory/" + fileUnderSubdirectory.getName(), fileUnderSubdirectory)
 		);
-		uploader = new S3ObjectUploader(s3Adapter, walker);
+		uploader = new S3ObjectUploader(s3Adapter, walker, subscriptionStorageChecker);
 		uploader.setLoggedInUser(createAuthenticatedUser());
 		assertTrue(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
 	}
@@ -75,9 +77,20 @@ class S3UploaderTest {
 		LocalFile subDirectory = createMockDirectory("path/to/directory/secondDirectory");
 		walker.setFile(subDirectory);
 		s3Adapter = new S3AdapterWithPutRequestNotCalled();
-		uploader = new S3ObjectUploader(s3Adapter, walker);
+		uploader = new S3ObjectUploader(s3Adapter, walker, subscriptionStorageChecker);
 		uploader.setLoggedInUser(createAuthenticatedUser());
 		assertTrue(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
+	}
+
+	@Test
+	void skipUploadWhenSubscriptionNotValid() {
+		LocalFile subDirectory = createMockDirectory("path/to/directory/secondDirectory");
+		walker.setFile(subDirectory);
+		s3Adapter = new S3AdapterWithPutRequestNotCalled();
+		subscriptionStorageChecker = new InvalidSubscriptionStorageChecker();
+		uploader = new S3ObjectUploader(s3Adapter, walker, subscriptionStorageChecker);
+		uploader.setLoggedInUser(createAuthenticatedUser());
+		assertFalse(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
 	}
 
 	@Test
@@ -85,7 +98,7 @@ class S3UploaderTest {
 		LocalFile subDirectory = createMockFile("path/to/directory/secondDirectory/file2");
 		walker.setFile(subDirectory);
 		s3Adapter = new S3AdapterWithPutRequestNotCalled();
-		uploader = new S3ObjectUploader(s3Adapter, walker);
+		uploader = new S3ObjectUploader(s3Adapter, walker, subscriptionStorageChecker);
 		uploader.setLoggedInUser(createUserWithExpiredCredentials());
 		assertFalse(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
 	}
@@ -100,18 +113,17 @@ class S3UploaderTest {
 	}
 
 	@Test
-	@Disabled
-	void directoryTraversingThrowsRuntimeException() {
+	void directoryTraversingThrowsSecurityException() {
 		LocalFile fileUnderSubdirectory = createMockFile("path/to/directory/secondDirectory/file2");
 		walker = new LocalFileWalkerStub() {
 			@Override
 			protected Stream<LocalFile> walkTreeFromRoot(LocalFile root) {
-				throw new RuntimeException();
+				throw new SecurityException();
 			}
 		};
 		walker.setFile(fileUnderSubdirectory);
 		s3Adapter = new S3AdapterWithPutRequestNotCalled();
-		uploader = new S3ObjectUploader(s3Adapter, walker);
+		uploader = new S3ObjectUploader(s3Adapter, walker, subscriptionStorageChecker);
 		assertFalse(uploader.uploadDirectory(createMockDirectory("path/to/directory")));
 	}
 

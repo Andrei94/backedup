@@ -1,0 +1,4 @@
+dependencies {
+    implementation "com.squareup.okhttp3:okhttp:3.14.4"
+    implementation "com.google.code.gson:gson:2.8.6"
+}

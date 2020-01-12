@@ -1,4 +1,4 @@
-package uploader;
+package subscription;
 
 public class Subscription {
 	private long freeSize;
@@ -6,36 +6,16 @@ public class Subscription {
 	private String storageClass;
 	private String userPath;
 
-	public long getFreeSize() {
-		return freeSize;
-	}
-
-	public void setFreeSize(long freeSize) {
-		this.freeSize = freeSize;
-	}
-
 	public String getBucketName() {
 		return bucketName;
-	}
-
-	public void setBucketName(String bucketName) {
-		this.bucketName = bucketName;
 	}
 
 	public String getStorageClass() {
 		return storageClass;
 	}
 
-	public void setStorageClass(String storageClass) {
-		this.storageClass = storageClass;
-	}
-
 	public String getUserPath() {
 		return userPath;
-	}
-
-	public void setUserPath(String userPath) {
-		this.userPath = userPath;
 	}
 
 	public Subscription withFreeSize(long freeSize) {
@@ -56,5 +36,9 @@ public class Subscription {
 	public Subscription withUserPath(String userPath) {
 		this.userPath = userPath;
 		return this;
+	}
+
+	public boolean isValid() {
+		return freeSize > 0;
 	}
 }
