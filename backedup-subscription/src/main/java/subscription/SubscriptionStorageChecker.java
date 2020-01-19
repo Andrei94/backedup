@@ -24,7 +24,7 @@ public class SubscriptionStorageChecker implements SubscriptionChecker {
 	}
 
 	private Subscription getUserSubscription(SubscriptionRequest requestJson) {
-		String responseBody = httpClient.makePutRequest("http://localhost:8080/checkStorage", jsonSerializer.toJson(requestJson));
+		String responseBody = httpClient.makePutRequest("http://192.168.232.128:8080/checkStorage", jsonSerializer.toJson(requestJson));
 		try {
 			return jsonSerializer.fromJson(responseBody, Subscription.class);
 		} catch(ClassCastException ex) {
