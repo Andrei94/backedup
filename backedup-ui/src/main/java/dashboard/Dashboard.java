@@ -10,6 +10,7 @@ import javafx.stage.DirectoryChooser;
 import utils.WindowPayload;
 
 import java.io.File;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Dashboard implements WindowPayload<LoginPayloadDashboard> {
@@ -23,10 +24,12 @@ public class Dashboard implements WindowPayload<LoginPayloadDashboard> {
 		UploadFolderListWorker uploadFolderListWorker = new UploadFolderListWorker(controller);
 		uploadFolderListWorker.setOnRunning(event -> setImageForFolder(controller.getWIPImageUrl()));
 		uploadFolderListWorker.setOnFailed(event -> setImageForFolder(controller.getFailedImageUrl()));
-		uploadFolderListWorker.setOnSucceeded(event -> controller.getSyncList().forEach(folder ->
-				new UploadDirectoryWorker(controller,
-						new FolderProgressMediator(folder, getFolderImage(getFolderTile(folder)))
-				).restart()));
+		uploadFolderListWorker.setOnSucceeded(event -> {
+			List<FolderProgressMediator> mediators = controller.getSyncList().stream()
+					.map(folder -> new FolderProgressMediator(folder, getFolderImage(getFolderTile(folder))))
+					.collect(Collectors.toList());
+			new UploadDirectoryWorker(controller, mediators).restart();
+		});
 		uploadFolderListWorker.restart();
 	}
 

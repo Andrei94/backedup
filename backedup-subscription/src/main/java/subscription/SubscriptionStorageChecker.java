@@ -5,12 +5,17 @@ import adapters.JsonSerializer;
 import com.google.gson.Gson;
 import okhttp3.OkHttpClient;
 
+import java.util.concurrent.TimeUnit;
+
 public class SubscriptionStorageChecker implements SubscriptionChecker {
 	private JsonSerializer jsonSerializer;
 	private HttpClient httpClient;
 
 	public SubscriptionStorageChecker() {
-		this(new JsonSerializer(new Gson()), new HttpClient(new OkHttpClient()));
+		this(new JsonSerializer(new Gson()), new HttpClient(new OkHttpClient.Builder()
+				.readTimeout(30, TimeUnit.SECONDS)
+				.connectTimeout(30, TimeUnit.SECONDS)
+				.build()));
 	}
 
 	public SubscriptionStorageChecker(JsonSerializer jsonSerializer, HttpClient httpClient) {
