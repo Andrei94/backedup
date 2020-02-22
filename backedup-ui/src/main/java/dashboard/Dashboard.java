@@ -21,6 +21,9 @@ public class Dashboard implements WindowPayload<LoginPayloadDashboard> {
 	public void uploadFolders(MouseEvent mouseEvent) {
 		controller.saveFolders();
 		UploadFolderListWorker uploadFolderListWorker = new UploadFolderListWorker(controller);
+		uploadFolderListWorker.setOnRunning(event ->
+				controller.getSyncList().forEach(folder ->
+						new FolderProgressMediator(folder, getFolderImage(getFolderTile(folder))).update(controller.getWIPImageUrl())));
 		uploadFolderListWorker.setOnSucceeded(event -> controller.getSyncList().forEach(folder ->
 				new UploadDirectoryWorker(controller,
 						new FolderProgressMediator(folder, getFolderImage(getFolderTile(folder)))
