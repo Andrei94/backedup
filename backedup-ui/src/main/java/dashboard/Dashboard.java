@@ -53,6 +53,7 @@ public class Dashboard implements WindowPayload<LoginPayloadDashboard> {
 		controller = new DashboardController(payload.getLoggedInUser());
 		controller.setLoggedInUser(payload.getLoggedInUser());
 		controller.setDriveGateway(payload.getDriveGateway());
+		controller.setObjectDownloader(payload.getObjectDownloader());
 		loggedInUsername.setText(controller.getLoggedInText(payload.getLoggedInUser().getName()));
 		addContents(getFolderImage());
 		cleanupOnWindowClose();

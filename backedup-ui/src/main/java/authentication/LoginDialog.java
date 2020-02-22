@@ -30,7 +30,7 @@ public class LoginDialog {
 		LoginFeedback l = loginWorker.getValue();
 		if(l.isSuccessfulLogin()) {
 			close(new ActionEvent());
-			WindowOpener.openWindow("/dashboard.fxml", new LoginPayloadDashboard(controller.getUser(), l.getDriveGateway()));
+			WindowOpener.openWindow("/dashboard.fxml", new LoginPayloadDashboard(controller.getUser(), l.getDriveGateway(), l.getObjectDownloader()));
 		}
 		else {
 			loginResult.setText(l.getText());

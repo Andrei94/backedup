@@ -5,11 +5,13 @@ import authentication.User;
 import file.LocalFile;
 import org.apache.commons.io.FileUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class S3ObjectDownloader implements ObjectDownloader {
@@ -76,5 +78,27 @@ public class S3ObjectDownloader implements ObjectDownloader {
 	@Override
 	public void shutdown() {
 		adapter.shutdownTransferManager();
+	}
+
+	@Override
+	public void downloadFolderList() {
+		if(user == null || !user.isAuthenticated())
+			return;
+		String folderListFile = "list.txt";
+		logger.info("Downloading " + folderListFile);
+		Optional<LocalFile> downloadedFile = adapter.downloadFile(user.getName() + "/" + folderListFile);
+		if(downloadedFile.isPresent()) {
+			moveDownloadedListFile(folderListFile, downloadedFile.get());
+			logger.info("Finished downloading list.txt to " + downloadedFile.get().getPath());
+		}
+	}
+
+	private void moveDownloadedListFile(String folderListFile, LocalFile downloadedFile) {
+		try {
+			FileUtils.moveFile(downloadedFile.toFile(), new File(folderListFile));
+			FileUtils.deleteDirectory(downloadedFile.toFile());
+		} catch(IOException e) {
+			logger.log(Level.WARNING, "Failed to download list.txt", e);
+		}
 	}
 }

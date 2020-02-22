@@ -21,4 +21,8 @@ public class S3DownloaderMock implements ObjectDownloader {
 	public void shutdown() {
 		shutdownCalled = true;
 	}
+
+	@Override
+	public void downloadFolderList() {
+	}
 }

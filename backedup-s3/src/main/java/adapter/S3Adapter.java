@@ -90,4 +90,15 @@ public class S3Adapter {
 				.withRegion(Regions.EU_CENTRAL_1)
 				.build()).build();
 	}
+
+	public Optional<LocalFile> downloadFile(String file) {
+		File outputFile = new File(file);
+		try {
+			transferManager.download("backedup-storage-2", file, outputFile).waitForCompletion();
+			return Optional.of(LocalFile.fromFile(outputFile));
+		} catch(InterruptedException e) {
+			logger.log(Level.SEVERE, "An error occurred while downloading", e);
+			return Optional.empty();
+		}
+	}
 }

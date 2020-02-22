@@ -153,4 +153,10 @@ class DashboardController {
 		uploader.setLoggedInUser(loggedInUser);
 		return uploader.uploadFile(Paths.get("list.txt"));
 	}
+
+	public void setObjectDownloader(ObjectDownloader objectDownloader) {
+		if(downloader != null)
+			downloader.shutdown();
+		downloader = objectDownloader;
+	}
 }

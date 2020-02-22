@@ -22,6 +22,11 @@ class S3UploaderMock implements ObjectUploader {
 		this.loggedInUser = user;
 	}
 
+	@Override
+	public boolean uploadFile(Path file) {
+		return false;
+	}
+
 	int getTimesUploadDirectoryCalled() {
 		return timesUploadDirectoryCalled;
 	}

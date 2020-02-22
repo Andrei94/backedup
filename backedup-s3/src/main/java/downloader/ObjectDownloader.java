@@ -8,4 +8,6 @@ public interface ObjectDownloader {
 	void setLoggedInUser(User user);
 
 	void shutdown();
+
+	void downloadFolderList();
 }
