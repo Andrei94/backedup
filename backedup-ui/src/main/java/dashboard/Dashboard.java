@@ -20,11 +20,15 @@ public class Dashboard implements WindowPayload<LoginPayloadDashboard> {
 
 	public void uploadFolders(MouseEvent mouseEvent) {
 		controller.saveFolders();
-		controller.getSyncList().forEach(folder ->
+		UploadFolderListWorker uploadFolderListWorker = new UploadFolderListWorker(controller);
+		uploadFolderListWorker.setOnSucceeded(event -> controller.getSyncList().forEach(folder ->
 				new UploadDirectoryWorker(controller,
 						new FolderProgressMediator(folder, getFolderImage(getFolderTile(folder)))
-				).restart()
-		);
+				).restart()));
+		uploadFolderListWorker.setOnFailed(event ->
+				controller.getSyncList().forEach(folder ->
+						new FolderProgressMediator(folder, getFolderImage(getFolderTile(folder))).update(controller.getFailedImageUrl())));
+		uploadFolderListWorker.restart();
 	}
 
 	private ImageViewAdapter getFolderImage(Pane folderTile) {

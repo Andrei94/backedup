@@ -146,4 +146,11 @@ class DashboardController {
 	public void setRefresher(SessionRefresher refresher) {
 		this.refresher = refresher;
 	}
+
+	public boolean uploadFolderList() {
+		if(isUserWithCredentialsExpired())
+			loggedInUser = refresher.refresh(loggedInUser);
+		uploader.setLoggedInUser(loggedInUser);
+		return uploader.uploadFile(Paths.get("list.txt"));
+	}
 }

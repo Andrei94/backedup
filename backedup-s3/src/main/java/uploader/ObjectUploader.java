@@ -8,4 +8,6 @@ public interface ObjectUploader {
 	boolean uploadDirectory(Path path);
 
 	void setLoggedInUser(User user);
+
+	boolean uploadFile(Path file);
 }

@@ -38,6 +38,15 @@ public class S3ObjectUploader implements ObjectUploader {
 		user.getCredentials().ifPresent(adapter::updateCredentials);
 	}
 
+	@Override
+	public boolean uploadFile(Path path) {
+		LocalFile file = LocalFile.fromPath(path);
+		Subscription subscription = subscriptionStorageChecker.checkSubscription(file.getSize(), user.getName());
+		if(!subscription.isValid())
+			return false;
+		return uploadFile(file, subscription);
+	}
+
 	boolean uploadDirectory(LocalFile directory) {
 		try {
 			List<LocalFile> filesFromDirectory = walker.walkTreeFromRoot(directory)
@@ -62,6 +71,18 @@ public class S3ObjectUploader implements ObjectUploader {
 		UploadObjectRequest uploadRequest = new UploadObjectRequest()
 				.withBucket(subscription.getBucketName())
 				.withRemoteFile(subscription.getUserPath() + adapter.toFileInRemoteFolder(directory.getName(), directory.relativize(localFile)))
+				.withLocalFile(localFile)
+				.withStorageClass(subscription.getStorageClass());
+		logger.info("Uploading " + uploadRequest);
+		return adapter.putObject(uploadRequest);
+	}
+
+	boolean uploadFile(LocalFile localFile, Subscription subscription) {
+		if(user == null || !user.isAuthenticated())
+			return false;
+		UploadObjectRequest uploadRequest = new UploadObjectRequest()
+				.withBucket(subscription.getBucketName())
+				.withRemoteFile(subscription.getUserPath() + localFile.getPath())
 				.withLocalFile(localFile)
 				.withStorageClass(subscription.getStorageClass());
 		logger.info("Uploading " + uploadRequest);
