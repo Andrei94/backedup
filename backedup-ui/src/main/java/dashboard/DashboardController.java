@@ -155,8 +155,9 @@ class DashboardController {
 	}
 
 	public void setObjectDownloader(ObjectDownloader objectDownloader) {
-		if(downloader != null)
+		if(objectDownloader != null) {
 			downloader.shutdown();
-		downloader = objectDownloader;
+			downloader = objectDownloader;
+		}
 	}
 }
