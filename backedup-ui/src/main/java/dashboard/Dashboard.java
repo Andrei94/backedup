@@ -21,17 +21,26 @@ public class Dashboard implements WindowPayload<LoginPayloadDashboard> {
 	public void uploadFolders(MouseEvent mouseEvent) {
 		controller.saveFolders();
 		UploadFolderListWorker uploadFolderListWorker = new UploadFolderListWorker(controller);
-		uploadFolderListWorker.setOnRunning(event ->
-				controller.getSyncList().forEach(folder ->
-						new FolderProgressMediator(folder, getFolderImage(getFolderTile(folder))).update(controller.getWIPImageUrl())));
+		uploadFolderListWorker.setOnRunning(event -> setImageForFolder(controller.getWIPImageUrl()));
+		uploadFolderListWorker.setOnFailed(event -> setImageForFolder(controller.getFailedImageUrl()));
 		uploadFolderListWorker.setOnSucceeded(event -> controller.getSyncList().forEach(folder ->
 				new UploadDirectoryWorker(controller,
 						new FolderProgressMediator(folder, getFolderImage(getFolderTile(folder)))
 				).restart()));
-		uploadFolderListWorker.setOnFailed(event ->
-				controller.getSyncList().forEach(folder ->
-						new FolderProgressMediator(folder, getFolderImage(getFolderTile(folder))).update(controller.getFailedImageUrl())));
 		uploadFolderListWorker.restart();
+	}
+
+	private void setImageForFolder(String imageUrl) {
+		controller.getSyncList().forEach(folder ->
+				new FolderProgressMediator(folder, getFolderImage(getFolderTile(folder))).update(imageUrl));
+	}
+
+	public void downloadFolders(MouseEvent mouseEvent) {
+		controller.getSyncList().forEach(folder ->
+				new DownloadDirectoryWorker(controller,
+						new FolderProgressMediator(folder, getFolderImage(getFolderTile(folder)))
+				).restart()
+		);
 	}
 
 	private ImageViewAdapter getFolderImage(Pane folderTile) {
@@ -41,14 +50,6 @@ public class Dashboard implements WindowPayload<LoginPayloadDashboard> {
 	private Pane getFolderTile(Folder folder) {
 		int index = controller.getSyncList().indexOf(folder);
 		return (Pane) foldersToSync.getChildren().get(index);
-	}
-
-	public void downloadFolders(MouseEvent mouseEvent) {
-		controller.getSyncList().forEach(folder ->
-				new DownloadDirectoryWorker(controller,
-						new FolderProgressMediator(folder, getFolderImage(getFolderTile(folder)))
-				).restart()
-		);
 	}
 
 	@Override
