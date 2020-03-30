@@ -22,6 +22,7 @@ class LoginController {
 		user = authenticator.authenticate(username, password);
 		if(user.isAuthenticated()) {
 			DriveGateway gateway = new DriveGateway();
+			gateway.createRemoteDrive(username);
 			gateway.mount(username, password);
 			if(!new File("list.txt").exists()) {
 				ObjectDownloader objectDownloader = ObjectDownloaderFactory.createObjectDownloader(user);
