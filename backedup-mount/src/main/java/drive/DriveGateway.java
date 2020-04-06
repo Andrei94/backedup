@@ -24,15 +24,19 @@ public class DriveGateway {
 		this.httpClient = httpClient;
 	}
 
-	public void createRemoteDrive(String user) {
+	public void mountRemoteDrive(String username) {
+		mount(username, createRemoteDrive(username));
+	}
+
+	public String createRemoteDrive(String user) {
 		logger.log(Level.INFO, "Creating remote drive for user " + user);
-		httpClient.makePutRequest("http://192.168.232.128:8080/volume/" + user, "");
+		return httpClient.makePutRequest("http://35.158.140.9:8080/volume/" + user, "").split(" ")[1];
 	}
 
 	public void mount(String username, String password) {
 		mount(new MountArguments(
 				"D:\\Programming\\Win-SSHFS\\Sshfs\\Sshfs\\bin\\Release\\WinSshFS.exe",
-				"192.168.232.128",
+				"35.158.140.9",
 				"22",
 				username,
 				"files",

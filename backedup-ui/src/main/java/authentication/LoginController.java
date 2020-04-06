@@ -7,30 +7,30 @@ import drive.DriveGateway;
 import java.io.File;
 
 class LoginController {
+	private DriveGateway driveGateway;
 	private Authenticator authenticator;
 	private User user;
 
 	LoginController() {
-		this(new CognitoAuthenticator());
+		this(new CognitoAuthenticator(), new DriveGateway());
 	}
 
-	LoginController(Authenticator authenticator) {
+	LoginController(Authenticator authenticator, DriveGateway driveGateway) {
 		this.authenticator = authenticator;
+		this.driveGateway = driveGateway;
 	}
 
 	LoginFeedback authenticate(String username, String password) {
 		user = authenticator.authenticate(username, password);
 		if(user.isAuthenticated()) {
-			DriveGateway gateway = new DriveGateway();
-			gateway.createRemoteDrive(username);
-			gateway.mount(username, password);
+			driveGateway.mountRemoteDrive(username);
 			if(!new File("list.txt").exists()) {
 				ObjectDownloader objectDownloader = ObjectDownloaderFactory.createObjectDownloader(user);
 				objectDownloader.setLoggedInUser(user);
 				objectDownloader.downloadFolderList();
-				return LoginFeedback.createSuccessfulLoginFeedback(gateway, objectDownloader);
+				return LoginFeedback.createSuccessfulLoginFeedback(driveGateway, objectDownloader);
 			}
-			return LoginFeedback.createSuccessfulLoginFeedback(gateway);
+			return LoginFeedback.createSuccessfulLoginFeedback(driveGateway);
 		} else {
 			return LoginFeedback.createIncorrectCredentialsFeedback();
 		}
