@@ -1,6 +1,8 @@
 package drive;
 
+import com.google.gson.Gson;
 import drive.adapters.HttpClient;
+import drive.adapters.JsonSerializer;
 import okhttp3.OkHttpClient;
 
 import java.io.IOException;
@@ -12,31 +14,37 @@ public class DriveGateway {
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	private Process winsshfs;
 	private HttpClient httpClient;
+	private JsonSerializer jsonSerializer;
 
 	public DriveGateway() {
-		this(new HttpClient(new OkHttpClient.Builder()
-				.readTimeout(30, TimeUnit.SECONDS)
-				.connectTimeout(30, TimeUnit.SECONDS)
+		this(new JsonSerializer(new Gson()), new HttpClient(new OkHttpClient.Builder()
+				.readTimeout(1, TimeUnit.MINUTES)
+				.connectTimeout(1, TimeUnit.MINUTES)
 				.build()));
 	}
 
-	public DriveGateway(HttpClient httpClient) {
+	public DriveGateway(JsonSerializer jsonSerializer, HttpClient httpClient) {
+		this.jsonSerializer = jsonSerializer;
 		this.httpClient = httpClient;
 	}
 
 	public void mountRemoteDrive(String username) {
-		mount(username, createRemoteDrive(username));
+		CreateUserDriveResponse remoteDrive = createRemoteDrive(username);
+		mount(username, remoteDrive.getToken(), remoteDrive.getIp());
 	}
 
-	public String createRemoteDrive(String user) {
+	private CreateUserDriveResponse createRemoteDrive(String user) {
 		logger.log(Level.INFO, "Creating remote drive for user " + user);
-		return httpClient.makePutRequest("http://35.158.140.9:8080/volume/" + user, "").split(" ")[1];
+		return jsonSerializer.fromJson(
+				httpClient.makePutRequest("https://i9bdhatjq3.execute-api.eu-central-1.amazonaws.com/test/volume", jsonSerializer.toJson(new CreateUserDriveRequest(user))),
+				CreateUserDriveResponse.class
+		);
 	}
 
-	public void mount(String username, String password) {
+	private void mount(String username, String password, String ip) {
 		mount(new MountArguments(
 				"D:\\Programming\\Win-SSHFS\\Sshfs\\Sshfs\\bin\\Release\\WinSshFS.exe",
-				"35.158.140.9",
+				ip,
 				"22",
 				username,
 				"files",
