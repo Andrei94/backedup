@@ -212,10 +212,6 @@ class DashboardControllerTest {
 		controller = getControllerForDownload(downloader);
 		controller.setDriveGateway(new DriveGateway() {
 			@Override
-			public void mount(String username, String password) {
-			}
-
-			@Override
 			public void unmount() {
 			}
 		});

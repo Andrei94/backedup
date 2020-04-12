@@ -18,8 +18,8 @@ public class DriveGateway {
 
 	public DriveGateway() {
 		this(new JsonSerializer(new Gson()), new HttpClient(new OkHttpClient.Builder()
-				.readTimeout(1, TimeUnit.MINUTES)
-				.connectTimeout(1, TimeUnit.MINUTES)
+				.readTimeout(30, TimeUnit.SECONDS)
+				.connectTimeout(30, TimeUnit.SECONDS)
 				.build()));
 	}
 
@@ -35,10 +35,25 @@ public class DriveGateway {
 
 	private CreateUserDriveResponse createRemoteDrive(String user) {
 		logger.log(Level.INFO, "Creating remote drive for user " + user);
-		return jsonSerializer.fromJson(
-				httpClient.makePutRequest("https://i9bdhatjq3.execute-api.eu-central-1.amazonaws.com/test/volume", jsonSerializer.toJson(new CreateUserDriveRequest(user))),
-				CreateUserDriveResponse.class
+		logger.log(Level.INFO, "Creating user " + user);
+		CreateUserResponse createUserResponse = jsonSerializer.fromJson(
+				httpClient.makePutRequest("https://i9bdhatjq3.execute-api.eu-central-1.amazonaws.com/test/volume/createuser", jsonSerializer.toJson(new CreateUserDriveRequest(user))),
+				CreateUserResponse.class
 		);
+		if(!createUserResponse.getToken().isEmpty()) {
+			logger.log(Level.INFO, "User " + user + " created");
+			logger.log(Level.INFO, "Creating remote drive" + user);
+			CreateUserDriveResponse createUserDriveResponse = jsonSerializer.fromJson(
+					httpClient.makePutRequest("https://i9bdhatjq3.execute-api.eu-central-1.amazonaws.com/test/volume", jsonSerializer.toJson(new CreateUserDriveRequest(user))),
+					CreateUserDriveResponse.class
+			);
+			logger.log(Level.INFO, "Remote drive created");
+			return createUserDriveResponse;
+		}
+		else {
+			logger.log(Level.WARNING, "Failed to create user " + user);
+			throw new RuntimeException();
+		}
 	}
 
 	private void mount(String username, String password, String ip) {
