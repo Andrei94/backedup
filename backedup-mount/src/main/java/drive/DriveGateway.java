@@ -6,7 +6,7 @@ import drive.adapters.JsonSerializer;
 import okhttp3.OkHttpClient;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
@@ -64,7 +64,13 @@ public class DriveGateway {
 	private String sha512(String text) {
 		try {
 			MessageDigest digest = MessageDigest.getInstance("SHA-512");
-			return new String(digest.digest(text.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
+			byte[] messageDigest = digest.digest(text.getBytes());
+			BigInteger no = new BigInteger(1, messageDigest);
+			StringBuilder hashText = new StringBuilder(no.toString(16));
+			while(hashText.length() < 32) {
+				hashText.insert(0, "0");
+			}
+			return hashText.toString();
 		} catch(NoSuchAlgorithmException e) {
 			logger.log(Level.WARNING, "Failed to initialize hash algorithm");
 		}
