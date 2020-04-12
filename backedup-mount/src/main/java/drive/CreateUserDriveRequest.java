@@ -2,9 +2,11 @@ package drive;
 
 public class CreateUserDriveRequest {
 	private String username;
+	private String token;
 
-	public CreateUserDriveRequest(String username) {
+	public CreateUserDriveRequest(String username, String token) {
 		this.username = username;
+		this.token = token;
 	}
 
 	public String getUsername() {
@@ -13,5 +15,13 @@ public class CreateUserDriveRequest {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 }

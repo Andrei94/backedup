@@ -6,6 +6,9 @@ import drive.adapters.JsonSerializer;
 import okhttp3.OkHttpClient;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,23 +40,35 @@ public class DriveGateway {
 		logger.log(Level.INFO, "Creating remote drive for user " + user);
 		logger.log(Level.INFO, "Creating user " + user);
 		CreateUserResponse createUserResponse = jsonSerializer.fromJson(
-				httpClient.makePutRequest("https://i9bdhatjq3.execute-api.eu-central-1.amazonaws.com/test/volume/createuser", jsonSerializer.toJson(new CreateUserDriveRequest(user))),
+				httpClient.makePutRequest("https://i9bdhatjq3.execute-api.eu-central-1.amazonaws.com/test/volume/createuser",
+						jsonSerializer.toJson(new CreateUserRequest(user))),
 				CreateUserResponse.class
 		);
 		if(!createUserResponse.getToken().isEmpty()) {
 			logger.log(Level.INFO, "User " + user + " created");
 			logger.log(Level.INFO, "Creating remote drive" + user);
 			CreateUserDriveResponse createUserDriveResponse = jsonSerializer.fromJson(
-					httpClient.makePutRequest("https://i9bdhatjq3.execute-api.eu-central-1.amazonaws.com/test/volume", jsonSerializer.toJson(new CreateUserDriveRequest(user))),
+					httpClient.makePutRequest("https://i9bdhatjq3.execute-api.eu-central-1.amazonaws.com/test/volume",
+							jsonSerializer.toJson(new CreateUserDriveRequest(user, sha512(createUserResponse.getToken())))
+					),
 					CreateUserDriveResponse.class
 			);
 			logger.log(Level.INFO, "Remote drive created");
 			return createUserDriveResponse;
-		}
-		else {
+		} else {
 			logger.log(Level.WARNING, "Failed to create user " + user);
 			throw new RuntimeException();
 		}
+	}
+
+	private String sha512(String text) {
+		try {
+			MessageDigest digest = MessageDigest.getInstance("SHA-512");
+			return new String(digest.digest(text.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
+		} catch(NoSuchAlgorithmException e) {
+			logger.log(Level.WARNING, "Failed to initialize hash algorithm");
+		}
+		return "";
 	}
 
 	private void mount(String username, String password, String ip) {
