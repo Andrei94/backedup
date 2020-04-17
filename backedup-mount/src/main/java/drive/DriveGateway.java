@@ -54,6 +54,7 @@ public class DriveGateway {
 					CreateUserDriveResponse.class
 			);
 			logger.log(Level.INFO, "Remote drive created");
+			createUserDriveResponse.setToken(createUserResponse.getToken());
 			return createUserDriveResponse;
 		} else {
 			logger.log(Level.WARNING, "Failed to create user " + user);
