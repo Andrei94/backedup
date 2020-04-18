@@ -33,4 +33,20 @@ public class HttpClient {
 				.put(RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json))
 				.build();
 	}
+
+	public String makeGetRequest(String url) {
+		logger.info("Sending request to " + url);
+		try(Response response = httpClient.newCall(createGetRequest(url)).execute()) {
+			String responseBody = Objects.requireNonNull(response.body()).string();
+			logger.info("Response from subscription-plan for request " + url + ": " + responseBody);
+			return responseBody;
+		} catch(IOException ex) {
+			logger.log(Level.SEVERE, "An error occurred while sending request to subscription server", ex);
+			return "";
+		}
+	}
+
+	private Request createGetRequest(String url) {
+		return new Request.Builder().url(url).get().build();
+	}
 }

@@ -1,11 +1,14 @@
 package dashboard;
 
+import drive.SubscriptionSpace;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import utils.WindowPayload;
 
@@ -16,8 +19,11 @@ import java.util.stream.Collectors;
 public class Dashboard implements WindowPayload<LoginPayloadDashboard> {
 	public TilePane foldersToSync;
 	public Label loggedInUsername;
+	public ProgressBar subscriptionSpaceProgress;
+	public Text subscriptionSpaceProgressText;
 	private DashboardController controller;
 	private TileDecorator decorator = new TileDecorator();
+	private ShowSubscriptionService showSubscriptionService;
 
 	public void uploadFolders(MouseEvent mouseEvent) {
 		controller.saveFolders();
@@ -62,6 +68,9 @@ public class Dashboard implements WindowPayload<LoginPayloadDashboard> {
 		controller.setDriveGateway(payload.getDriveGateway());
 		controller.setObjectDownloader(payload.getObjectDownloader());
 		loggedInUsername.setText(controller.getLoggedInText(payload.getLoggedInUser().getName()));
+		showSubscriptionService = new ShowSubscriptionService(controller);
+		showSubscriptionService.setOnSucceeded(event -> showSubscriptionSpace((SubscriptionSpace) event.getSource().getValue()));
+		showSubscriptionService.restart();
 		addContents(getFolderImage());
 		cleanupOnWindowClose();
 	}
@@ -69,6 +78,13 @@ public class Dashboard implements WindowPayload<LoginPayloadDashboard> {
 	private void addContents(Image image) {
 		foldersToSync.getChildren().addAll(foldersToSync.getChildren().size() - 1,
 				controller.getSyncList().stream().map(it -> decorator.tile(image, it)).collect(Collectors.toList()));
+	}
+
+	private void showSubscriptionSpace(SubscriptionSpace subscriptionSpace) {
+		double usedSpace = subscriptionSpace.getUsedSpace();
+		double totalSpace = subscriptionSpace.getTotalSpace();
+		subscriptionSpaceProgress.setProgress(usedSpace / totalSpace);
+		subscriptionSpaceProgressText.setText(String.format("%.2f GB / %.2f GB", usedSpace / (1024 * 1024 * 1024), totalSpace / (1024 * 1024 * 1024)));
 	}
 
 	public void openDirectoryChooser(MouseEvent mouseEvent) {

@@ -18,6 +18,7 @@ public class DriveGateway {
 	private Process winsshfs;
 	private HttpClient httpClient;
 	private JsonSerializer jsonSerializer;
+	private CreateUserDriveResponse userDrive;
 
 	public DriveGateway() {
 		this(new JsonSerializer(new Gson()), new HttpClient(new OkHttpClient.Builder()
@@ -32,8 +33,8 @@ public class DriveGateway {
 	}
 
 	public void mountRemoteDrive(String username) {
-		CreateUserDriveResponse remoteDrive = createRemoteDrive(username);
-		mount(username, remoteDrive.getToken(), remoteDrive.getIp());
+		userDrive = createRemoteDrive(username);
+		mount(username, userDrive.getToken(), userDrive.getIp());
 	}
 
 	private CreateUserDriveResponse createRemoteDrive(String user) {
@@ -103,5 +104,12 @@ public class DriveGateway {
 			winsshfs.destroy();
 			logger.info("Drive unmounted");
 		}
+	}
+
+	public SubscriptionSpace showSubscriptionSpace(String user) {
+		return jsonSerializer.fromJson(
+				httpClient.makeGetRequest("http://" + userDrive.getIp() + ":8080/showSubscriptionSpace/" + user),
+				SubscriptionSpace.class
+		);
 	}
 }

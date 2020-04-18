@@ -4,6 +4,7 @@ import authentication.User;
 import downloader.ObjectDownloader;
 import downloader.ObjectDownloaderFactory;
 import drive.DriveGateway;
+import drive.SubscriptionSpace;
 import sessionRefresher.AssumedRoleRefresher;
 import sessionRefresher.SessionRefresher;
 import uploader.ObjectUploader;
@@ -159,5 +160,9 @@ class DashboardController {
 			downloader.shutdown();
 			downloader = objectDownloader;
 		}
+	}
+
+	public SubscriptionSpace showSubscriptionSpace() {
+		return driveGateway.showSubscriptionSpace(loggedInUser.getName());
 	}
 }
