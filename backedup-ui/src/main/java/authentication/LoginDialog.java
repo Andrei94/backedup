@@ -14,7 +14,7 @@ public class LoginDialog {
 	public PasswordField password;
 	public ProgressIndicator loginIndicator;
 	public Text loginResult;
-
+	public Text loginProgress;
 	private LoginController controller = new LoginController();
 	private LoginWorker loginWorker = new LoginWorker(controller);
 
@@ -22,8 +22,15 @@ public class LoginDialog {
 		loginWorker = loginWorker.bindUsername(username.textProperty())
 				.bindPassword(password.textProperty());
 		loginIndicator.visibleProperty().bind(loginWorker.runningProperty());
+		loginProgress.visibleProperty().bind(loginWorker.runningProperty());
+		loginWorker.setOnRunning(event -> showWIP());
 		loginWorker.setOnSucceeded(event -> showLoginCallFeedback());
 		loginWorker.restart();
+	}
+
+	private void showWIP() {
+		loginResult.setVisible(false);
+		loginProgress.setText("Logging you in and preparing drive. This might take a while. Please wait...");
 	}
 
 	private void showLoginCallFeedback() {
@@ -33,6 +40,7 @@ public class LoginDialog {
 			WindowOpener.openWindow("/dashboard.fxml", new LoginPayloadDashboard(controller.getUser(), l.getDriveGateway(), l.getObjectDownloader()));
 		}
 		else {
+			loginResult.setVisible(true);
 			loginResult.setText(l.getText());
 			loginResult.setFill(l.getColor());
 		}
