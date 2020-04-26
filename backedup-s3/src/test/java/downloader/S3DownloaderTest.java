@@ -63,13 +63,13 @@ class S3DownloaderTest {
 		objectDownloader = new S3ObjectDownloader(new S3AdapterStub()) {
 			@Override
 			void moveFolder(Path src, Path dst) {
-				assertEquals("D:\\username\\testFolder", src.toString());
+				assertEquals("D:\\username\\My Local PC\\testFolder", src.toString());
 				assertEquals("D:\\testFolder", dst.toString());
 			}
 
 			@Override
 			void deleteFolder(Path localDownloadDirectory) {
-				assertEquals("D:\\username", localDownloadDirectory.toString());
+				assertEquals("D:\\username\\My Local PC", localDownloadDirectory.toString());
 			}
 		};
 		objectDownloader.setLoggedInUser(createAuthenticatedUser());

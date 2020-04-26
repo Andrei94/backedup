@@ -32,7 +32,7 @@ public class S3ObjectDownloader implements ObjectDownloader {
 		if(user == null || !user.isAuthenticated())
 			return false;
 		logger.info("Downloading " + remoteDir + " to " + getDestination(remoteDir, localDir));
-		Optional<LocalFile> isDownloadSuccessful = adapter.downloadDirectory(user.getName() + "/" + remoteDir, localDir.getPath());
+		Optional<LocalFile> isDownloadSuccessful = adapter.downloadDirectory(user.getName() + "/My Local PC/" + remoteDir, localDir.getPath());
 		if(isDownloadSuccessful.isPresent()) {
 			moveDownloadedFolder(remoteDir, localDir);
 			logger.info("Finished downloading " + remoteDir + " to " + getDestination(remoteDir, localDir));
@@ -62,7 +62,7 @@ public class S3ObjectDownloader implements ObjectDownloader {
 	}
 
 	Path getLocalDownloadDirectory(String remoteDirName, LocalFile localDir) {
-		return Paths.get(localDir.getPath() + "/" + user.getName() + "/" + remoteDirName);
+		return Paths.get(localDir.getPath() + "/" + user.getName() + "/My Local PC/" + remoteDirName);
 	}
 
 	Path getDestination(String remoteDir, LocalFile localDir) {
