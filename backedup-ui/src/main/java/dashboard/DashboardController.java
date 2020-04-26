@@ -115,6 +115,7 @@ class DashboardController {
 		if(isUserWithCredentialsExpired())
 			loggedInUser = refresher.refresh(loggedInUser);
 		uploader.setLoggedInUser(loggedInUser);
+		uploader.setHost(driveGateway.getIp());
 		return uploader.uploadDirectory(folder.path);
 	}
 
@@ -152,6 +153,7 @@ class DashboardController {
 		if(isUserWithCredentialsExpired())
 			loggedInUser = refresher.refresh(loggedInUser);
 		uploader.setLoggedInUser(loggedInUser);
+		uploader.setHost(driveGateway.getIp());
 		return uploader.uploadFile(Paths.get("list.txt"));
 	}
 

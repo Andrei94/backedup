@@ -47,6 +47,11 @@ public class S3ObjectUploader implements ObjectUploader {
 		return uploadFile(file, subscription);
 	}
 
+	@Override
+	public void setHost(String host) {
+		subscriptionStorageChecker.setHost(host);
+	}
+
 	boolean uploadDirectory(LocalFile directory) {
 		try {
 			List<LocalFile> filesFromDirectory = walker.walkTreeFromRoot(directory)

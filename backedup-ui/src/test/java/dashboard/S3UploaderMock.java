@@ -8,6 +8,7 @@ import java.nio.file.Path;
 class S3UploaderMock implements ObjectUploader {
 	private int timesUploadDirectoryCalled = 0;
 	private User loggedInUser;
+	private String host;
 
 	@Override
 	public boolean uploadDirectory(Path directory) {
@@ -25,6 +26,11 @@ class S3UploaderMock implements ObjectUploader {
 	@Override
 	public boolean uploadFile(Path file) {
 		return false;
+	}
+
+	@Override
+	public void setHost(String host) {
+		this.host = host;
 	}
 
 	int getTimesUploadDirectoryCalled() {

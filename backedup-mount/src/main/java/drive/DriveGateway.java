@@ -112,4 +112,8 @@ public class DriveGateway {
 				SubscriptionSpace.class
 		);
 	}
+
+	public String getIp() {
+		return userDrive.getIp();
+	}
 }

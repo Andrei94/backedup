@@ -138,6 +138,7 @@ class DashboardControllerTest {
 		S3UploaderMock uploader = new S3UploaderMock();
 		controller = getControllerForUpload(uploader, new FolderSaver());
 		controller.setLoggedInUser(createAuthenticatedUser());
+		controller.setDriveGateway(new DriveGatewayMock());
 		controller.upload(Folder.createFolder("/home/directory"));
 		controller.upload(Folder.createFolder("/home/directory2"));
 		assertEquals(2, uploader.getTimesUploadDirectoryCalled());
@@ -147,6 +148,7 @@ class DashboardControllerTest {
 	void skipUploadWhenUserNotLoggedIn() {
 		S3UploaderMock uploader = new S3UploaderMock();
 		controller = getControllerForUpload(uploader, new FolderSaver());
+		controller.setDriveGateway(new DriveGatewayUserNotLoggedIn());
 		controller.upload(Folder.createFolder("/home/directory"));
 		assertEquals(0, uploader.getTimesUploadDirectoryCalled());
 	}
@@ -156,6 +158,7 @@ class DashboardControllerTest {
 		S3UploaderMock uploader = new S3UploaderMock();
 		controller = getControllerForUpload(uploader, new FolderSaver());
 		controller.setLoggedInUser(createUserWithExpiredCredentials());
+		controller.setDriveGateway(new DriveGatewayMock());
 		controller.setRefresher(refreshToken -> createUserWithExpiredCredentials());
 		controller.upload(Folder.createFolder("/home/directory"));
 		assertEquals(0, uploader.getTimesUploadDirectoryCalled());
@@ -166,6 +169,7 @@ class DashboardControllerTest {
 		S3UploaderMock uploader = new S3UploaderMock();
 		controller = getControllerForUpload(uploader, new FolderSaver());
 		controller.setLoggedInUser(createUserWithExpiredCredentials());
+		controller.setDriveGateway(new DriveGatewayMock());
 		controller.setRefresher(refreshToken -> createAuthenticatedUser());
 		controller.upload(Folder.createFolder("/home/directory"));
 		assertEquals(1, uploader.getTimesUploadDirectoryCalled());

@@ -10,4 +10,6 @@ public interface ObjectUploader {
 	void setLoggedInUser(User user);
 
 	boolean uploadFile(Path file);
+
+	void setHost(String host);
 }

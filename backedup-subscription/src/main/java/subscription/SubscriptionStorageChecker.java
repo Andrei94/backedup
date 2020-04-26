@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 public class SubscriptionStorageChecker implements SubscriptionChecker {
 	private JsonSerializer jsonSerializer;
 	private HttpClient httpClient;
+	private String host;
 
 	public SubscriptionStorageChecker() {
 		this(new JsonSerializer(new Gson()), new HttpClient(new OkHttpClient.Builder()
@@ -28,8 +29,13 @@ public class SubscriptionStorageChecker implements SubscriptionChecker {
 		return getUserSubscription(new SubscriptionRequest(usedSize, username));
 	}
 
+	@Override
+	public void setHost(String host) {
+		this.host = host;
+	}
+
 	private Subscription getUserSubscription(SubscriptionRequest requestJson) {
-		String responseBody = httpClient.makePutRequest("http://192.168.232.128:8080/checkStorage", jsonSerializer.toJson(requestJson));
+		String responseBody = httpClient.makePutRequest("http://" + host + ":8080/checkStorage", jsonSerializer.toJson(requestJson));
 		try {
 			return jsonSerializer.fromJson(responseBody, Subscription.class);
 		} catch(ClassCastException ex) {
