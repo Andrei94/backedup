@@ -108,7 +108,7 @@ public class DriveGateway {
 
 	public SubscriptionSpace showSubscriptionSpace(String user) {
 		return jsonSerializer.fromJson(
-				httpClient.makeGetRequest("http://" + userDrive.getIp() + ":8080/showSubscriptionSpace/" + user),
+				httpClient.makeGetRequest("https://" + userDrive.getIp() + ":8443/showSubscriptionSpace/" + user),
 				SubscriptionSpace.class
 		);
 	}
