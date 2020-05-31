@@ -14,10 +14,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DriveGateway {
-	private Logger logger = Logger.getLogger(this.getClass().getName());
+	private final Logger logger = Logger.getLogger(this.getClass().getName());
 	private Process winsshfs;
-	private HttpClient httpClient;
-	private JsonSerializer jsonSerializer;
+	private final HttpClient httpClient;
+	private final JsonSerializer jsonSerializer;
 	private CreateUserDriveResponse userDrive;
 
 	public DriveGateway() {

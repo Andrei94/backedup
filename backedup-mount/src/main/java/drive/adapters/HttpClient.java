@@ -8,8 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class HttpClient {
-	private Logger logger = Logger.getLogger(this.getClass().getName());
-	private OkHttpClient httpClient;
+	private final Logger logger = Logger.getLogger(this.getClass().getName());
+	private final OkHttpClient httpClient;
 
 	public HttpClient(OkHttpClient httpClient) {
 		this.httpClient = httpClient;
@@ -30,7 +30,7 @@ public class HttpClient {
 	private Request createPutRequest(String url, String json) {
 		return new Request.Builder()
 				.url(url)
-				.put(RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json))
+				.put(RequestBody.create(json, MediaType.parse("application/json; charset=utf-8")))
 				.build();
 	}
 
