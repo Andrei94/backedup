@@ -2,7 +2,6 @@ package subscription;
 
 import adapters.HttpClient;
 import adapters.JsonSerializer;
-import okhttp3.OkHttpClient;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Type;
@@ -12,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SubscriptionStorageCheckerTest {
 	@Test
 	void invalidSubscriptionCheck() {
-		HttpClient httpClient = new HttpClient(new OkHttpClient()) {
+		HttpClient httpClient = new HttpClient(null) {
 			@Override
 			public String makePutRequest(String url, String body) {
 				return "";
@@ -40,7 +39,7 @@ class SubscriptionStorageCheckerTest {
 
 	@Test
 	void validSubscriptionCheck() {
-		HttpClient httpClient = new HttpClient(new OkHttpClient()) {
+		HttpClient httpClient = new HttpClient(null) {
 			@Override
 			public String makePutRequest(String url, String body) {
 				return "{\n" +
