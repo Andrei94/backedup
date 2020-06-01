@@ -61,6 +61,12 @@ class DashboardController {
 		return subpath.startsWith("..");
 	}
 
+	boolean removeFromSyncList(Folder folder) {
+		if(folder == null)
+			return false;
+		return folders.remove(folder);
+	}
+
 	boolean download(Folder folder) {
 		if(isUserWithCredentialsExpired())
 			loggedInUser = refresher.refresh(loggedInUser);

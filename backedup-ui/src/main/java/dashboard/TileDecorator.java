@@ -1,8 +1,12 @@
 package dashboard;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -25,6 +29,18 @@ class TileDecorator {
 		pane.getStyleClass().add("pane");
 		pane.getChildren().add(center(new VBox(new ImageView(image), centeredWrapableText(new Label(text)))));
 		pane.getChildren().add(progressImage());
+		return pane;
+	}
+
+	public Pane contextMenu(Pane pane, String option, EventHandler<ActionEvent> action) {
+		pane.setOnContextMenuRequested(event -> {
+			MenuItem menuItem = new MenuItem(option);
+			menuItem.setOnAction(action);
+			ContextMenu contextMenu = new ContextMenu(menuItem);
+			contextMenu.setY(event.getScreenY());
+			contextMenu.setX(event.getScreenX());
+			contextMenu.show(pane.getScene().getWindow());
+		});
 		return pane;
 	}
 

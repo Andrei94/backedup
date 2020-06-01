@@ -77,7 +77,12 @@ public class Dashboard implements WindowPayload<LoginPayloadDashboard> {
 
 	private void addContents(Image image) {
 		foldersToSync.getChildren().addAll(foldersToSync.getChildren().size() - 1,
-				controller.getSyncList().stream().map(it -> decorator.tile(image, it)).collect(Collectors.toList()));
+				controller.getSyncList().stream().map(it ->
+						decorator.contextMenu(decorator.tile(image, it), "Remove", event -> {
+							foldersToSync.getChildren().remove(controller.getSyncList().indexOf(it));
+							controller.removeFromSyncList(it);
+							controller.saveFolders();
+						})).collect(Collectors.toList()));
 	}
 
 	private void showSubscriptionSpace(SubscriptionSpace subscriptionSpace) {
