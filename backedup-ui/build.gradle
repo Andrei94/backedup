@@ -1,5 +1,22 @@
+plugins {
+    id "com.github.johnrengelman.shadow" version "5.0.0"
+    id "application"
+}
+
 dependencies {
     implementation project(':backedup-s3')
     implementation project(':backedup-identity')
     implementation project(':backedup-mount')
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'main.Main'
+    }
+}
+
+mainClassName = "main.Main"
+
+shadowJar {
+    mergeServiceFiles()
 }
