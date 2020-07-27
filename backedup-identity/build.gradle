@@ -1,4 +1,8 @@
 dependencies {
-    implementation 'com.amazonaws:aws-java-sdk:1.11.632'
-    implementation 'org.json:json:20190722'
+    implementation 'com.amazonaws:aws-java-sdk-core:1.11.822'
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.11.822'
+    implementation 'com.amazonaws:aws-java-sdk-cognitoidp:1.11.822'
+    implementation 'com.amazonaws:aws-java-sdk-cognitoidentity:1.11.822'
+    implementation 'com.amazonaws:aws-java-sdk-sts:1.11.822'
+    implementation 'org.json:json:20200518'
 }
